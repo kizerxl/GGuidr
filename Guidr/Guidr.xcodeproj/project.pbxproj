@@ -7,14 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6A20F0DDC4C12D953BCC2AF8 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D718FF7CDDBE094DBC2ED65 /* Pods.framework */; };
 		EB036CC61CF6167E000CCB5E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB036CC51CF6167E000CCB5E /* AppDelegate.swift */; };
 		EB036CC81CF6167E000CCB5E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB036CC71CF6167E000CCB5E /* ViewController.swift */; };
 		EB036CCB1CF6167E000CCB5E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB036CC91CF6167E000CCB5E /* Main.storyboard */; };
 		EB036CCD1CF6167E000CCB5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB036CCC1CF6167E000CCB5E /* Assets.xcassets */; };
 		EB036CD01CF6167E000CCB5E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB036CCE1CF6167E000CCB5E /* LaunchScreen.storyboard */; };
+		EB6C01D01CF62D8F00A64A0D /* GTMSessionFetcher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB6C01CF1CF62D8F00A64A0D /* GTMSessionFetcher.framework */; };
+		EB6C01D21CF62D9900A64A0D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB6C01D11CF62D9900A64A0D /* Foundation.framework */; };
+		EB6C01D41CF62DA200A64A0D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB6C01D31CF62DA200A64A0D /* Security.framework */; };
+		EB6C01D61CF62DAA00A64A0D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB6C01D51CF62DAA00A64A0D /* SystemConfiguration.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		10AB3C10CD0F06FD835F2AE8 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		5D718FF7CDDBE094DBC2ED65 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7B8A068823A0CDFB751CA3D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		EB036CC21CF6167E000CCB5E /* Guidr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Guidr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB036CC51CF6167E000CCB5E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB036CC71CF6167E000CCB5E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +30,11 @@
 		EB036CCC1CF6167E000CCB5E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EB036CCF1CF6167E000CCB5E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EB036CD11CF6167E000CCB5E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EB6C01CF1CF62D8F00A64A0D /* GTMSessionFetcher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GTMSessionFetcher.framework; path = "Pods/../build/Debug-iphoneos/GTMSessionFetcher.framework"; sourceTree = "<group>"; };
+		EB6C01D11CF62D9900A64A0D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		EB6C01D31CF62DA200A64A0D /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		EB6C01D51CF62DAA00A64A0D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		EB6C01D81CF62F8000A64A0D /* GGuidr-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GGuidr-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +42,45 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB6C01D61CF62DAA00A64A0D /* SystemConfiguration.framework in Frameworks */,
+				EB6C01D41CF62DA200A64A0D /* Security.framework in Frameworks */,
+				EB6C01D21CF62D9900A64A0D /* Foundation.framework in Frameworks */,
+				EB6C01D01CF62D8F00A64A0D /* GTMSessionFetcher.framework in Frameworks */,
+				6A20F0DDC4C12D953BCC2AF8 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2787C769EC5688CF04D1E26E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EB6C01D51CF62DAA00A64A0D /* SystemConfiguration.framework */,
+				EB6C01D31CF62DA200A64A0D /* Security.framework */,
+				EB6C01D11CF62D9900A64A0D /* Foundation.framework */,
+				EB6C01CF1CF62D8F00A64A0D /* GTMSessionFetcher.framework */,
+				5D718FF7CDDBE094DBC2ED65 /* Pods.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		993D470041D767E9CF0572F6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C7B8A068823A0CDFB751CA3D /* Pods.debug.xcconfig */,
+				10AB3C10CD0F06FD835F2AE8 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		EB036CB91CF6167E000CCB5E = {
 			isa = PBXGroup;
 			children = (
 				EB036CC41CF6167E000CCB5E /* Guidr */,
 				EB036CC31CF6167E000CCB5E /* Products */,
+				993D470041D767E9CF0572F6 /* Pods */,
+				2787C769EC5688CF04D1E26E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,6 +95,7 @@
 		EB036CC41CF6167E000CCB5E /* Guidr */ = {
 			isa = PBXGroup;
 			children = (
+				EB6C01D81CF62F8000A64A0D /* GGuidr-Bridging-Header.h */,
 				EB036CC51CF6167E000CCB5E /* AppDelegate.swift */,
 				EB036CC71CF6167E000CCB5E /* ViewController.swift */,
 				EB036CC91CF6167E000CCB5E /* Main.storyboard */,
@@ -71,9 +113,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EB036CD41CF6167E000CCB5E /* Build configuration list for PBXNativeTarget "Guidr" */;
 			buildPhases = (
+				6ED753FCA742A503DC174BBF /* Check Pods Manifest.lock */,
 				EB036CBE1CF6167E000CCB5E /* Sources */,
 				EB036CBF1CF6167E000CCB5E /* Frameworks */,
 				EB036CC01CF6167E000CCB5E /* Resources */,
+				F21868D1D7975AA107F10BD8 /* Embed Pods Frameworks */,
+				61D46922B9E12D169CFFE4FF /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -130,6 +175,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		61D46922B9E12D169CFFE4FF /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6ED753FCA742A503DC174BBF /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F21868D1D7975AA107F10BD8 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		EB036CBE1CF6167E000CCB5E /* Sources */ = {
@@ -248,23 +341,35 @@
 		};
 		EB036CD51CF6167E000CCB5E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C7B8A068823A0CDFB751CA3D /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				INFOPLIST_FILE = Guidr/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.roundSteel.Guidr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Guidr/GGuidr-Bridging-Header.h";
 			};
 			name = Debug;
 		};
 		EB036CD61CF6167E000CCB5E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 10AB3C10CD0F06FD835F2AE8 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				INFOPLIST_FILE = Guidr/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.roundSteel.Guidr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Guidr/GGuidr-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -287,6 +392,7 @@
 				EB036CD61CF6167E000CCB5E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

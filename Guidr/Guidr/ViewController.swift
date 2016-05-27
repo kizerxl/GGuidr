@@ -12,13 +12,14 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    private let kKeychainItemName = "Google Apps Script Execution API"
-    private let kClientID = "885847385200-ktgfdmbk5m17lmkk3kh82j4kapscvvej.apps.googleusercontent.com"
-    private let kScriptId = "Mg0neH7oNT2VTHMxEt0XpbrLQuUZr8v_g"
+    private let kKeychainItemName = nameInKeychain
+    private let kClientID = secretKClientID
+    private let kScriptId = secretKScriptId
+    
     // If modifying these scopes, delete your previously saved credentials by
     // resetting the iOS simulator or uninstall the app.
     private let scopes = ["https://www.googleapis.com/auth/script.external_request"]
-            
+    
     private let service = GTLService()
     let output = UITextView()
     
@@ -61,7 +62,7 @@ class ViewController: UIViewController {
     // Calls an Apps Script function to list the folders in the user's
     // root Drive folder.
     func callAppsScript() {
-        output.text = "Getting folders..."
+        output.text = "Executing script..."
         let baseUrl = "https://script.googleapis.com/v1/scripts/\(kScriptId):run"
         let url = GTLUtilities.URLWithString(baseUrl, queryParameters: nil)
         
@@ -73,10 +74,10 @@ class ViewController: UIViewController {
         service.fetchObjectByInsertingObject(request,
                                              forURL: url,
                                              delegate: self,
-                                             didFinishSelector: "displayResultWithTicket:finishedWithObject:error:")
+                                             didFinishSelector: #selector(ViewController.displayResultWithTicket(_:finishedWithObject:error:)))
     }
     
-    // Displays the retrieved folders returned by the Apps Script function.
+    // Displays the events or an error in the textview
     func displayResultWithTicket(ticket: GTLServiceTicket,
                                  finishedWithObject object : GTLObject,
                                                     error : NSError?) {
@@ -119,22 +120,25 @@ class ViewController: UIViewController {
             // returns. Here, the function returns an Apps Script Object with
             // String keys and values, so must be cast into a Dictionary
             // (folderSet).
+            print("here is the response: \(object.JSON)\n")
             let response = object.JSON["response"] as! [String: AnyObject]
-            let folderSet = response["result"] as! [String: AnyObject]
-            if folderSet.count == 0 {
-                output.text = "No folders returned!\n"
+            let events = response["result"] as! [[String]]
+   
+            //this is from the original google thingy
+            var eventsText = ""
+            
+            if events.count == 0 {
+                output.text = "No events found\n"
             } else {
-                var folderString = "Folders under your root folder:\n"
-                for (id, folder) in folderSet {
-                    folderString += "\t\(folder) (\(id))\n"
+                for event in events {
+                    eventsText += "\(event)\n\n"
                 }
-                output.text = folderString
             }
-        }
+            
+                output.text = eventsText
+            
+            }
         
-        print("here is the fucking GTL object: \(object)")
-        print("here is the fucking GTL object: \(object)")
-
     }
     
     // Creates the auth controller for authorizing access to Google Apps Script Execution API
@@ -146,7 +150,7 @@ class ViewController: UIViewController {
             clientSecret: nil,
             keychainItemName: kKeychainItemName,
             delegate: self,
-            finishedSelector: "viewController:finishedWithAuth:error:"
+            finishedSelector: #selector(ViewController.viewController(_:finishedWithAuth:error:))
         )
     }
     

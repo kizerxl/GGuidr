@@ -13,7 +13,7 @@
 		EB036CCB1CF6167E000CCB5E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB036CC91CF6167E000CCB5E /* Main.storyboard */; };
 		EB036CCD1CF6167E000CCB5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB036CCC1CF6167E000CCB5E /* Assets.xcassets */; };
 		EB036CD01CF6167E000CCB5E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB036CCE1CF6167E000CCB5E /* LaunchScreen.storyboard */; };
-		EB3227A91CF8E4B8005FF081 /* Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3227A81CF8E4B8005FF081 /* Secret.swift */; };
+		EB3227A91CF8E4B8005FF081 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3227A81CF8E4B8005FF081 /* Secrets.swift */; };
 		EB6C01D01CF62D8F00A64A0D /* GTMSessionFetcher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB6C01CF1CF62D8F00A64A0D /* GTMSessionFetcher.framework */; };
 		EB6C01D21CF62D9900A64A0D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB6C01D11CF62D9900A64A0D /* Foundation.framework */; };
 		EB6C01D41CF62DA200A64A0D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB6C01D31CF62DA200A64A0D /* Security.framework */; };
@@ -31,7 +31,7 @@
 		EB036CCC1CF6167E000CCB5E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EB036CCF1CF6167E000CCB5E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EB036CD11CF6167E000CCB5E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EB3227A81CF8E4B8005FF081 /* Secret.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secret.swift; sourceTree = "<group>"; };
+		EB3227A81CF8E4B8005FF081 /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		EB6C01CF1CF62D8F00A64A0D /* GTMSessionFetcher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GTMSessionFetcher.framework; path = "Pods/../build/Debug-iphoneos/GTMSessionFetcher.framework"; sourceTree = "<group>"; };
 		EB6C01D11CF62D9900A64A0D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		EB6C01D31CF62DA200A64A0D /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -100,7 +100,7 @@
 				EB6C01D81CF62F8000A64A0D /* GGuidr-Bridging-Header.h */,
 				EB036CC51CF6167E000CCB5E /* AppDelegate.swift */,
 				EB036CC71CF6167E000CCB5E /* ViewController.swift */,
-				EB3227A81CF8E4B8005FF081 /* Secret.swift */,
+				EB3227A81CF8E4B8005FF081 /* Secrets.swift */,
 				EB036CC91CF6167E000CCB5E /* Main.storyboard */,
 				EB036CCC1CF6167E000CCB5E /* Assets.xcassets */,
 				EB036CCE1CF6167E000CCB5E /* LaunchScreen.storyboard */,
@@ -233,7 +233,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB036CC81CF6167E000CCB5E /* ViewController.swift in Sources */,
-				EB3227A91CF8E4B8005FF081 /* Secret.swift in Sources */,
+				EB3227A91CF8E4B8005FF081 /* Secrets.swift in Sources */,
 				EB036CC61CF6167E000CCB5E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

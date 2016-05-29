@@ -59,4 +59,4 @@ fastlane/screenshots
 
 iOSInjectionProject/
 
-Guidr/Secret.swift
+./Guidr/Secret.swift

@@ -28,12 +28,15 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        output.frame = view.bounds
-        output.editable = false
-        output.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
-        output.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
+        view.backgroundColor = UIColor.blackColor()
         
-        view.addSubview(output);
+        // TESTING THE CARD VIEW THING
+        let fakeCard = CardView.init(title: "The Event", date: NSDate(), location: "My butthole", eventDescription: "This is an event where an event will take place")
+        view.addSubview(fakeCard)
+        fakeCard.center = view.center
+        
+        print("Fake card frame after adding: \(fakeCard.frame)")
+        // END TEST
         
         if let auth = GTMOAuth2ViewControllerTouch.authForGoogleFromKeychainForName(
             kKeychainItemName,

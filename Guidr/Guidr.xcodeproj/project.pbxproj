@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F1398A11CFF675A0053408A /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1398A01CFF675A0053408A /* CardView.swift */; };
 		6A20F0DDC4C12D953BCC2AF8 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D718FF7CDDBE094DBC2ED65 /* Pods.framework */; };
 		EB036CC61CF6167E000CCB5E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB036CC51CF6167E000CCB5E /* AppDelegate.swift */; };
 		EB036CC81CF6167E000CCB5E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB036CC71CF6167E000CCB5E /* ViewController.swift */; };
@@ -22,6 +23,7 @@
 
 /* Begin PBXFileReference section */
 		10AB3C10CD0F06FD835F2AE8 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		1F1398A01CFF675A0053408A /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		5D718FF7CDDBE094DBC2ED65 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7B8A068823A0CDFB751CA3D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		EB036CC21CF6167E000CCB5E /* Guidr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Guidr.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -100,6 +102,7 @@
 				EB6C01D81CF62F8000A64A0D /* GGuidr-Bridging-Header.h */,
 				EB036CC51CF6167E000CCB5E /* AppDelegate.swift */,
 				EB036CC71CF6167E000CCB5E /* ViewController.swift */,
+				1F1398A01CFF675A0053408A /* CardView.swift */,
 				EB3227A81CF8E4B8005FF081 /* Secrets.swift */,
 				EB036CC91CF6167E000CCB5E /* Main.storyboard */,
 				EB036CCC1CF6167E000CCB5E /* Assets.xcassets */,
@@ -234,6 +237,7 @@
 			files = (
 				EB036CC81CF6167E000CCB5E /* ViewController.swift in Sources */,
 				EB3227A91CF8E4B8005FF081 /* Secrets.swift in Sources */,
+				1F1398A11CFF675A0053408A /* CardView.swift in Sources */,
 				EB036CC61CF6167E000CCB5E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

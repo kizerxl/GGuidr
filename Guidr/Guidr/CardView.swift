@@ -58,18 +58,12 @@ class CardView: UIView {
         
         
         // Height and width
-        self.translatesAutoresizingMaskIntoConstraints = false
-
         let screenHeight = UIScreen.mainScreen().bounds.height
         let screenWidth = UIScreen.mainScreen().bounds.width
-//        
-//        self.heightAnchor.constraintEqualToConstant(screenHeight * 1/3)
-//        self.widthAnchor.constraintEqualToConstant(screenWidth * 3/4)
-        self.frame = CGRect(x: 0, y: 0, width: screenWidth*3/4, height: screenHeight*1/3)
-        print("Frame is: \(self.frame)") // Frame is (0, 0, 0, 0). Why?
+        self.frame.size = CGSize(width: screenWidth*3/4, height: screenHeight*1/3)
         
         // Colors: silver background, purple text
-        self.backgroundColor = UIColor.init(red: 189, green: 195, blue: 199, alpha: 1)
+        self.backgroundColor = UIColor.init(red: 189/255, green: 195/255, blue: 199/255, alpha: 1)
         let textColor = UIColor.purpleColor()
         
         // Rounded corners
@@ -96,6 +90,21 @@ class CardView: UIView {
         let descriptionLabel = UILabel()
         descriptionLabel.text = eventDescription
         descriptionLabel.textColor = textColor
+        
+        // Add labels
+        var heightCoord = 0
+        var widthCoord = 0
+    
+
+        for label: UILabel in [titleLabel, dateLabel, locationLabel, descriptionLabel] {
+            self.addSubview(label)
+            //label.frame = CGRect(origin: CGPoint((x: heightCoord += 10,  y: widthCoord += 10), size: CGSize(width: 150, height: 30))
+            label.frame = CGRect(origin: CGPoint(x: heightCoord + 10, y: widthCoord + 10), size: CGSize(width: 150, height: 30))
+            heightCoord += 10
+            widthCoord += 10
+            
+        }
+        
         
     }
 

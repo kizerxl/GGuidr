@@ -24,8 +24,6 @@ class CardView: UIView {
         
         super.init(frame: frame)
         
-        setup()
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -36,8 +34,6 @@ class CardView: UIView {
         self.eventDescription = ""
         
         super.init(coder: aDecoder)
-        
-        setup()
         
     }
 
@@ -51,6 +47,8 @@ class CardView: UIView {
         self.date = date
         self.location = location
         self.eventDescription = eventDescription
+        
+        setup()
         
     }
     
@@ -94,8 +92,8 @@ class CardView: UIView {
         descriptionLabel.textColor = textColor
         
         // Add labels
-        var heightCoord = 0.0 as CGFloat
-        var widthCoord = 0.0 as CGFloat
+        var heightCoord = 10 as CGFloat
+        var widthCoord = 10 as CGFloat
 
         for label: UILabel in [titleLabel, dateLabel, locationLabel, descriptionLabel] {
             
@@ -105,8 +103,8 @@ class CardView: UIView {
             label.leftAnchor.constraintEqualToAnchor(self.leftAnchor, constant: heightCoord).active = true
             label.topAnchor.constraintEqualToAnchor(self.topAnchor, constant: widthCoord).active = true
             
-            heightCoord += 10.0
-            widthCoord += 10.0
+            heightCoord += 5.0
+            widthCoord += 5.0
             
         }
        

@@ -43,8 +43,13 @@ class CardView: UIView {
         self.date = NSDate()
         self.location = ""
         self.eventDescription = ""
+        self.originalPoint = CGPointMake(0, 0)
         
         super.init(frame: frame)
+        
+        self.panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(CardView.beingDragged(_:)))
+        self.addGestureRecognizer(panGestureRecognizer)
+
         
     }
     
@@ -54,7 +59,8 @@ class CardView: UIView {
         self.date = NSDate()
         self.location = ""
         self.eventDescription = ""
-        
+        self.originalPoint = CGPointMake(0, 0)
+
         super.init(coder: aDecoder)
         
     }
@@ -127,7 +133,6 @@ class CardView: UIView {
             label.topAnchor.constraintEqualToAnchor(self.topAnchor, constant: widthCoord).active = true
             
             if label == labels.first! {
-                print("this should only print once")
                 var heightThing = label.frame.height
             }
             

@@ -10,7 +10,7 @@ import GoogleAPIClient
 import GTMOAuth2
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, DraggableViewDelegate {
     
     private let kKeychainItemName = nameInKeychain
     private let kClientID = secretKClientID
@@ -38,7 +38,6 @@ class ViewController: UIViewController {
         fakeCard.centerYAnchor.constraintEqualToAnchor(view.centerYAnchor).active = true
         view.layoutIfNeeded()
         
-        print("Fake card frame after adding: \(fakeCard.frame)")
         // END TEST
         
         if let auth = GTMOAuth2ViewControllerTouch.authForGoogleFromKeychainForName(
@@ -47,6 +46,8 @@ class ViewController: UIViewController {
             clientSecret: nil) {
             service.authorizer = auth
         }
+        
+    fakeCard.delegate = self
         
     }
     
@@ -191,4 +192,11 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func cardSwipedLeft(card: UIView) {
+        //do some shit
+    }
+    
+    func cardSwipedRight(card: UIView) {
+        //do some shit
+    }
 }

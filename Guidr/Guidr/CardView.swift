@@ -56,11 +56,13 @@ class CardView: UIView {
     
     func setup() {
         
+        translatesAutoresizingMaskIntoConstraints = false
         
         // Height and width
         let screenHeight = UIScreen.mainScreen().bounds.height
         let screenWidth = UIScreen.mainScreen().bounds.width
-        self.frame.size = CGSize(width: screenWidth*3/4, height: screenHeight*1/3)
+        self.heightAnchor.constraintEqualToConstant(screenHeight * 1/3).active = true
+        self.widthAnchor.constraintEqualToConstant(screenWidth * 3/4).active = true
         
         // Colors: silver background, purple text
         self.backgroundColor = UIColor.init(red: 189/255, green: 195/255, blue: 199/255, alpha: 1)
@@ -92,21 +94,27 @@ class CardView: UIView {
         descriptionLabel.textColor = textColor
         
         // Add labels
-        var heightCoord = 0
-        var widthCoord = 0
-    
+        var heightCoord = 0.0 as CGFloat
+        var widthCoord = 0.0 as CGFloat
 
         for label: UILabel in [titleLabel, dateLabel, locationLabel, descriptionLabel] {
+            
             self.addSubview(label)
-            //label.frame = CGRect(origin: CGPoint((x: heightCoord += 10,  y: widthCoord += 10), size: CGSize(width: 150, height: 30))
-            label.frame = CGRect(origin: CGPoint(x: heightCoord + 10, y: widthCoord + 10), size: CGSize(width: 150, height: 30))
-            heightCoord += 10
-            widthCoord += 10
+
+            label.translatesAutoresizingMaskIntoConstraints = false
+            label.leftAnchor.constraintEqualToAnchor(self.leftAnchor, constant: heightCoord).active = true
+            label.topAnchor.constraintEqualToAnchor(self.topAnchor, constant: widthCoord).active = true
+            
+            heightCoord += 10.0
+            widthCoord += 10.0
             
         }
+       
+        layoutIfNeeded()
         
         
     }
 
+    
 
 }

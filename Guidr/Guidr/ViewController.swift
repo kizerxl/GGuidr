@@ -33,7 +33,10 @@ class ViewController: UIViewController {
         // TESTING THE CARD VIEW THING
         let fakeCard = CardView.init(title: "The Event", date: NSDate(), location: "My butthole", eventDescription: "This is an event where an event will take place")
         view.addSubview(fakeCard)
-        fakeCard.center = view.center
+        fakeCard.translatesAutoresizingMaskIntoConstraints = false
+        fakeCard.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
+        fakeCard.centerYAnchor.constraintEqualToAnchor(view.centerYAnchor).active = true
+        view.layoutIfNeeded()
         
         print("Fake card frame after adding: \(fakeCard.frame)")
         // END TEST

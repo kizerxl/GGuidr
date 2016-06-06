@@ -92,20 +92,27 @@ class CardView: UIView {
         descriptionLabel.textColor = textColor
         
         // Add labels
-        var heightCoord = 10 as CGFloat
+        var heightThing = 0 as CGFloat
         var widthCoord = 10 as CGFloat
-
-        for label: UILabel in [titleLabel, dateLabel, locationLabel, descriptionLabel] {
+        let labels = [titleLabel, dateLabel, locationLabel, descriptionLabel]
+        
+        for label: UILabel in labels {
             
             self.addSubview(label)
 
             label.translatesAutoresizingMaskIntoConstraints = false
-            label.leftAnchor.constraintEqualToAnchor(self.leftAnchor, constant: heightCoord).active = true
+            label.leftAnchor.constraintEqualToAnchor(self.leftAnchor, constant: 10).active = true
             label.topAnchor.constraintEqualToAnchor(self.topAnchor, constant: widthCoord).active = true
             
-            heightCoord += 5.0
-            widthCoord += 5.0
+            if label == labels.first! {
+                print("this should only print once")
+                var heightThing = label.frame.height
+            }
             
+            
+            widthCoord += heightThing + 20.0
+            
+        
         }
        
         layoutIfNeeded()

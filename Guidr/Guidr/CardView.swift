@@ -32,7 +32,7 @@ class CardView: UIView {
     var delegate: DraggableViewDelegate!
     var panGestureRecognizer: UIPanGestureRecognizer!
     var originPoint: CGPoint!
-//    var overlayView: OverlayView!
+    var overlayView: OverlayView!
     var information: UILabel!
     var xFromCenter: Float!
     var yFromCenter: Float!
@@ -120,7 +120,7 @@ class CardView: UIView {
         descriptionLabel.textColor = textColor
         
         // Add labels
-        var heightThing = 0 as CGFloat
+        let heightThing = 0 as CGFloat
         var widthCoord = 10 as CGFloat
         let labels = [titleLabel, dateLabel, locationLabel, descriptionLabel]
         
@@ -145,34 +145,15 @@ class CardView: UIView {
         layoutIfNeeded()
         
         
+        overlayView = OverlayView(frame: CGRectMake(self.frame.size.width/2-100, 0, 100, 100))
+        overlayView.alpha = 0
+        self.addSubview(overlayView)
+        
+        xFromCenter = 0
+        yFromCenter = 0
+        
+        
     }
-
-//    func dragged(gestureRecognizer: UIPanGestureRecognizer){
-////        
-////        case Possible // the recognizer has not yet recognized its gesture, but may be evaluating touch events. this is the default state
-////        
-////        case Began // the recognizer has received touches recognized as the gesture. the action method will be called at the next turn of the run loop
-////        case Changed // the recognizer has received touches recognized as a change to the gesture. the action method will be called at the next turn of the run loop
-////        case Ended // the recognizer has received touches recognized as the end of the gesture. the action method will be called at the next turn of the run loop and the recognizer will be reset to UIGestureRecognizerStatePossible
-////        case Cancelled // the recognizer has received touches resulting in the cancellation of the gesture. the action method will be called at the next turn of the run loop. the recognizer will be reset to UIGestureRecognizerStatePossible
-////        
-////        case Failed
-//
-//        
-//        let xMove = gestureRecognizer.translationInView(self).x
-//        let yMove = gestureRecognizer.translationInView(self).y
-//        
-//        switch gestureRecognizer.state {
-//        case .Began :
-//            self.originalPoint = self.center
-//        case .Changed :
-//            var rotationStrength = min(xMove/320, 1)
-//        default:
-//            <#code#>
-//        }
-//
-//    
-//    }
     
     func beingDragged(gestureRecognizer: UIPanGestureRecognizer) -> Void {
         xFromCenter = Float(gestureRecognizer.translationInView(self).x)
@@ -191,7 +172,7 @@ class CardView: UIView {
             let transform = CGAffineTransformMakeRotation(CGFloat(rotationAngle))
             let scaleTransform = CGAffineTransformScale(transform, CGFloat(scale), CGFloat(scale))
             self.transform = scaleTransform
-//            self.updateOverlay(CGFloat(xFromCenter))
+            self.updateOverlay(CGFloat(xFromCenter))
         case UIGestureRecognizerState.Ended:
             self.afterSwipeAction()
         case UIGestureRecognizerState.Possible:
@@ -205,14 +186,14 @@ class CardView: UIView {
         }
     }
     
-//    func updateOverlay(distance: CGFloat) -> Void {
-//        if distance > 0 {
-//            overlayView.setMode(GGOverlayViewMode.GGOverlayViewModeRight)
-//        } else {
-//            overlayView.setMode(GGOverlayViewMode.GGOverlayViewModeLeft)
-//        }
-//        overlayView.alpha = CGFloat(min(fabsf(Float(distance))/100, 0.4))
-//    }
+    func updateOverlay(distance: CGFloat) -> Void {
+        if distance > 0 {
+            overlayView.setMode(GGOverlayViewMode.GGOverlayViewModeRight)
+        } else {
+            overlayView.setMode(GGOverlayViewMode.GGOverlayViewModeLeft)
+        }
+        overlayView.alpha = CGFloat(min(fabsf(Float(distance))/100, 0.4))
+    }
     
     func afterSwipeAction() -> Void {
         let floatXFromCenter = Float(xFromCenter)
@@ -224,7 +205,7 @@ class CardView: UIView {
             UIView.animateWithDuration(0.3, animations: {() -> Void in
                 self.center = self.originPoint
                 self.transform = CGAffineTransformMakeRotation(0)
-//                self.overlayView.alpha = 0
+                self.overlayView.alpha = 0
             })
         }
     }

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1BE9F4471D0A580000E0D7A0 /* DraggableViewBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE9F4461D0A580000E0D7A0 /* DraggableViewBackground.swift */; };
+		1BE9F4491D0A5A7400E0D7A0 /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE9F4481D0A5A7400E0D7A0 /* OverlayView.swift */; };
 		1F1398A11CFF675A0053408A /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1398A01CFF675A0053408A /* CardView.swift */; };
 		6A20F0DDC4C12D953BCC2AF8 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D718FF7CDDBE094DBC2ED65 /* Pods.framework */; };
 		EB036CC61CF6167E000CCB5E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB036CC51CF6167E000CCB5E /* AppDelegate.swift */; };
@@ -23,6 +25,8 @@
 
 /* Begin PBXFileReference section */
 		10AB3C10CD0F06FD835F2AE8 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		1BE9F4461D0A580000E0D7A0 /* DraggableViewBackground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraggableViewBackground.swift; sourceTree = "<group>"; };
+		1BE9F4481D0A5A7400E0D7A0 /* OverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
 		1F1398A01CFF675A0053408A /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		5D718FF7CDDBE094DBC2ED65 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7B8A068823A0CDFB751CA3D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -103,6 +107,8 @@
 				EB036CC51CF6167E000CCB5E /* AppDelegate.swift */,
 				EB036CC71CF6167E000CCB5E /* ViewController.swift */,
 				1F1398A01CFF675A0053408A /* CardView.swift */,
+				1BE9F4461D0A580000E0D7A0 /* DraggableViewBackground.swift */,
+				1BE9F4481D0A5A7400E0D7A0 /* OverlayView.swift */,
 				EB3227A81CF8E4B8005FF081 /* Secrets.swift */,
 				EB036CC91CF6167E000CCB5E /* Main.storyboard */,
 				EB036CCC1CF6167E000CCB5E /* Assets.xcassets */,
@@ -238,7 +244,9 @@
 				EB036CC81CF6167E000CCB5E /* ViewController.swift in Sources */,
 				EB3227A91CF8E4B8005FF081 /* Secrets.swift in Sources */,
 				1F1398A11CFF675A0053408A /* CardView.swift in Sources */,
+				1BE9F4491D0A5A7400E0D7A0 /* OverlayView.swift in Sources */,
 				EB036CC61CF6167E000CCB5E /* AppDelegate.swift in Sources */,
+				1BE9F4471D0A580000E0D7A0 /* DraggableViewBackground.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

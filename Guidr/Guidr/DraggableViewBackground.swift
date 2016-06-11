@@ -11,6 +11,7 @@ import UIKit
 
 class DraggableViewBackground: UIView, DraggableViewDelegate {
     var exampleCardLabels: [String]!
+    var cardContentArray: [[String]]!
     var allCards: [CardView]!
     
     let MAX_BUFFER_SIZE = 2

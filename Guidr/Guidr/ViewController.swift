@@ -15,18 +15,20 @@ class ViewController: UIViewController, DraggableViewDelegate {
     private let kKeychainItemName = nameInKeychain
     private let kClientID = secretKClientID
     private let kScriptId = secretKScriptId
+    private var dataStore: CardDataStore!
     
     // If modifying these scopes, delete your previously saved credentials by
     // resetting the iOS simulator or uninstall the app.
     private let scopes = ["https://www.googleapis.com/auth/script.external_request"]
     
     private let service = GTLService()
-    let output = UITextView()
     
     // When the view loads, create necessary subviews
     // and initialize the Google Apps Script Execution API service
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        dataStore = CardDataStore.sharedInstance
         
         view.backgroundColor = UIColor.blackColor()
         
@@ -56,7 +58,19 @@ class ViewController: UIViewController, DraggableViewDelegate {
     override func viewDidAppear(animated: Bool) {
         if let authorizer = service.authorizer,
             canAuth = authorizer.canAuthorize where canAuth {
-            callAppsScript() //replace this with the store 
+            
+            //call our data store here and have it return the card content
+             dataStore.getEventsContent(usingService: service, completion: { (result) in
+                
+                if result {
+                    print("\n\n\nWe got the card contents!!!!!!!")
+                }
+                
+                else{
+                    //put a loading icon here while the cards content gets loaded or something...
+                    print("Shit doesn't work")
+                }
+             })
         } else {
             presentViewController(
                 createAuthController(),
@@ -64,88 +78,6 @@ class ViewController: UIViewController, DraggableViewDelegate {
                 completion: nil
             )
         }
-    }
-    
-    // Calls an Apps Script function to list the folders in the user's
-    // root Drive folder.
-    func callAppsScript() {
-        output.text = "Executing script..."
-        let baseUrl = "https://script.googleapis.com/v1/scripts/\(kScriptId):run"
-        let url = GTLUtilities.URLWithString(baseUrl, queryParameters: nil)
-        
-        // Create an execution request object.
-        var request = GTLObject()
-        request.setJSONValue("scapeGary", forKey: "function")
-        
-        // Make the API request.
-        service.fetchObjectByInsertingObject(request,
-                                             forURL: url,
-                                             delegate: self,
-                                             didFinishSelector: #selector(ViewController.displayResultWithTicket(_:finishedWithObject:error:)))
-    }
-    
-    // Displays the events or an error in the textview
-    func displayResultWithTicket(ticket: GTLServiceTicket,
-                                 finishedWithObject object : GTLObject,
-                                                    error : NSError?) {
-        if let error = error {
-            // The API encountered a problem before the script
-            // started executing.
-            showAlert("The API returned the error: ",
-                      message: error.localizedDescription)
-            return
-        }
-        
-        if let apiError = object.JSON["error"] as? [String: AnyObject] {
-            // The API executed, but the script returned an error.
-            
-            // Extract the first (and only) set of error details and cast as
-            // a Dictionary. The values of this Dictionary are the script's
-            // 'errorMessage' and 'errorType', and an array of stack trace
-            // elements (which also need to be cast as Dictionaries).
-            let details = apiError["details"] as! [[String: AnyObject]]
-            var errMessage = String(
-                format:"Script error message: %@\n",
-                details[0]["errorMessage"] as! String)
-            
-            if let stacktrace =
-                details[0]["scriptStackTraceElements"] as? [[String: AnyObject]] {
-                // There may not be a stacktrace if the script didn't start
-                // executing.
-                for trace in stacktrace {
-                    let f = trace["function"] as? String ?? "Unknown"
-                    let num = trace["lineNumber"] as? Int ?? -1
-                    errMessage += "\t\(f): \(num)\n"
-                }
-            }
-            
-            // Set the output as the compiled error message.
-            output.text = errMessage
-        } else {
-            // The result provided by the API needs to be cast into the
-            // correct type, based upon what types the Apps Script function
-            // returns. Here, the function returns an Apps Script Object with
-            // String keys and values, so must be cast into a Dictionary
-            // (folderSet).
-            print("here is the response: \(object.JSON)\n")
-            let response = object.JSON["response"] as! [String: AnyObject]
-            let events = response["result"] as! [[String]]
-   
-            //this is from the original google thingy
-            var eventsText = ""
-            
-            if events.count == 0 {
-                output.text = "No events found\n"
-            } else {
-                for event in events {
-                    eventsText += "\(event)\n\n"
-                }
-            }
-            
-                output.text = eventsText
-            
-            }
-        
     }
     
     // Creates the auth controller for authorizing access to Google Apps Script Execution API
@@ -193,10 +125,11 @@ class ViewController: UIViewController, DraggableViewDelegate {
     }
     
     func cardSwipedLeft(card: UIView) {
-        //do some shit
+        //place logic for adding card event here
     }
     
     func cardSwipedRight(card: UIView) {
-        //do some shit
+        //place logic for adding card event here
+
     }
 }

@@ -8,10 +8,9 @@
 
 import Foundation
 import GoogleAPIClient
-import GTMOAuth2
 import UIKit
 
-class CardDataStore {
+class CardDataStore: NSObject {
     
     var hasContent = false
     var store = []{
@@ -20,15 +19,13 @@ class CardDataStore {
         }
     }
     
-    private let service = GTLService()
-    
     // If modifying these scopes, delete your previously saved credentials by
     // resetting the iOS simulator or uninstall the app.
     private let scopes = ["https://www.googleapis.com/auth/script.external_request"]
     static let sharedInstance = CardDataStore()
     
     
-    private init(){}
+    private override init(){}
     
     public func getEventsContent(usingService service: GTLService, completion:(result: Bool) -> Void){
         
@@ -43,14 +40,14 @@ class CardDataStore {
          service.fetchObjectByInsertingObject(request,
                                               forURL: url,
                                               delegate: self,
-                                              didFinishSelector: #selector(ViewController.displayResultWithTicket(_:finishedWithObject:error:)))
+                                              didFinishSelector: #selector(displayResultWithTicket(_:finishedWithObject:error:)))
         
         completion(result: hasContent)
     
     }
     
     // Displays the events or an error in the textview
-    func displayResultWithTicket(ticket: GTLServiceTicket,
+      func displayResultWithTicket(ticket: GTLServiceTicket,
                                  finishedWithObject object : GTLObject,
                                                     error : NSError?) {
         if let error = error {
@@ -94,6 +91,8 @@ class CardDataStore {
             print("here is the response: \(object.JSON)\n")
             let response = object.JSON["response"] as! [String: AnyObject]
             self.store = response["result"] as! [[String]]
+            
+            print("hasContent is \(hasContent)")
     
         }
         

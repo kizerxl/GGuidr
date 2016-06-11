@@ -56,7 +56,7 @@ class ViewController: UIViewController, DraggableViewDelegate {
     override func viewDidAppear(animated: Bool) {
         if let authorizer = service.authorizer,
             canAuth = authorizer.canAuthorize where canAuth {
-            callAppsScript()
+            callAppsScript() //replace this with the store 
         } else {
             presentViewController(
                 createAuthController(),

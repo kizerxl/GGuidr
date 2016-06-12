@@ -10,12 +10,16 @@ import Foundation
 import GoogleAPIClient
 import UIKit
 
+let eventsLoadedNotification = "eventsLoaded"
+
 class CardDataStore: NSObject {
     
     var hasContent = false
-    var store = []{
+    var store:[[String]] = []{
         didSet{
-            hasContent = self.store.count > 0
+                print("shit just set!!!!!!!!")
+                NSNotificationCenter.defaultCenter().postNotificationName(eventsLoadedNotification, object: nil)
+                print("notifcation just fired and the array on the draggable view is being made....")
         }
     }
     
@@ -27,10 +31,12 @@ class CardDataStore: NSObject {
     
     private override init(){}
     
-    public func getEventsContent(usingService service: GTLService, completion:(result: Bool) -> Void){
+    internal func getEventsContent(usingService service: GTLService) {
         
         let baseUrl = "https://script.googleapis.com/v1/scripts/\(secretKScriptId):run"
         let url = GTLUtilities.URLWithString(baseUrl, queryParameters: nil)
+        
+        NSNotificationCenter.defaultCenter().postNotificationName(eventsLoadedNotification, object: self)
         
         // Create an execution request object.
         let request = GTLObject()
@@ -42,7 +48,6 @@ class CardDataStore: NSObject {
                                               delegate: self,
                                               didFinishSelector: #selector(displayResultWithTicket(_:finishedWithObject:error:)))
         
-        completion(result: hasContent)
     
     }
     
@@ -88,16 +93,18 @@ class CardDataStore: NSObject {
             // returns. Here, the function returns an Apps Script Object with
             // String keys and values, so must be cast into a Dictionary
             // (folderSet).
-            print("here is the response: \(object.JSON)\n")
+//            print("here is the response: \(object.JSON)\n")
             let response = object.JSON["response"] as! [String: AnyObject]
             self.store = response["result"] as! [[String]]
             
-            print("hasContent is \(hasContent)")
-    
         }
         
     }
-
+    
+    internal func getEventsContentFromStore() -> [[String]] {
+        return self.store as! [[String]]
+    }
+    
 }
 
 

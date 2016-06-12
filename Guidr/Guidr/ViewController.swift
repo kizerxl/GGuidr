@@ -16,6 +16,8 @@ class ViewController: UIViewController, DraggableViewDelegate {
     private let kClientID = secretKClientID
     private let kScriptId = secretKScriptId
     private var dataStore: CardDataStore!
+    private var draggableBackground: DraggableViewBackground!
+    private var eventsContentArray: [[String]]!
     
     // If modifying these scopes, delete your previously saved credentials by
     // resetting the iOS simulator or uninstall the app.
@@ -30,17 +32,17 @@ class ViewController: UIViewController, DraggableViewDelegate {
         
         dataStore = CardDataStore.sharedInstance
         
-        view.backgroundColor = UIColor.blackColor()
+//        view.backgroundColor = UIColor.blackColor()
         
-        // TESTING THE CARD VIEW THING
-        let fakeCard = CardView.init(title: "The Event", date: NSDate(), location: "My butthole", eventDescription: "This is an event where an event will take place")
-        view.addSubview(fakeCard)
-        fakeCard.translatesAutoresizingMaskIntoConstraints = false
-        fakeCard.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
-        fakeCard.centerYAnchor.constraintEqualToAnchor(view.centerYAnchor).active = true
-        view.layoutIfNeeded()
-        
-        // END TEST
+//        // TESTING THE CARD VIEW THING
+//        let fakeCard = CardView.init(title: "The Event", date: NSDate(), location: "My butthole", eventDescription: "This is an event where an event will take place")
+//        view.addSubview(fakeCard)
+//        fakeCard.translatesAutoresizingMaskIntoConstraints = false
+//        fakeCard.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
+//        fakeCard.centerYAnchor.constraintEqualToAnchor(view.centerYAnchor).active = true
+//        view.layoutIfNeeded()
+//        
+//        // END TEST
         
         if let auth = GTMOAuth2ViewControllerTouch.authForGoogleFromKeychainForName(
             kKeychainItemName,
@@ -49,7 +51,7 @@ class ViewController: UIViewController, DraggableViewDelegate {
             service.authorizer = auth
         }
         
-    fakeCard.delegate = self
+//    fakeCard.delegate = self
         
     }
     
@@ -58,19 +60,17 @@ class ViewController: UIViewController, DraggableViewDelegate {
     override func viewDidAppear(animated: Bool) {
         if let authorizer = service.authorizer,
             canAuth = authorizer.canAuthorize where canAuth {
-            
+            print("just got inside viewdidapppear!!!!!!!")
+
             //call our data store here and have it return the card content
-             dataStore.getEventsContent(usingService: service, completion: { (result) in
-                
-                if result {
-                    print("\n\n\nWe got the card contents!!!!!!!")
-                }
-                
-                else{
-                    //put a loading icon here while the cards content gets loaded or something...
-                    print("Shit doesn't work")
-                }
-             })
+             dataStore.getEventsContent(usingService: service)
+            print("after using the getEventsContent method!!!!")
+            NSNotificationCenter.defaultCenter().addObserver(self,selector: #selector(ViewController.setupViewWithDraggableView(_:)), name: eventsLoadedNotification, object: nil)
+            
+            print("just setup the draggable view!")
+            print("here is the result of the script!!!: \(dataStore.getEventsContentFromStore())")
+
+            
         } else {
             presentViewController(
                 createAuthController(),
@@ -119,6 +119,17 @@ class ViewController: UIViewController, DraggableViewDelegate {
         alert.show()
     }
     
+    @objc func setupViewWithDraggableView(note: NSNotification) {
+        print("started setting up draggable vieww!!!!")
+        eventsContentArray = dataStore.getEventsContentFromStore()
+        
+        draggableBackground = DraggableViewBackground(frame: self.view.frame)
+        draggableBackground.addCardsContent(eventsContentArray)
+        view.addSubview(draggableBackground)
+        print("ended setting up draggable vieww!!!!")
+
+    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

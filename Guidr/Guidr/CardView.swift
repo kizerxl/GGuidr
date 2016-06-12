@@ -39,7 +39,7 @@ class CardView: UIView {
     
     override init(frame: CGRect) {
   
-        self.title = ""
+        self.title = "insert some stuff here.."
         self.date = NSDate()
         self.location = ""
         self.eventDescription = ""

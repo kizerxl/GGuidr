@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 
 class DraggableViewBackground: UIView, DraggableViewDelegate {
-    var exampleCardLabels: [String]!
     var cardContentArray: [[String]]!
     var allCards: [CardView]!
     
@@ -31,17 +30,23 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        print("start loading this bitch up")
+
         super.layoutSubviews()
         self.setupView()
-        exampleCardLabels = ["first", "second", "third", "fourth", "last"]
         allCards = []
         loadedCards = []
+        cardContentArray = []
+        print("MIDWAY loading this bitch up")
         cardsLoadedIndex = 0
         self.loadCards()
+        print("end loading this bitch up")
+
     }
     
     func setupView() -> Void {
         self.backgroundColor = UIColor(red: 0.92, green: 0.93, blue: 0.95, alpha: 1)
+//        self.backgroundColor = UIColor.blackColor()
         
 //        
 //        xButton = UIButton(frame: CGRectMake((self.frame.size.width - CARD_WIDTH)/2 + 35, self.frame.size.height/2 + CARD_HEIGHT/2 + 10, 59, 59))
@@ -64,9 +69,11 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
     }
     
     func loadCards() -> Void {
-        if exampleCardLabels.count > 0 {
-            let numLoadedCardsCap = exampleCardLabels.count > MAX_BUFFER_SIZE ? MAX_BUFFER_SIZE : exampleCardLabels.count
-            for i in 0 ..< exampleCardLabels.count {
+        print("loading cards......")
+
+        if cardContentArray.count > 0 {
+            let numLoadedCardsCap = cardContentArray.count > MAX_BUFFER_SIZE ? MAX_BUFFER_SIZE : cardContentArray.count
+            for i in 0 ..< cardContentArray.count {
                 let newCard: CardView = self.createDraggableViewWithDataAtIndex(i)
                 allCards.append(newCard)
                 if i < numLoadedCardsCap {
@@ -129,5 +136,11 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
             dragView.overlayView.alpha = 1
         })
         dragView.leftClickAction()
+    }
+    
+    internal func addCardsContent(cardsArray: [[String]]) {
+        print("Getting into the draggable background array add!")
+        self.cardContentArray = cardsArray
+        print("This is what the cards array looks like: \(self.cardContentArray)")
     }
 }

@@ -123,6 +123,8 @@ class ViewController: UIViewController, DraggableViewDelegate {
         print("started setting up draggable vieww!!!!")
         eventsContentArray = dataStore.getEventsContentFromStore()
         
+        print("size of the eventsContentArray is \(eventsContentArray.count)")
+
         draggableBackground = DraggableViewBackground(frame: self.view.frame)
         draggableBackground.addCardsContent(eventsContentArray)
         view.addSubview(draggableBackground)

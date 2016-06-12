@@ -39,7 +39,7 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         cardContentArray = []
         print("MIDWAY loading this bitch up")
         cardsLoadedIndex = 0
-        self.loadCards()
+//        self.loadCards()
         print("end loading this bitch up")
 
     }
@@ -70,21 +70,30 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
     
     func loadCards() -> Void {
         print("loading cards......")
-
+        print("size of cardContentArray is \(cardContentArray.count)")
+        
         if cardContentArray.count > 0 {
+            print("starting the official loading of the cards mein")
+
             let numLoadedCardsCap = cardContentArray.count > MAX_BUFFER_SIZE ? MAX_BUFFER_SIZE : cardContentArray.count
             for i in 0 ..< cardContentArray.count {
                 let newCard: CardView = self.createDraggableViewWithDataAtIndex(i)
                 allCards.append(newCard)
+                print("All cards count: \(allCards.count)")
                 if i < numLoadedCardsCap {
                     loadedCards.append(newCard)
+                    print("Loaded cards count: \(loadedCards.count)")
+
                 }
             }
             
             for i in 0 ..< loadedCards.count {
+                print("We are in the ACTUAL loading of the cards!!!!!!")
                 if i > 0 {
+                    print("added a card above the view!")
                     self.insertSubview(loadedCards[i], belowSubview: loadedCards[i - 1])
                 } else {
+                    print("added a card to the view!")
                     self.addSubview(loadedCards[i])
                 }
                 cardsLoadedIndex = cardsLoadedIndex + 1
@@ -142,5 +151,6 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         print("Getting into the draggable background array add!")
         self.cardContentArray = cardsArray
         print("This is what the cards array looks like: \(self.cardContentArray)")
+        self.loadCards()
     }
 }

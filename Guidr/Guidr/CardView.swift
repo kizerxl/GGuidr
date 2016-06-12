@@ -39,7 +39,7 @@ class CardView: UIView {
     
     override init(frame: CGRect) {
   
-        self.title = "insert some stuff here.."
+        self.title = ""
         self.date = NSDate()
         self.location = ""
         self.eventDescription = ""
@@ -47,6 +47,7 @@ class CardView: UIView {
         
         super.init(frame: frame)
         
+        self.backgroundColor = UIColor.blackColor()
         self.panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(CardView.beingDragged(_:)))
         self.addGestureRecognizer(panGestureRecognizer)
 
@@ -62,6 +63,7 @@ class CardView: UIView {
         self.originalPoint = CGPointMake(0, 0)
 
         super.init(coder: aDecoder)
+        self.backgroundColor = UIColor.blackColor()
         
     }
 

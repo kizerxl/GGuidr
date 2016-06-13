@@ -47,9 +47,12 @@ class CardView: UIView {
         
         super.init(frame: frame)
         
-        self.backgroundColor = UIColor.blackColor()
+        self.backgroundColor = UIColor.init(red: 189/255, green: 195/255, blue: 199/255, alpha: 1)
         self.panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(CardView.beingDragged(_:)))
         self.addGestureRecognizer(panGestureRecognizer)
+        overlayView = OverlayView(frame: CGRectMake(self.frame.size.width/2-100, 0, 100, 100))
+        overlayView.alpha = 0
+        self.addSubview(overlayView)
 
         
     }
@@ -77,6 +80,7 @@ class CardView: UIView {
         self.date = date
         self.location = location
         self.eventDescription = eventDescription
+
         
         setup()
         
@@ -262,4 +266,5 @@ class CardView: UIView {
         delegate.cardSwipedLeft(self)
     }
     
+
 }

@@ -46,19 +46,19 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
     
     func setupView() -> Void {
         self.backgroundColor = UIColor(red: 0.92, green: 0.93, blue: 0.95, alpha: 1)
-//        self.backgroundColor = UIColor.blackColor()
+        self.backgroundColor = UIColor.whiteColor()
         
-//        
-//        xButton = UIButton(frame: CGRectMake((self.frame.size.width - CARD_WIDTH)/2 + 35, self.frame.size.height/2 + CARD_HEIGHT/2 + 10, 59, 59))
-//        xButton.setImage(UIImage(named: "xButton"), forState: UIControlState.Normal)
-//        xButton.addTarget(self, action: "swipeLeft", forControlEvents: UIControlEvents.TouchUpInside)
-//        
-//        checkButton = UIButton(frame: CGRectMake(self.frame.size.width/2 + CARD_WIDTH/2 - 85, self.frame.size.height/2 + CARD_HEIGHT/2 + 10, 59, 59))
-//        checkButton.setImage(UIImage(named: "checkButton"), forState: UIControlState.Normal)
-//        checkButton.addTarget(self, action: "swipeRight", forControlEvents: UIControlEvents.TouchUpInside)
-//        
-//        self.addSubview(xButton)
-//        self.addSubview(checkButton)
+        
+        xButton = UIButton(frame: CGRectMake((self.frame.size.width - CARD_WIDTH)/2 + 35, self.frame.size.height/2 + CARD_HEIGHT/2 + 10, 100, 75))
+        xButton.setImage(UIImage(named: "xMark"), forState: UIControlState.Normal)
+        xButton.addTarget(self, action: "swipeLeft", forControlEvents: UIControlEvents.TouchUpInside)
+        
+        checkButton = UIButton(frame: CGRectMake(self.frame.size.width/2 + CARD_WIDTH/2 - 85, self.frame.size.height/2 + CARD_HEIGHT/2 + 10, 90, 75))
+        checkButton.setImage(UIImage(named: "checkMark"), forState: UIControlState.Normal)
+        checkButton.addTarget(self, action: "swipeRight", forControlEvents: UIControlEvents.TouchUpInside)
+        
+        self.addSubview(xButton)
+        self.addSubview(checkButton)
     }
     
     func createDraggableViewWithDataAtIndex(index: NSInteger) -> CardView {
@@ -104,6 +104,7 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
     func cardSwipedLeft(card: UIView) -> Void {
         loadedCards.removeAtIndex(0)
         
+        print("just swiped!!!")
         if cardsLoadedIndex < allCards.count {
             loadedCards.append(allCards[cardsLoadedIndex])
             cardsLoadedIndex = cardsLoadedIndex + 1
@@ -114,6 +115,7 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
     func cardSwipedRight(card: UIView) -> Void {
         loadedCards.removeAtIndex(0)
         
+        print("just swiped!!!")
         if cardsLoadedIndex < allCards.count {
             loadedCards.append(allCards[cardsLoadedIndex])
             cardsLoadedIndex = cardsLoadedIndex + 1
@@ -153,4 +155,6 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         print("This is what the cards array looks like: \(self.cardContentArray)")
         self.loadCards()
     }
+    
+
 }

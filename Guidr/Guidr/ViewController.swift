@@ -10,7 +10,7 @@ import GoogleAPIClient
 import GTMOAuth2
 import UIKit
 
-class ViewController: UIViewController, DraggableViewDelegate {
+class ViewController: UIViewController {
     
     private let kKeychainItemName = nameInKeychain
     private let kClientID = secretKClientID
@@ -137,12 +137,4 @@ class ViewController: UIViewController, DraggableViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    func cardSwipedLeft(card: UIView) {
-        //place logic for adding card event here
-    }
-    
-    func cardSwipedRight(card: UIView) {
-        //place logic for adding card event here
-
-    }
 }

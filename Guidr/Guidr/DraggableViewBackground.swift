@@ -44,6 +44,20 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
 
     }
     
+    convenience init(){
+ 
+        self.init(frame: CGRect.zero)
+        
+        let screenHeight = UIScreen.mainScreen().bounds.height
+        let screenWidth = UIScreen.mainScreen().bounds.width
+        self.heightAnchor.constraintEqualToConstant(screenHeight).active = true
+        self.widthAnchor.constraintEqualToConstant(screenWidth).active = true
+
+    }
+        
+        
+        
+    
     func setupView() -> Void {
         self.backgroundColor = UIColor(red: 0.92, green: 0.93, blue: 0.95, alpha: 1)
         self.backgroundColor = UIColor.whiteColor()
@@ -62,7 +76,18 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
     }
     
     func createDraggableViewWithDataAtIndex(index: NSInteger) -> CardView {
-        let draggableView = CardView(frame: CGRectMake((self.frame.size.width - CARD_WIDTH)/2, (self.frame.size.height - CARD_HEIGHT)/2, CARD_WIDTH, CARD_HEIGHT))
+//        let draggableView = CardView(frame: CGRectMake((self.frame.size.width - CARD_WIDTH)/2, (self.frame.size.height - CARD_HEIGHT)/2, CARD_WIDTH, CARD_HEIGHT))
+        
+        let currentCard = cardContentArray[index]
+        
+        let draggableView = CardView(title: currentCard.count > 1 ? currentCard[1] : "(no title)",
+                                         date: NSDate(),
+                                         location: currentCard.count > 2 ? currentCard[2] : "(no location given)",
+                                         eventDescription: currentCard.count > 3 ? currentCard[3] : "(no description)")
+        
+        
+    
+//        let draggableView = CardView(title: "shit", date: NSDate(), location: "somewhere where there is shit", eventDescription: "lots and lots of shit")
 //        draggableView.information.text = exampleCardLabels[index]
         draggableView.delegate = self
         return draggableView
@@ -89,38 +114,54 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
             
             for i in 0 ..< loadedCards.count {
                 print("We are in the ACTUAL loading of the cards!!!!!!")
+                
+                let card1 = loadedCards[i]
+
+                // Put first card above the view; each subsequent card goes below the preceding one
                 if i > 0 {
                     print("added a card above the view!")
-                    self.insertSubview(loadedCards[i], belowSubview: loadedCards[i - 1])
+                    self.insertSubview(card1, belowSubview: loadedCards[i - 1])
+                    let card2 = loadedCards[i - 1]
+                    card2.translatesAutoresizingMaskIntoConstraints = false
+                    card2.centerXAnchor.constraintEqualToAnchor(self.centerXAnchor).active = true
+                    card2.centerYAnchor.constraintEqualToAnchor(self.centerYAnchor).active = true
+                    
                 } else {
-                    print("added a card to the view!")
-                    self.addSubview(loadedCards[i])
+                    self.addSubview(card1)
                 }
-                cardsLoadedIndex = cardsLoadedIndex + 1
+                
+                card1.translatesAutoresizingMaskIntoConstraints = false
+                card1.centerXAnchor.constraintEqualToAnchor(self.centerXAnchor).active = true
+                card1.centerYAnchor.constraintEqualToAnchor(self.centerYAnchor).active = true
+                layoutIfNeeded()
+                
             }
+            print("Cards loaded: \(cardsLoadedIndex)")
+            cardsLoadedIndex! += 1
         }
     }
     
+    func cardSwiped(card: UIView) -> Void {
+
+        print("just swiped!!!")
+
+        loadedCards.removeAtIndex(0)
+        
+        if cardsLoadedIndex < allCards.count {
+            print("haven't run out of cards yet")
+            loadedCards.append(allCards[cardsLoadedIndex])
+            cardsLoadedIndex = cardsLoadedIndex + 1
+            self.insertSubview(loadedCards[MAX_BUFFER_SIZE - 1], belowSubview: loadedCards[MAX_BUFFER_SIZE - 2])
+        } else {
+            print("ran out of cards")
+        }
+    
+    }
     func cardSwipedLeft(card: UIView) -> Void {
-        loadedCards.removeAtIndex(0)
-        
-        print("just swiped!!!")
-        if cardsLoadedIndex < allCards.count {
-            loadedCards.append(allCards[cardsLoadedIndex])
-            cardsLoadedIndex = cardsLoadedIndex + 1
-            self.insertSubview(loadedCards[MAX_BUFFER_SIZE - 1], belowSubview: loadedCards[MAX_BUFFER_SIZE - 2])
-        }
+        cardSwiped(card)
     }
-    
     func cardSwipedRight(card: UIView) -> Void {
-        loadedCards.removeAtIndex(0)
-        
-        print("just swiped!!!")
-        if cardsLoadedIndex < allCards.count {
-            loadedCards.append(allCards[cardsLoadedIndex])
-            cardsLoadedIndex = cardsLoadedIndex + 1
-            self.insertSubview(loadedCards[MAX_BUFFER_SIZE - 1], belowSubview: loadedCards[MAX_BUFFER_SIZE - 2])
-        }
+        cardSwiped(card)
     }
     
     func swipeRight() -> Void {

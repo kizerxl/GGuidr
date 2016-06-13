@@ -125,7 +125,15 @@ class ViewController: UIViewController {
         
         print("size of the eventsContentArray is \(eventsContentArray.count)")
 
-        draggableBackground = DraggableViewBackground(frame: self.view.frame)
+//        draggableBackground = DraggableViewBackground(frame: self.view.frame)
+        draggableBackground = DraggableViewBackground()
+        view.addSubview(draggableBackground)
+        draggableBackground.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
+        draggableBackground.centerYAnchor.constraintEqualToAnchor(view.centerYAnchor).active = true
+        draggableBackground.translatesAutoresizingMaskIntoConstraints = false
+        view.layoutIfNeeded()
+        
+
         draggableBackground.addCardsContent(eventsContentArray)
         view.addSubview(draggableBackground)
         print("ended setting up draggable vieww!!!!")

@@ -93,9 +93,11 @@ class CardDataStore: NSObject {
             // returns. Here, the function returns an Apps Script Object with
             // String keys and values, so must be cast into a Dictionary
             // (folderSet).
-//            print("here is the response: \(object.JSON)\n")
+            print("\n\n\n\nhere is the response: \(object.JSON)\n\n\n\n\n")
             let response = object.JSON["response"] as! [String: AnyObject]
             self.store = response["result"] as! [[String]]
+            
+            print("\n\n\n----------The real count of the cards is \(self.store.count)----------\n\n\n")
             
         }
         

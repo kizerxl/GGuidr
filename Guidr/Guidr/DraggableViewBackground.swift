@@ -123,17 +123,17 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
                     self.insertSubview(card1, belowSubview: loadedCards[i - 1])
                     let card2 = loadedCards[i - 1]
                     card2.translatesAutoresizingMaskIntoConstraints = false
-                    card2.centerXAnchor.constraintEqualToAnchor(self.centerXAnchor).active = true
-                    card2.centerYAnchor.constraintEqualToAnchor(self.centerYAnchor).active = true
-                    
+                    card2.centerXAnchor.constraintEqualToAnchor(self.superview!.centerXAnchor).active = true
+                    card2.centerYAnchor.constraintEqualToAnchor(self.superview!.centerYAnchor).active = true
                 } else {
                     self.addSubview(card1)
                 }
                 
                 card1.translatesAutoresizingMaskIntoConstraints = false
-                card1.centerXAnchor.constraintEqualToAnchor(self.centerXAnchor).active = true
-                card1.centerYAnchor.constraintEqualToAnchor(self.centerYAnchor).active = true
+                card1.centerXAnchor.constraintEqualToAnchor(self.superview!.centerXAnchor).active = true
+                card1.centerYAnchor.constraintEqualToAnchor(self.superview!.centerYAnchor).active = true
                 layoutIfNeeded()
+                print("card added. Frame: \(card1.frame)")
                 
             }
             print("Cards loaded: \(cardsLoadedIndex)")
@@ -151,7 +151,12 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
             print("haven't run out of cards yet")
             loadedCards.append(allCards[cardsLoadedIndex])
             cardsLoadedIndex = cardsLoadedIndex + 1
-            self.insertSubview(loadedCards[MAX_BUFFER_SIZE - 1], belowSubview: loadedCards[MAX_BUFFER_SIZE - 2])
+            let card1 = loadedCards[MAX_BUFFER_SIZE - 1]
+            self.insertSubview(card1, belowSubview: loadedCards[MAX_BUFFER_SIZE - 2])
+            card1.translatesAutoresizingMaskIntoConstraints = false
+            card1.centerXAnchor.constraintEqualToAnchor(self.superview!.centerXAnchor).active = true
+            card1.centerYAnchor.constraintEqualToAnchor(self.superview!.centerYAnchor).active = true
+            layoutIfNeeded()
         } else {
             print("ran out of cards")
         }

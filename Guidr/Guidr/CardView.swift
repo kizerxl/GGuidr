@@ -217,53 +217,63 @@ class CardView: UIView {
     }
     
     func rightAction() -> Void {
-        let finishPoint: CGPoint = CGPointMake(500, 2 * CGFloat(yFromCenter) + self.originPoint.y)
-        UIView.animateWithDuration(0.3,
-                                   animations: {
-                                    self.center = finishPoint
-            }, completion: {
-                (value: Bool) in
+//        let finishPoint: CGPoint = CGPointMake(currentScreenBounds().width + 50, currentScreenBounds().height + 50)
+//        UIView.animateWithDuration(0.3,
+//                                   animations: {
+//                                    self.center = finishPoint
+//                                    self.centerXAnchor.constraintEqualToAnchor(self.superview?.rightAnchor, constant: -1000).active = true
+//                                    self.centerYAnchor.constraintEqualToAnchor(self.superview?.bottomAnchor, constant: -1000).active = true
+//                                    self.layoutIfNeeded()
+//            }, completion: {
+//                (value: Bool) in
                 self.removeFromSuperview()
-        })
+//        })
         delegate.cardSwipedRight(self)
     }
     
     func leftAction() -> Void {
-        let finishPoint: CGPoint = CGPointMake(-500, 2 * CGFloat(yFromCenter) + self.originPoint.y)
-        UIView.animateWithDuration(0.3,
-                                   animations: {
-                                    self.center = finishPoint
-            }, completion: {
-                (value: Bool) in
+//        let finishPoint: CGPoint = CGPointMake(-500, 2 * CGFloat(yFromCenter) + self.originPoint.y)
+//        UIView.animateWithDuration(0.3,
+//                                   animations: {
+//                                    self.center = finishPoint
+//            }, completion: {
+//                (value: Bool) in
                 self.removeFromSuperview()
-        })
+//        })
         delegate.cardSwipedLeft(self)
     }
     
     func rightClickAction() -> Void {
-        let finishPoint = CGPointMake(600, self.center.y)
-        UIView.animateWithDuration(0.3,
-                                   animations: {
-                                    self.center = finishPoint
-                                    self.transform = CGAffineTransformMakeRotation(1)
-            }, completion: {
-                (value: Bool) in
-                self.removeFromSuperview()
-        })
-        delegate.cardSwipedRight(self)
+//        let finishPoint = CGPointMake(600, self.center.y)
+//        UIView.animateWithDuration(0.3,
+//                                   animations: {
+//                                    self.center = finishPoint
+//                                    self.transform = CGAffineTransformMakeRotation(1)
+//            }, completion: {
+//                (value: Bool) in
+//                self.removeFromSuperview()
+//        })
+//        delegate.cardSwipedRight(self)
+        rightAction()
     }
     
     func leftClickAction() -> Void {
-        let finishPoint: CGPoint = CGPointMake(-600, self.center.y)
-        UIView.animateWithDuration(0.3,
-                                   animations: {
-                                    self.center = finishPoint
-                                    self.transform = CGAffineTransformMakeRotation(1)
-            }, completion: {
-                (value: Bool) in
-                self.removeFromSuperview()
-        })
-        delegate.cardSwipedLeft(self)
+//        let finishPoint: CGPoint = CGPointMake(-600, self.center.y)
+//        UIView.animateWithDuration(0.3,
+//                                   animations: {
+//                                    self.center = finishPoint
+//                                    self.transform = CGAffineTransformMakeRotation(1)
+//            }, completion: {
+//                (value: Bool) in
+//                self.removeFromSuperview()
+//        })
+//        delegate.cardSwipedLeft(self)
+        leftAction()
+    }
+    
+    func currentScreenBounds() -> CGRect {
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        return screenSize
     }
     
 

@@ -62,17 +62,38 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         self.backgroundColor = UIColor(red: 0.92, green: 0.93, blue: 0.95, alpha: 1)
         self.backgroundColor = UIColor.whiteColor()
         
+//        
+//        xButton = UIButton(frame: CGRectMake((self.frame.size.width - CARD_WIDTH)/2 + 35, self.frame.size.height/2 + CARD_HEIGHT/2 + 10, 100, 75))
+//        xButton.setImage(UIImage(named: "xMark"), forState: UIControlState.Normal)
+//        xButton.addTarget(self, action: "swipeLeft", forControlEvents: UIControlEvents.TouchUpInside)
+//        
+//        checkButton = UIButton(frame: CGRectMake(self.frame.size.width/2 + CARD_WIDTH/2 - 85, self.frame.size.height/2 + CARD_HEIGHT/2 + 10, 90, 75))
         
-        xButton = UIButton(frame: CGRectMake((self.frame.size.width - CARD_WIDTH)/2 + 35, self.frame.size.height/2 + CARD_HEIGHT/2 + 10, 100, 75))
-        xButton.setImage(UIImage(named: "xMark"), forState: UIControlState.Normal)
-        xButton.addTarget(self, action: "swipeLeft", forControlEvents: UIControlEvents.TouchUpInside)
-        
-        checkButton = UIButton(frame: CGRectMake(self.frame.size.width/2 + CARD_WIDTH/2 - 85, self.frame.size.height/2 + CARD_HEIGHT/2 + 10, 90, 75))
+        xButton = UIButton()
+        checkButton = UIButton()
+
         checkButton.setImage(UIImage(named: "checkMark"), forState: UIControlState.Normal)
         checkButton.addTarget(self, action: "swipeRight", forControlEvents: UIControlEvents.TouchUpInside)
         
         self.addSubview(xButton)
         self.addSubview(checkButton)
+        
+        // check button constraints
+        checkButton.translatesAutoresizingMaskIntoConstraints = false
+        checkButton.centerXAnchor.constraintEqualToAnchor(self.centerXAnchor).active = true
+        checkButton.bottomAnchor.constraintEqualToAnchor(self.bottomAnchor, constant: 30).active = true
+        checkButton.widthAnchor.constraintEqualToConstant(100).active = true
+        checkButton.heightAnchor.constraintEqualToConstant(100).active = true
+
+        // x button constraints
+        xButton.translatesAutoresizingMaskIntoConstraints = false
+        xButton.centerXAnchor.constraintEqualToAnchor(self.centerXAnchor).active = true
+        xButton.bottomAnchor.constraintEqualToAnchor(self.bottomAnchor, constant: 30).active = true
+        xButton.widthAnchor.constraintEqualToConstant(100).active = true
+        xButton.heightAnchor.constraintEqualToConstant(75).active = true
+
+        layoutIfNeeded()
+
     }
     
     func createDraggableViewWithDataAtIndex(index: NSInteger) -> CardView {
@@ -85,10 +106,6 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
                                          location: currentCard.count > 2 ? currentCard[2] : "(no location given)",
                                          eventDescription: currentCard.count > 3 ? currentCard[3] : "(no description)")
         
-        
-    
-//        let draggableView = CardView(title: "shit", date: NSDate(), location: "somewhere where there is shit", eventDescription: "lots and lots of shit")
-//        draggableView.information.text = exampleCardLabels[index]
         draggableView.delegate = self
         return draggableView
     }
@@ -152,11 +169,13 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
             loadedCards.append(allCards[cardsLoadedIndex])
             cardsLoadedIndex = cardsLoadedIndex + 1
             let card1 = loadedCards[MAX_BUFFER_SIZE - 1]
+            self.insertSubview(card1, aboveSubview: self)
             self.insertSubview(card1, belowSubview: loadedCards[MAX_BUFFER_SIZE - 2])
             card1.translatesAutoresizingMaskIntoConstraints = false
             card1.centerXAnchor.constraintEqualToAnchor(self.superview!.centerXAnchor).active = true
             card1.centerYAnchor.constraintEqualToAnchor(self.superview!.centerYAnchor).active = true
             layoutIfNeeded()
+
         } else {
             print("ran out of cards")
         }
@@ -167,6 +186,12 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
     }
     func cardSwipedRight(card: UIView) -> Void {
         cardSwiped(card)
+        
+        // ADD TO CALENDAR
+        // http://sweettutos.com/2015/11/25/eventkit-reminders-manager-how-to-retrieve-create-and-edit-reminders-from-within-your-app-in-swift/
+        // or, Google Calendar instead (but will require login)
+        
+        
     }
     
     func swipeRight() -> Void {

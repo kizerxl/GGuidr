@@ -204,9 +204,9 @@ class CardView: UIView {
     func afterSwipeAction() -> Void {
         let floatXFromCenter = Float(xFromCenter)
         if floatXFromCenter > ACTION_MARGIN {
-            self.rightAction()
+            self.actionForDirection("left")
         } else if floatXFromCenter < -ACTION_MARGIN {
-            self.leftAction()
+            self.actionForDirection("right")
         } else {
             UIView.animateWithDuration(0.3, animations: {() -> Void in
                 self.center = self.originPoint
@@ -216,59 +216,57 @@ class CardView: UIView {
         }
     }
     
-    func rightAction() -> Void {
-//        let finishPoint: CGPoint = CGPointMake(currentScreenBounds().width + 50, currentScreenBounds().height + 50)
-//        UIView.animateWithDuration(0.3,
-//                                   animations: {
-//                                    self.center = finishPoint
-//                                    self.centerXAnchor.constraintEqualToAnchor(self.superview?.rightAnchor, constant: -1000).active = true
-//                                    self.centerYAnchor.constraintEqualToAnchor(self.superview?.bottomAnchor, constant: -1000).active = true
-//                                    self.layoutIfNeeded()
-//            }, completion: {
-//                (value: Bool) in
-                self.removeFromSuperview()
-//        })
+    func actionForDirection(direction: String) {
+       UIView.animateWithDuration(0.5) {
+            self.removeFromSuperview()
+        }
+        
+        if direction == "left" {
+            delegate.cardSwipedLeft(self)
+        }
+        else {
+            delegate.cardSwipedRight(self)
+        }
+    }
+
+    func rightClickAction() -> Void {
+        let transform = CGAffineTransformMakeRotation(CGFloat(ROTATION_MAX * 0.75))
+        let scaleTransform = CGAffineTransformScale(transform, CGFloat(SCALE_MAX), CGFloat(SCALE_MAX))
+        
+        UIView.animateKeyframesWithDuration(0.5, delay: 0, options: [], animations: {
+            
+            UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 0.5) {
+                self.transform = scaleTransform
+                self.center.x += self.center.x
+                self.center.y -= self.center.y
+                self.alpha = 0
+                self.layoutIfNeeded()
+            }
+            
+        }) { (value: Bool) in
+            self.removeFromSuperview()
+        }
         delegate.cardSwipedRight(self)
     }
     
-    func leftAction() -> Void {
-//        let finishPoint: CGPoint = CGPointMake(-500, 2 * CGFloat(yFromCenter) + self.originPoint.y)
-//        UIView.animateWithDuration(0.3,
-//                                   animations: {
-//                                    self.center = finishPoint
-//            }, completion: {
-//                (value: Bool) in
-                self.removeFromSuperview()
-//        })
-        delegate.cardSwipedLeft(self)
-    }
-    
-    func rightClickAction() -> Void {
-//        let finishPoint = CGPointMake(600, self.center.y)
-//        UIView.animateWithDuration(0.3,
-//                                   animations: {
-//                                    self.center = finishPoint
-//                                    self.transform = CGAffineTransformMakeRotation(1)
-//            }, completion: {
-//                (value: Bool) in
-//                self.removeFromSuperview()
-//        })
-//        delegate.cardSwipedRight(self)
-        rightAction()
-    }
-    
     func leftClickAction() -> Void {
-//        let finishPoint: CGPoint = CGPointMake(-600, self.center.y)
-//        UIView.animateWithDuration(0.3,
-//                                   animations: {
-//                                    self.center = finishPoint
-//                                    self.transform = CGAffineTransformMakeRotation(1)
-//            }, completion: {
-//                (value: Bool) in
-//                self.removeFromSuperview()
-//        })
-//        delegate.cardSwipedLeft(self)
-        leftAction()
+        let transform = CGAffineTransformMakeRotation(CGFloat(ROTATION_MAX * 0.75))
+        let scaleTransform = CGAffineTransformScale(transform, CGFloat(SCALE_MAX), CGFloat(SCALE_MAX))
+        
+        UIView.animateKeyframesWithDuration(0.5, delay: 0, options: [], animations: {
+            
+            UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 0.5) {
+                self.transform = scaleTransform
+                self.center.x -= self.center.x
+                self.center.y -= self.center.y
+                self.alpha = 0
+                self.layoutIfNeeded()
+            }
+            
+        }) { (value: Bool) in
+            self.removeFromSuperview()
+        }
+        delegate.cardSwipedLeft(self)
     }
     
     func currentScreenBounds() -> CGRect {

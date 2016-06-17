@@ -114,6 +114,7 @@ class CardView: UIView {
         let titleLabel = UILabel()
         titleLabel.text = title
         titleLabel.textColor = textColor
+        
        
         // date
         let dateLabel = UILabel()
@@ -132,20 +133,23 @@ class CardView: UIView {
         descriptionLabel.textColor = textColor
         
         // Add labels
-        let heightThing = 0 as CGFloat
+        var heightThing = 3 as CGFloat
         var widthCoord = 10 as CGFloat
         let labels = [titleLabel, dateLabel, locationLabel, descriptionLabel]
         
         for label: UILabel in labels {
             
             self.addSubview(label)
-
+            
             label.translatesAutoresizingMaskIntoConstraints = false
             label.leftAnchor.constraintEqualToAnchor(self.leftAnchor, constant: 10).active = true
             label.topAnchor.constraintEqualToAnchor(self.topAnchor, constant: widthCoord).active = true
+            label.numberOfLines = 5
+            label.preferredMaxLayoutWidth = self.bounds.width - 5
+            label.enabled = true
             
             if label == labels.first! {
-                var heightThing = label.frame.height
+                heightThing = label.frame.height
             }
             
             
@@ -274,11 +278,5 @@ class CardView: UIView {
         }
         delegate.cardSwipedLeft(self)
     }
-    
-    func currentScreenBounds() -> CGRect {
-        let screenSize: CGRect = UIScreen.mainScreen().bounds
-        return screenSize
-    }
-    
 
 }

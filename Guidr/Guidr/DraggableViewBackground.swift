@@ -75,22 +75,28 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         checkButton.setImage(UIImage(named: "checkMark"), forState: UIControlState.Normal)
         checkButton.addTarget(self, action: "swipeRight", forControlEvents: UIControlEvents.TouchUpInside)
         
+        xButton.setImage(UIImage(named: "xMark"), forState: UIControlState.Normal)
+        xButton.addTarget(self, action: "swipeLeft", forControlEvents: UIControlEvents.TouchUpInside)
+        
         self.addSubview(xButton)
         self.addSubview(checkButton)
         
         // check button constraints
         checkButton.translatesAutoresizingMaskIntoConstraints = false
-        checkButton.centerXAnchor.constraintEqualToAnchor(self.centerXAnchor).active = true
-        checkButton.bottomAnchor.constraintEqualToAnchor(self.bottomAnchor, constant: 30).active = true
+//        checkButton.centerXAnchor.constraintEqualToAnchor(self.centerXAnchor, constant: checkButton.bounds.width).active = true
+        checkButton.bottomAnchor.constraintEqualToAnchor(self.bottomAnchor, constant: -100).active = true
         checkButton.widthAnchor.constraintEqualToConstant(100).active = true
         checkButton.heightAnchor.constraintEqualToConstant(100).active = true
+        checkButton.rightAnchor.constraintEqualToAnchor(self.rightAnchor).active = true
 
         // x button constraints
         xButton.translatesAutoresizingMaskIntoConstraints = false
-        xButton.centerXAnchor.constraintEqualToAnchor(self.centerXAnchor).active = true
-        xButton.bottomAnchor.constraintEqualToAnchor(self.bottomAnchor, constant: 30).active = true
+//        xButton.centerXAnchor.constraintEqualToAnchor(self.centerXAnchor, constant: -self.checkButton.bounds.width).active = true
+        xButton.bottomAnchor.constraintEqualToAnchor(self.bottomAnchor, constant: -100).active = true
         xButton.widthAnchor.constraintEqualToConstant(100).active = true
         xButton.heightAnchor.constraintEqualToConstant(75).active = true
+        xButton.leftAnchor.constraintEqualToAnchor(self.leftAnchor).active = true
+
 
         layoutIfNeeded()
 
@@ -183,10 +189,12 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
     }
     func cardSwipedLeft(card: UIView) -> Void {
         cardSwiped(card)
+        //insert code for adding to calendar
     }
     func cardSwipedRight(card: UIView) -> Void {
         cardSwiped(card)
         
+        //insert code for adding to calendar
         // ADD TO CALENDAR
         // http://sweettutos.com/2015/11/25/eventkit-reminders-manager-how-to-retrieve-create-and-edit-reminders-from-within-your-app-in-swift/
         // or, Google Calendar instead (but will require login)

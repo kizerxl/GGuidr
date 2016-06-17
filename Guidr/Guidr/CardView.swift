@@ -97,8 +97,14 @@ class CardView: UIView {
         self.widthAnchor.constraintEqualToConstant(screenWidth * 3/4).active = true
         
         // Colors: silver background, purple text
-        self.backgroundColor = UIColor.init(red: 189/255, green: 195/255, blue: 199/255, alpha: 1)
-        let textColor = UIColor.purpleColor()
+//        self.backgroundColor = UIColor.init(red: 189/255, green: 195/255, blue: 199/255, alpha: 1)
+        
+        //make a black outline for the card + clear bg
+        self.layer.borderWidth = 1
+        self.layer.borderColor = UIColor.blackColor().CGColor
+        self.backgroundColor = UIColor.whiteColor()
+        
+        let textColor = UIColor.blackColor()
         
         // Rounded corners
         self.layer.cornerRadius = screenHeight * 1/3 * 0.1

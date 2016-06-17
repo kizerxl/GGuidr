@@ -59,9 +59,7 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         
     
     func setupView() -> Void {
-        self.backgroundColor = UIColor(red: 0.92, green: 0.93, blue: 0.95, alpha: 1)
         self.backgroundColor = UIColor.whiteColor()
-        
 //        
 //        xButton = UIButton(frame: CGRectMake((self.frame.size.width - CARD_WIDTH)/2 + 35, self.frame.size.height/2 + CARD_HEIGHT/2 + 10, 100, 75))
 //        xButton.setImage(UIImage(named: "xMark"), forState: UIControlState.Normal)
@@ -72,11 +70,11 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         xButton = UIButton()
         checkButton = UIButton()
 
-        checkButton.setImage(UIImage(named: "checkMark"), forState: UIControlState.Normal)
-        checkButton.addTarget(self, action: "swipeRight", forControlEvents: UIControlEvents.TouchUpInside)
+        checkButton.setImage(UIImage(named: "newCheck"), forState: UIControlState.Normal)
+        checkButton.addTarget(self, action: #selector(DraggableViewBackground.swipeRight), forControlEvents: UIControlEvents.TouchUpInside)
         
-        xButton.setImage(UIImage(named: "xMark"), forState: UIControlState.Normal)
-        xButton.addTarget(self, action: "swipeLeft", forControlEvents: UIControlEvents.TouchUpInside)
+        xButton.setImage(UIImage(named: "newX"), forState: UIControlState.Normal)
+        xButton.addTarget(self, action: #selector(DraggableViewBackground.swipeLeft), forControlEvents: UIControlEvents.TouchUpInside)
         
         self.addSubview(xButton)
         self.addSubview(checkButton)
@@ -86,16 +84,16 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
 //        checkButton.centerXAnchor.constraintEqualToAnchor(self.centerXAnchor, constant: checkButton.bounds.width).active = true
         checkButton.bottomAnchor.constraintEqualToAnchor(self.bottomAnchor, constant: -100).active = true
         checkButton.widthAnchor.constraintEqualToConstant(100).active = true
-        checkButton.heightAnchor.constraintEqualToConstant(100).active = true
-        checkButton.rightAnchor.constraintEqualToAnchor(self.rightAnchor).active = true
+        checkButton.heightAnchor.constraintEqualToConstant(86).active = true
+        checkButton.rightAnchor.constraintEqualToAnchor(self.rightAnchor, constant: -100).active = true
 
         // x button constraints
         xButton.translatesAutoresizingMaskIntoConstraints = false
 //        xButton.centerXAnchor.constraintEqualToAnchor(self.centerXAnchor, constant: -self.checkButton.bounds.width).active = true
         xButton.bottomAnchor.constraintEqualToAnchor(self.bottomAnchor, constant: -100).active = true
         xButton.widthAnchor.constraintEqualToConstant(100).active = true
-        xButton.heightAnchor.constraintEqualToConstant(75).active = true
-        xButton.leftAnchor.constraintEqualToAnchor(self.leftAnchor).active = true
+        xButton.heightAnchor.constraintEqualToConstant(86).active = true
+        xButton.leftAnchor.constraintEqualToAnchor(self.leftAnchor, constant: 100).active = true
 
 
         layoutIfNeeded()

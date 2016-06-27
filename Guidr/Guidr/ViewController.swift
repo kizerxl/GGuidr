@@ -176,6 +176,11 @@ class ViewController: UIViewController, CalendarDelegate {
         calendar = EKCalendar(forEntityType: .Event, eventStore: eventStore)
         calendar.title = appName
         
+        calendar.source = eventStore.sources.filter{
+            (source: EKSource) -> Bool in
+            source.sourceType.rawValue == EKSourceType.Local.rawValue
+            }.first!
+        
         do {
             try self.eventStore.saveCalendar(calendar, commit: true)
 

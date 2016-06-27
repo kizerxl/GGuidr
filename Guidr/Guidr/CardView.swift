@@ -118,7 +118,9 @@ class CardView: UIView {
        
         // date
         let dateLabel = UILabel()
-        dateLabel.text = NSDateFormatter().stringFromDate(date)
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateStyle = .ShortStyle
+        dateLabel.text = dateFormatter.stringFromDate(date)
         dateLabel.textColor = textColor
         
         // location

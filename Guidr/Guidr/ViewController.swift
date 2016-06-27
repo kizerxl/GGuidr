@@ -154,6 +154,7 @@ class ViewController: UIViewController, CalendarDelegate {
         
         
         draggableBackground.addCardsContent(eventsContentArray)
+        draggableBackground.calDelegate = self
         view.addSubview(draggableBackground)
         print("ended setting up draggable vieww!!!!")
 

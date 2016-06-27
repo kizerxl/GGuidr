@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0730"
+   LastUpgradeVersion = "0700"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D468777BEC2DE5127A16239373FFD11F"
-               BuildableName = "GTMOAuth2.framework"
-               BlueprintName = "GTMOAuth2"
+               BlueprintIdentifier = "4F95B3A0F68FE5F4564A42D906FA2905"
+               BuildableName = "Pods_Guidr.framework"
+               BlueprintName = "Pods-Guidr"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D468777BEC2DE5127A16239373FFD11F"
-            BuildableName = "GTMOAuth2.framework"
-            BlueprintName = "GTMOAuth2"
+            BlueprintIdentifier = "4F95B3A0F68FE5F4564A42D906FA2905"
+            BuildableName = "Pods_Guidr.framework"
+            BlueprintName = "Pods-Guidr"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -60,15 +60,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D468777BEC2DE5127A16239373FFD11F"
-            BuildableName = "GTMOAuth2.framework"
-            BlueprintName = "GTMOAuth2"
-            ReferencedContainer = "container:Pods.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

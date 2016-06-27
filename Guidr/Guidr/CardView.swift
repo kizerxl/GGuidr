@@ -9,8 +9,8 @@
 import UIKit
 
 protocol DraggableViewDelegate {
-    func cardSwipedLeft(card: UIView) -> Void
-    func cardSwipedRight(card: UIView) -> Void
+    func cardSwipedLeft(card: CardView) -> Void
+    func cardSwipedRight(card: CardView) -> Void
 }
 
 class CardView: UIView {
@@ -278,5 +278,13 @@ class CardView: UIView {
         }
         delegate.cardSwipedLeft(self)
     }
+    
+//    func formatDate(dateString: String) -> NSDate {
+//        let dateFormatter = NSDateFormatter()
+//        dateFormatter.dateFormat = "EEEE, MMM d" /* find out and place date format from http://userguide.icu-project.org/formatparse/datetime */
+//        let date = dateFormatter.dateFromString(dateString)
+//        return date!
+//    }
+
 
 }

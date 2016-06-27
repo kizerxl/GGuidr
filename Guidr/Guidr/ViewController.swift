@@ -9,8 +9,9 @@
 import GoogleAPIClient
 import GTMOAuth2
 import UIKit
+import EventKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, CalendarDelegate {
     
     private let kKeychainItemName = nameInKeychain
     private let kClientID = secretKClientID
@@ -18,6 +19,9 @@ class ViewController: UIViewController {
     private var dataStore: CardDataStore!
     private var draggableBackground: DraggableViewBackground!
     private var eventsContentArray: [[String]]!
+    private var eventStore: EKEventStore!
+    private var calendar: EKCalendar!
+    private var appName = "Guidr"
     
     // If modifying these scopes, delete your previously saved credentials by
     // resetting the iOS simulator or uninstall the app.
@@ -29,20 +33,12 @@ class ViewController: UIViewController {
     // and initialize the Google Apps Script Execution API service
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        eventStore = EKEventStore()
         
         dataStore = CardDataStore.sharedInstance
         
-//        view.backgroundColor = UIColor.blackColor()
-        
-//        // TESTING THE CARD VIEW THING
-//        let fakeCard = CardView.init(title: "The Event", date: NSDate(), location: "My butthole", eventDescription: "This is an event where an event will take place")
-//        view.addSubview(fakeCard)
-//        fakeCard.translatesAutoresizingMaskIntoConstraints = false
-//        fakeCard.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
-//        fakeCard.centerYAnchor.constraintEqualToAnchor(view.centerYAnchor).active = true
-//        view.layoutIfNeeded()
-//        
-//        // END TEST
+//        view.backgroundColor = UIColor.purpleColor()
         
         if let auth = GTMOAuth2ViewControllerTouch.authForGoogleFromKeychainForName(
             kKeychainItemName,
@@ -51,13 +47,15 @@ class ViewController: UIViewController {
             service.authorizer = auth
         }
         
-//    fakeCard.delegate = self
-        
     }
     
     // When the view appears, ensure that the Google Apps Script Execution API service is authorized
     // and perform API calls
     override func viewDidAppear(animated: Bool) {
+        
+        // Make sure we have calendar authorization
+        checkCalendarAuthorizationStatus()
+        
         if let authorizer = service.authorizer,
             canAuth = authorizer.canAuthorize where canAuth {
             print("just got inside viewdidapppear!!!!!!!")
@@ -77,6 +75,27 @@ class ViewController: UIViewController {
                 animated: true,
                 completion: nil
             )
+        }
+    }
+    
+    // (Copied from tutorial)
+    func checkCalendarAuthorizationStatus() {
+        let status = EKEventStore.authorizationStatusForEntityType(EKEntityType.Event)
+        
+        switch (status) {
+        case EKAuthorizationStatus.NotDetermined: // This happens on first-run
+            requestAccessToCalendar()
+        case EKAuthorizationStatus.Authorized:
+            if draggableBackground != nil {
+                calendarSetup()
+            }
+            calendarSetup() //setup the calendar
+            break // Things are in line with being able to show the calendars in the table view
+//            loadCalendars() //TODO: change this
+        case EKAuthorizationStatus.Restricted, EKAuthorizationStatus.Denied:
+            //TODO: handle this
+            break
+            
         }
     }
     
@@ -133,11 +152,79 @@ class ViewController: UIViewController {
         draggableBackground.translatesAutoresizingMaskIntoConstraints = false
         view.layoutIfNeeded()
         
-
+        
         draggableBackground.addCardsContent(eventsContentArray)
         view.addSubview(draggableBackground)
         print("ended setting up draggable vieww!!!!")
 
+    }
+
+    
+    func calendarSetup() {
+        
+        // If the app's calendar already exists on the phone, use it
+        let calendars = eventStore.calendarsForEntityType(.Event)
+        for calendar: EKCalendar in calendars {
+            if calendar.title == appName {
+                print("calendar is already made!!!!!")
+                self.calendar = calendar
+                return
+            }
+        }
+        
+        // Otherwise, create one
+        calendar = EKCalendar(forEntityType: .Event, eventStore: eventStore)
+        calendar.title = appName
+        
+        do {
+            try self.eventStore.saveCalendar(calendar, commit: true)
+
+        } catch {
+            let alert = UIAlertController(title: "Couldn't create calendar", message: (error as NSError).localizedDescription, preferredStyle: .Alert)
+            let OKAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            alert.addAction(OKAction)
+            
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+        
+        print("MADE the calendar and now we are going to use it!!!!!!")
+        
+    }
+    
+    func requestAccessToCalendar() {
+        eventStore.requestAccessToEntityType(EKEntityType.Event, completion: {
+            (accessGranted: Bool, error: NSError?) in
+            
+            if accessGranted == true {
+                dispatch_async(dispatch_get_main_queue(), {
+                    
+                    print("Access granted!!!!!")
+                    
+                    
+                })
+            } else {
+                dispatch_async(dispatch_get_main_queue(), {
+                    //some logic to have user open settings
+//                    let openSettingsUrl = NSURL(string: UIApplicationOpenSettingsURLString)
+//                    UIApplication.sharedApplication().openURL(openSettingsUrl!)
+
+                })
+            }
+        })
+    }
+    
+    
+    func addEventToCalendar(card:CardView){
+        
+        //we add the event to the calendar 
+        
+        let newEvent = EKEvent(eventStore: eventStore)
+        newEvent.calendar = calendar
+        newEvent.title = card.title
+        newEvent.startDate = card.date
+        newEvent.endDate = card.date
+        newEvent.notes = card.description
+        newEvent.location = card.location
     }
 
     override func didReceiveMemoryWarning() {

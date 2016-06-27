@@ -9,6 +9,10 @@
 import Foundation
 import UIKit
 
+protocol CalendarDelegate {
+    func addEventToCalendar(card:CardView)
+}
+
 class DraggableViewBackground: UIView, DraggableViewDelegate {
     var cardContentArray: [[String]]!
     var allCards: [CardView]!
@@ -23,6 +27,7 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
     var messageButton: UIButton!
     var checkButton: UIButton!
     var xButton: UIButton!
+    var calDelegate: CalendarDelegate!
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
@@ -59,8 +64,10 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         
     
     func setupView() -> Void {
-        self.backgroundColor = UIColor.whiteColor()
-//        
+//        self.backgroundColor = UIColor.whiteColor()
+        self.backgroundColor = UIColor.purpleColor()
+
+//
 //        xButton = UIButton(frame: CGRectMake((self.frame.size.width - CARD_WIDTH)/2 + 35, self.frame.size.height/2 + CARD_HEIGHT/2 + 10, 100, 75))
 //        xButton.setImage(UIImage(named: "xMark"), forState: UIControlState.Normal)
 //        xButton.addTarget(self, action: "swipeLeft", forControlEvents: UIControlEvents.TouchUpInside)
@@ -106,7 +113,7 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         let currentCard = cardContentArray[index]
         
         let draggableView = CardView(title: currentCard.count > 1 ? currentCard[1] : "(no title)",
-                                         date: NSDate(),
+                                         date: formatDate(currentCard[0]),
                                          location: currentCard.count > 2 ? currentCard[2] : "(no location given)",
                                          eventDescription: currentCard.count > 3 ? currentCard[3] : "(no description)")
         
@@ -162,7 +169,7 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         }
     }
     
-    func cardSwiped(card: UIView) -> Void {
+    func cardSwiped(card: CardView) -> Void {
 
         print("just swiped!!!")
 
@@ -185,19 +192,16 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         }
     
     }
-    func cardSwipedLeft(card: UIView) -> Void {
+    func cardSwipedLeft(card: CardView) -> Void {
         cardSwiped(card)
         //insert code for adding to calendar
     }
-    func cardSwipedRight(card: UIView) -> Void {
+    func cardSwipedRight(card: CardView) -> Void {
         cardSwiped(card)
         
-        //insert code for adding to calendar
-        // ADD TO CALENDAR
-        // http://sweettutos.com/2015/11/25/eventkit-reminders-manager-how-to-retrieve-create-and-edit-reminders-from-within-your-app-in-swift/
-        // or, Google Calendar instead (but will require login)
-        
-        
+        // Add the event to the calendar
+        calDelegate.addEventToCalendar(card)
+
     }
     
     func swipeRight() -> Void {
@@ -231,6 +235,14 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         self.cardContentArray = cardsArray
         print("This is what the cards array looks like: \(self.cardContentArray)")
         self.loadCards()
+    }
+    
+    
+    func formatDate(dateString: String) -> NSDate {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "EEEE, MMM d" /* find out and place date format from http://userguide.icu-project.org/formatparse/datetime */
+        let date = dateFormatter.dateFromString(dateString)
+        return date!
     }
     
 

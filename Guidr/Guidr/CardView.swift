@@ -216,9 +216,9 @@ class CardView: UIView {
     func afterSwipeAction() -> Void {
         let floatXFromCenter = Float(xFromCenter)
         if floatXFromCenter > ACTION_MARGIN {
-            self.actionForDirection("left")
-        } else if floatXFromCenter < -ACTION_MARGIN {
             self.actionForDirection("right")
+        } else if floatXFromCenter < -ACTION_MARGIN {
+            self.actionForDirection("left")
         } else {
             UIView.animateWithDuration(0.3, animations: {() -> Void in
                 self.center = self.originPoint
@@ -234,9 +234,11 @@ class CardView: UIView {
         }
         
         if direction == "left" {
+            print("------card swipped left being called!!!!!!!------")
             delegate.cardSwipedLeft(self)
         }
         else {
+            print("------card swipped right being called!!!!!!!------")
             delegate.cardSwipedRight(self)
         }
     }

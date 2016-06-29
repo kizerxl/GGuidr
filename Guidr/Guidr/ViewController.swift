@@ -86,9 +86,6 @@ class ViewController: UIViewController, CalendarDelegate {
         case EKAuthorizationStatus.NotDetermined: // This happens on first-run
             requestAccessToCalendar()
         case EKAuthorizationStatus.Authorized:
-//            if draggableBackground != nil {
-//                calendarSetup()
-//            }
             calendarSetup() //setup the calendar
             break // Things are in line with being able to show the calendars in the table view
 //            loadCalendars() //TODO: change this

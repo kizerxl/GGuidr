@@ -194,7 +194,6 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
     }
     func cardSwipedLeft(card: CardView) -> Void {
         cardSwiped(card)
-        //insert code for adding to calendar
     }
     func cardSwipedRight(card: CardView) -> Void {
         cardSwiped(card)

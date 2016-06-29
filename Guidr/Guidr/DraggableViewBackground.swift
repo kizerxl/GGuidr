@@ -29,6 +29,12 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
     var xButton: UIButton!
     var calDelegate: CalendarDelegate!
     
+    
+    var calendarOfCurrentYear: NSCalendar!
+    var currentDate: NSDate!
+    var currentMonth: Int!
+    var currentYear: Int!
+    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
     }
@@ -39,6 +45,7 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
 
         super.layoutSubviews()
         self.setupView()
+        self.setupDateChecking()
         allCards = []
         loadedCards = []
         cardContentArray = []
@@ -116,6 +123,8 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
                                          date: formatDate(currentCard[0]),
                                          location: currentCard.count > 2 ? currentCard[2] : "(no location given)",
                                          eventDescription: currentCard.count > 3 ? currentCard[3] : "(no description)")
+        
+        
         
         draggableView.delegate = self
         return draggableView
@@ -238,10 +247,42 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
     
     
     func formatDate(dateString: String) -> NSDate {
+        
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "EEEE, MMM d" /* find out and place date format from http://userguide.icu-project.org/formatparse/datetime */
-        let date = dateFormatter.dateFromString(dateString)
+        var date = dateFormatter.dateFromString(dateString)
+        
+        //correct date with correct year
+        date = correctYearForDate(date!)
+        
         return date!
+    }
+    
+    func setupDateChecking() {
+        currentDate = NSDate()
+        calendarOfCurrentYear = NSCalendar.currentCalendar()
+        
+        let components = calendarOfCurrentYear.components([.Month, .Year], fromDate: currentDate)
+        
+        currentMonth = components.month
+        currentYear = components.year
+    }
+    
+    func correctYearForDate(eventDate: NSDate) -> NSDate {
+        var correctYear = currentYear
+        var newDate: NSDate!
+        
+        let components = calendarOfCurrentYear.components([.Month, .Day, .Year], fromDate: eventDate)
+        let eventMonth = components.month
+    
+        if eventMonth < currentMonth {
+            correctYear! += 1 //this is one year up
+        }
+        
+        components.setValue(correctYear, forComponent: .Year)
+        newDate = calendarOfCurrentYear.dateFromComponents(components)
+        
+        return newDate
     }
     
 

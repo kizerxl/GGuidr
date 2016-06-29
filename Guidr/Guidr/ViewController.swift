@@ -86,9 +86,9 @@ class ViewController: UIViewController, CalendarDelegate {
         case EKAuthorizationStatus.NotDetermined: // This happens on first-run
             requestAccessToCalendar()
         case EKAuthorizationStatus.Authorized:
-            if draggableBackground != nil {
-                calendarSetup()
-            }
+//            if draggableBackground != nil {
+//                calendarSetup()
+//            }
             calendarSetup() //setup the calendar
             break // Things are in line with being able to show the calendars in the table view
 //            loadCalendars() //TODO: change this
@@ -228,9 +228,26 @@ class ViewController: UIViewController, CalendarDelegate {
         newEvent.calendar = calendar
         newEvent.title = card.title
         newEvent.startDate = card.date
-        newEvent.endDate = card.date
-        newEvent.notes = card.description
+        newEvent.endDate = card.date.dateByAddingTimeInterval(2 * 60 * 60)
+        newEvent.notes = card.eventDescription
         newEvent.location = card.location
+        
+        
+        print("The start event date is \(newEvent.startDate)")
+        print("The end event date is \(newEvent.endDate)")
+
+        
+        do {
+            try eventStore.saveEvent(newEvent, span: .ThisEvent)
+            print("This was added to the calendar!!!!")
+            
+        } catch {
+            //TODO: handle this somehow if the event does not save.....
+            print("WOMP womp womp not added to calendar!!!")
+
+        }
+        
+        
     }
 
     override func didReceiveMemoryWarning() {

@@ -93,8 +93,8 @@ class CardView: UIView {
         // Height and width
         let screenHeight = UIScreen.mainScreen().bounds.height
         let screenWidth = UIScreen.mainScreen().bounds.width
-        self.heightAnchor.constraintEqualToConstant(screenHeight * 1/3).active = true
-        self.widthAnchor.constraintEqualToConstant(screenWidth * 3/4).active = true
+        self.heightAnchor.constraintEqualToConstant(screenHeight * 0.50).active = true
+        self.widthAnchor.constraintEqualToConstant(screenWidth * 0.90).active = true
         
         // Colors: silver background, purple text
 //        self.backgroundColor = UIColor.init(red: 189/255, green: 195/255, blue: 199/255, alpha: 1)
@@ -146,8 +146,10 @@ class CardView: UIView {
             label.translatesAutoresizingMaskIntoConstraints = false
             label.leftAnchor.constraintEqualToAnchor(self.leftAnchor, constant: 10).active = true
             label.topAnchor.constraintEqualToAnchor(self.topAnchor, constant: widthCoord).active = true
-            label.numberOfLines = 5
-            label.preferredMaxLayoutWidth = self.bounds.width - 5
+            label.rightAnchor.constraintEqualToAnchor(self.rightAnchor, constant: -20).active = true
+            label.numberOfLines = 0
+            label.lineBreakMode = .ByWordWrapping
+//            label.preferredMaxLayoutWidth = self.bounds.width - 5
             label.enabled = true
             
             if label == labels.first! {

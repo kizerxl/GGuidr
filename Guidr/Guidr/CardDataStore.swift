@@ -104,7 +104,7 @@ class CardDataStore: NSObject {
     }
     
     internal func getEventsContentFromStore() -> [[String]] {
-        return self.store as! [[String]]
+        return self.store
     }
     
 }

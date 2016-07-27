@@ -110,6 +110,7 @@ class CardView: UIView {
         self.layer.cornerRadius = screenHeight * 1/3 * 0.1
         
         // Create labels
+        
         // title
         let titleLabel = UILabel()
         titleLabel.text = title
@@ -135,9 +136,10 @@ class CardView: UIView {
         descriptionLabel.textColor = textColor
         
         // Add labels
-        var heightThing = 3 as CGFloat
-        var widthCoord = 10 as CGFloat
+        let labelHeightDistance = 10 as CGFloat
         let labels = [titleLabel, dateLabel, locationLabel, descriptionLabel]
+        
+        var previousLabel: UILabel!
         
         for label: UILabel in labels {
             
@@ -145,20 +147,19 @@ class CardView: UIView {
             
             label.translatesAutoresizingMaskIntoConstraints = false
             label.leftAnchor.constraintEqualToAnchor(self.leftAnchor, constant: 10).active = true
-            label.topAnchor.constraintEqualToAnchor(self.topAnchor, constant: widthCoord).active = true
             label.rightAnchor.constraintEqualToAnchor(self.rightAnchor, constant: -20).active = true
             label.numberOfLines = 0
             label.lineBreakMode = .ByWordWrapping
-//            label.preferredMaxLayoutWidth = self.bounds.width - 5
             label.enabled = true
             
             if label == labels.first! {
-                heightThing = label.frame.height
+                label.topAnchor.constraintEqualToAnchor(self.topAnchor, constant: labelHeightDistance).active = true
+            }
+            else{
+                label.topAnchor.constraintEqualToAnchor(previousLabel.bottomAnchor, constant: labelHeightDistance).active = true
             }
             
-            
-            widthCoord += heightThing + 20.0
-            
+            previousLabel = label
         
         }
        

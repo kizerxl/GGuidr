@@ -72,7 +72,7 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
     
     func setupView() -> Void {
 //        self.backgroundColor = UIColor.whiteColor()
-        self.backgroundColor = UIColor.purpleColor()
+        self.backgroundColor = UIColor.whiteColor()
 
 //
 //        xButton = UIButton(frame: CGRectMake((self.frame.size.width - CARD_WIDTH)/2 + 35, self.frame.size.height/2 + CARD_HEIGHT/2 + 10, 100, 75))
@@ -115,7 +115,6 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
     }
     
     func createDraggableViewWithDataAtIndex(index: NSInteger) -> CardView {
-//        let draggableView = CardView(frame: CGRectMake((self.frame.size.width - CARD_WIDTH)/2, (self.frame.size.height - CARD_HEIGHT)/2, CARD_WIDTH, CARD_HEIGHT))
         
         let currentCard = cardContentArray[index]
         
@@ -281,6 +280,7 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         
         components.setValue(correctYear, forComponent: .Year)
         newDate = calendarOfCurrentYear.dateFromComponents(components)
+        
         
         return newDate
     }

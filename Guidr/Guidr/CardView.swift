@@ -101,8 +101,9 @@ class CardView: UIView {
         
         //make a black outline for the card + clear bg
         self.layer.borderWidth = 1
-        self.layer.borderColor = UIColor.blackColor().CGColor
-        self.backgroundColor = UIColor.whiteColor()
+        self.layer.borderColor = UIColor.greenColor().CGColor
+        self.backgroundColor = UIColor.redColor()
+//        self.backgroundColor = UIColor(patternImage: UIImage(named:"YES")!)
         
         let textColor = UIColor.blackColor()
         
@@ -115,13 +116,17 @@ class CardView: UIView {
         let titleLabel = UILabel()
         titleLabel.text = title
         titleLabel.textColor = textColor
+        titleLabel.font = UIFont(name: "Copperplate", size: 35)
+        titleLabel.textAlignment = .Center
         
        
         // date
         let dateLabel = UILabel()
         let dateFormatter = NSDateFormatter()
-        dateFormatter.dateStyle = .ShortStyle
+        dateFormatter.dateFormat = "• EEEE, MMMM d, Y •"
         dateLabel.text = dateFormatter.stringFromDate(date)
+        dateLabel.textAlignment = .Center
+        dateLabel.font = UIFont(name: "Avenir-Light", size: 15)
         dateLabel.textColor = textColor
         
         // location
@@ -151,6 +156,7 @@ class CardView: UIView {
             label.numberOfLines = 0
             label.lineBreakMode = .ByWordWrapping
             label.enabled = true
+            label.textColor = UIColor.whiteColor()
             
             if label == labels.first! {
                 label.topAnchor.constraintEqualToAnchor(self.topAnchor, constant: labelHeightDistance).active = true
@@ -285,13 +291,5 @@ class CardView: UIView {
         }
         delegate.cardSwipedLeft(self)
     }
-    
-//    func formatDate(dateString: String) -> NSDate {
-//        let dateFormatter = NSDateFormatter()
-//        dateFormatter.dateFormat = "EEEE, MMM d" /* find out and place date format from http://userguide.icu-project.org/formatparse/datetime */
-//        let date = dateFormatter.dateFromString(dateString)
-//        return date!
-//    }
-
 
 }

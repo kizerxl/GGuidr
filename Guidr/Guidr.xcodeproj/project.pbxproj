@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B99A0231D54230500045402 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B99A0221D54230400045402 /* SplashScreen.swift */; };
 		1BE9F4471D0A580000E0D7A0 /* DraggableViewBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE9F4461D0A580000E0D7A0 /* DraggableViewBackground.swift */; };
 		1BE9F4491D0A5A7400E0D7A0 /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE9F4481D0A5A7400E0D7A0 /* OverlayView.swift */; };
 		1BE9F44B1D0A8E9900E0D7A0 /* CardDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE9F44A1D0A8E9900E0D7A0 /* CardDataStore.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1B99A0221D54230400045402 /* SplashScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 		1BE9F4461D0A580000E0D7A0 /* DraggableViewBackground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraggableViewBackground.swift; sourceTree = "<group>"; };
 		1BE9F4481D0A5A7400E0D7A0 /* OverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
 		1BE9F44A1D0A8E9900E0D7A0 /* CardDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDataStore.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 				EB6C01D81CF62F8000A64A0D /* GGuidr-Bridging-Header.h */,
 				EB036CC51CF6167E000CCB5E /* AppDelegate.swift */,
 				EB036CC71CF6167E000CCB5E /* ViewController.swift */,
+				1B99A0221D54230400045402 /* SplashScreen.swift */,
 				1F1398A01CFF675A0053408A /* CardView.swift */,
 				1BE9F4461D0A580000E0D7A0 /* DraggableViewBackground.swift */,
 				1BE9F44A1D0A8E9900E0D7A0 /* CardDataStore.swift */,
@@ -240,6 +243,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B99A0231D54230500045402 /* SplashScreen.swift in Sources */,
 				EB036CC81CF6167E000CCB5E /* ViewController.swift in Sources */,
 				EB3227A91CF8E4B8005FF081 /* Secrets.swift in Sources */,
 				1F1398A11CFF675A0053408A /* CardView.swift in Sources */,

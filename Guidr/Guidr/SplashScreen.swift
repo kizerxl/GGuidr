@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class SplashScreen: UIViewController {
     
     var splashImage = UIImageView()
@@ -47,7 +48,13 @@ class SplashScreen: UIViewController {
             
         }) { _ in
             self.splashImage.transform = CGAffineTransformIdentity
+            self.splashImage.layer.addPulse { builder in
+                builder.borderColors = [UIColor.whiteColor().CGColor]
+                builder.backgroundColors = []
+            }
+            
             self.animateGary()
+            
         }
     }
 

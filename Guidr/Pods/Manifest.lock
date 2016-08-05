@@ -9,18 +9,21 @@ PODS:
   - GTMSessionFetcher/Core (1.1.4)
   - GTMSessionFetcher/Full (1.1.4):
     - GTMSessionFetcher/Core (= 1.1.4)
+  - Pulsar (1.0.3)
 
 DEPENDENCIES:
   - Alamofire (~> 3.4)
   - GoogleAPIClient/Core (~> 1.0.2)
   - GTMOAuth2 (~> 1.1.0)
+  - Pulsar
 
 SPEC CHECKSUMS:
   Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
   GoogleAPIClient: 4dedb6af613eb7d171814c343f8a82ee5411e13b
   GTMOAuth2: bdb12f3e0d2110bfe585f6151230b883beb4d042
   GTMSessionFetcher: 174bc61d5238f81f9ddb807b0b0170420f67de85
+  Pulsar: 8f20ca95d70b12121a8250981ffa4125dd3ae3c5
 
-PODFILE CHECKSUM: daf9e3da460008376d4cb2a81bc79a461222df5b
+PODFILE CHECKSUM: fb7baedf397321be2dc52097e6c499a1c0019d65
 
 COCOAPODS: 1.0.1

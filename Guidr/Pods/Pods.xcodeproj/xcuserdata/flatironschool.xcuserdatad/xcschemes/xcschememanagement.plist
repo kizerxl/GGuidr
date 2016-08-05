@@ -29,15 +29,25 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pulsar.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>18A9812FBD180602211B068BE77FCD9B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>236B0087BFA2A7C367DDD9C481F99ECE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4F95B3A0F68FE5F4564A42D906FA2905</key>
+		<key>5FBFC3D92F00839CD3E77BC7C67C5653</key>
 		<dict>
 			<key>primary</key>
 			<true/>

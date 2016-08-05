@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1B99A0231D54230500045402 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B99A0221D54230400045402 /* SplashScreen.swift */; };
+		1B99A0271D54561600045402 /* CALayer+Pulsar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B99A0261D54561600045402 /* CALayer+Pulsar.swift */; };
 		1BE9F4471D0A580000E0D7A0 /* DraggableViewBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE9F4461D0A580000E0D7A0 /* DraggableViewBackground.swift */; };
 		1BE9F4491D0A5A7400E0D7A0 /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE9F4481D0A5A7400E0D7A0 /* OverlayView.swift */; };
 		1BE9F44B1D0A8E9900E0D7A0 /* CardDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE9F44A1D0A8E9900E0D7A0 /* CardDataStore.swift */; };
@@ -26,6 +27,8 @@
 
 /* Begin PBXFileReference section */
 		1B99A0221D54230400045402 /* SplashScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
+		1B99A0241D54555900045402 /* Pulsar.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pulsar.framework; path = "../../../../Library/Developer/Xcode/DerivedData/Guidr-diwwzdyjliyegvfevvxzqetxmjva/Build/Products/Debug-iphonesimulator/Pulsar/Pulsar.framework"; sourceTree = "<group>"; };
+		1B99A0261D54561600045402 /* CALayer+Pulsar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CALayer+Pulsar.swift"; sourceTree = "<group>"; };
 		1BE9F4461D0A580000E0D7A0 /* DraggableViewBackground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraggableViewBackground.swift; sourceTree = "<group>"; };
 		1BE9F4481D0A5A7400E0D7A0 /* OverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
 		1BE9F44A1D0A8E9900E0D7A0 /* CardDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDataStore.swift; sourceTree = "<group>"; };
@@ -65,6 +68,7 @@
 		2787C769EC5688CF04D1E26E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1B99A0241D54555900045402 /* Pulsar.framework */,
 				EB6C01D51CF62DAA00A64A0D /* SystemConfiguration.framework */,
 				EB6C01D31CF62DA200A64A0D /* Security.framework */,
 				EB6C01D11CF62D9900A64A0D /* Foundation.framework */,
@@ -112,6 +116,7 @@
 				1BE9F44A1D0A8E9900E0D7A0 /* CardDataStore.swift */,
 				1BE9F4481D0A5A7400E0D7A0 /* OverlayView.swift */,
 				EB3227A81CF8E4B8005FF081 /* Secrets.swift */,
+				1B99A0261D54561600045402 /* CALayer+Pulsar.swift */,
 				EB036CC91CF6167E000CCB5E /* Main.storyboard */,
 				EB036CCC1CF6167E000CCB5E /* Assets.xcassets */,
 				EB036CCE1CF6167E000CCB5E /* LaunchScreen.storyboard */,
@@ -245,6 +250,7 @@
 			files = (
 				1B99A0231D54230500045402 /* SplashScreen.swift in Sources */,
 				EB036CC81CF6167E000CCB5E /* ViewController.swift in Sources */,
+				1B99A0271D54561600045402 /* CALayer+Pulsar.swift in Sources */,
 				EB3227A91CF8E4B8005FF081 /* Secrets.swift in Sources */,
 				1F1398A11CFF675A0053408A /* CardView.swift in Sources */,
 				1BE9F4491D0A5A7400E0D7A0 /* OverlayView.swift in Sources */,

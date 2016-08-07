@@ -11,17 +11,19 @@ import GTMOAuth2
 import UIKit
 import EventKit
 
-class ViewController: UIViewController, CalendarDelegate {
+class ViewController: UIViewController, CalendarDelegate, SplashDelegate {
     
     private let kKeychainItemName = nameInKeychain
     private let kClientID = secretKClientID
     private let kScriptId = secretKScriptId
     private var dataStore: CardDataStore!
     private var draggableBackground: DraggableViewBackground!
-    private var eventsContentArray: [[String]]!
+    private var eventsContentArray: [[String]] = []
     private var eventStore: EKEventStore!
     private var calendar: EKCalendar!
     private var appName = "Guidr"
+    private var splashScreen: SplashScreen!
+    private var loadSplash = true
     
     // If modifying these scopes, delete your previously saved credentials by
     // resetting the iOS simulator or uninstall the app.
@@ -39,12 +41,14 @@ class ViewController: UIViewController, CalendarDelegate {
         dataStore = CardDataStore.sharedInstance
         
 //        view.backgroundColor = UIColor.purpleColor()
-        
+        print("In view did load!!!!!!\n\n\n")
         if let auth = GTMOAuth2ViewControllerTouch.authForGoogleFromKeychainForName(
             kKeychainItemName,
             clientID: kClientID,
             clientSecret: nil) {
             service.authorizer = auth
+            print("checking for auth!!!!!!\n\n\n")
+
         }
         
     }
@@ -52,6 +56,15 @@ class ViewController: UIViewController, CalendarDelegate {
     // When the view appears, ensure that the Google Apps Script Execution API service is authorized
     // and perform API calls
     override func viewDidAppear(animated: Bool) {
+        
+        // start gary splash here.......
+        if loadSplash {
+            loadSplash = false
+            splashScreen = SplashScreen()
+            splashScreen.splashDelegate = self
+            print("Loading screen setup")
+            presentViewController(splashScreen, animated: false, completion: nil)
+        }
         
         // Make sure we have calendar authorization
         checkCalendarAuthorizationStatus()
@@ -136,25 +149,32 @@ class ViewController: UIViewController, CalendarDelegate {
     }
     
     @objc func setupViewWithDraggableView(note: NSNotification) {
-        print("started setting up draggable vieww!!!!")
-        eventsContentArray = dataStore.getEventsContentFromStore()
         
-        print("size of the eventsContentArray is \(eventsContentArray.count)")
-
-//        draggableBackground = DraggableViewBackground(frame: self.view.frame)
-        draggableBackground = DraggableViewBackground()
-        view.addSubview(draggableBackground)
-        draggableBackground.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
-        draggableBackground.centerYAnchor.constraintEqualToAnchor(view.centerYAnchor).active = true
-        draggableBackground.translatesAutoresizingMaskIntoConstraints = false
-        view.layoutIfNeeded()
-        
-        
-        draggableBackground.addCardsContent(eventsContentArray)
-        draggableBackground.calDelegate = self
-        view.addSubview(draggableBackground)
-        print("ended setting up draggable vieww!!!!")
-
+        if eventsContentArray.count == 0 {
+            print("size of the eventsContentArray is FIRST \(eventsContentArray.count)")
+            
+            print("started setting up draggable vieww!!!!")
+            eventsContentArray = dataStore.getEventsContentFromStore()
+            
+            print("size of the eventsContentArray is \(eventsContentArray.count)")
+            
+            draggableBackground = DraggableViewBackground(frame: self.view.frame)
+            draggableBackground = DraggableViewBackground()
+            view.addSubview(draggableBackground)
+            draggableBackground.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
+            draggableBackground.centerYAnchor.constraintEqualToAnchor(view.centerYAnchor).active = true
+            draggableBackground.translatesAutoresizingMaskIntoConstraints = false
+            view.layoutIfNeeded()
+            
+            
+            draggableBackground.addCardsContent(eventsContentArray)
+            draggableBackground.calDelegate = self
+            view.addSubview(draggableBackground)
+            print("ended setting up draggable vieww!!!!")
+            splashScreen.splashDelegate.endSplashScreen(splashScreen)
+            print("end splash screen \n\n\n!!!!!!!!")
+        }
+    
     }
 
     
@@ -245,6 +265,11 @@ class ViewController: UIViewController, CalendarDelegate {
         }
         
         
+    }
+    
+    func endSplashScreen(splash: UIViewController) {
+        print("We dismissed the SPLASH\n\n\n\n")
+        splash.dismissViewControllerAnimated(false, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {

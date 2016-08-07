@@ -8,10 +8,15 @@
 
 import UIKit
 
+protocol SplashDelegate {
+    func endSplashScreen(splash: UIViewController)
+}
+
 
 class SplashScreen: UIViewController {
     
     var splashImage = UIImageView()
+    var splashDelegate: SplashDelegate!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,9 +57,8 @@ class SplashScreen: UIViewController {
                 builder.borderColors = [UIColor.whiteColor().CGColor]
                 builder.backgroundColors = []
             }
-            
+
             self.animateGary()
-            
         }
     }
 

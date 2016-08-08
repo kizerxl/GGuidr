@@ -275,33 +275,60 @@ class ViewController: UIViewController, CalendarDelegate, SplashDelegate {
     }
     
     func setupNavBar() {
-//        let navBar: UINavigationBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: 320, height: 44))
-//        self.view.addSubview(navBar);
-//        let navItem = UINavigationItem(title: "SomeTitle");
-////        let doneItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: nil, action: "selector");
-////        navItem.rightBarButtonItem = doneItem;
-//        navBar.setItems([navItem], animated: false);
-        // 1
+        //title image
         var nav = self.navigationController?.navigationBar
-        // 2
-//        nav?.barStyle = UIBarStyle.Default
-//        nav?.backgroundColor = UIColor(red: 134/255, green: 36/255, blue: 27/255, alpha: 1)
-//        nav?.tintColor = UIColor(red: 134/255, green: 36/255, blue: 27/255, alpha: 1)
         nav?.setBackgroundImage(UIImage(named: "bgHeader"), forBarMetrics: UIBarMetrics.Default)
-//        UIColor(red: 1, green: 165/255, blue: 0, alpha: 1)
-        // 3
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
         imageView.contentMode = .ScaleAspectFit
-        // 4
         let image = UIImage(named: "garyHeader1")
         imageView.image = image
-//        // 5
+        
+        //left bar button image
+//        let leftImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+//        leftImageView.contentMode = .ScaleAspectFit
+//        let leftButtonImg = UIImage(named: "settingsImg")
+//        leftImageView.image = leftButtonImg
+
+        
+        
+        
+        //set title
         navigationItem.titleView = imageView
+        
+        //add left button
+//        let leftButton = UIButton(type: .Custom)
+//        leftButton.frame = CGRectMake(0, 0, (nav?.frame.size.height)!, 30)
+//        leftButton.setImage( UIImage(named: "settingsImg"), forState: UIControlState.Normal)
+//        leftButton.imageView?.image
+//        leftButton.addTarget(self, action: #selector(ViewController.settingsTapped), forControlEvents: UIControlEvents.TouchUpInside)
+//        let leftBarButton = UIBarButtonItem(customView: leftButton)
+        
+//        navigationItem.leftBarButtonItems = [leftBarButton]
+//        navigationItem.rightBarButtonItems = [leftBarButton]
+//        let testUIBarButtonItem = UIBarButtonItem(image: UIImage(named: "test.png"), style: .plain, target: self, action: nil)
+        let leftButton = UIBarButtonItem(image: UIImage(named: "newCheck"), style: UIBarButtonItemStyle.Done, target: self, action: #selector(ViewController.settingsTapped))
+//        let leftButton = UIBarButtonItem(title: "left button", style: UIBarButtonItemStyle.Done, target: self, action: #selector(ViewController.settingsTapped))
+
+        
+        self.navigationItem.leftBarButtonItem  = leftButton
+        self.navigationItem.rightBarButtonItem = leftButton
+        
+
+
+//        self.navigationController!.navigationItem.leftBarButtonItem = leftBarButton
+//        self.navigationController!.navigationItem.leftBarButtonItem?.width = 30.0
+        print("Width of bar button item is: \(self.navigationController?.navigationItem.leftBarButtonItem?.width). Frame of nav bar: \(self.navigationController?.navigationBar.frame)")
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func settingsTapped() {
+        print("settings tapped")
     }
     
 }

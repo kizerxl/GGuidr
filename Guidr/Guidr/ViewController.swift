@@ -271,6 +271,15 @@ class ViewController: UIViewController, CalendarDelegate, SplashDelegate {
         print("We dismissed the SPLASH\n\n\n\n")
         splash.dismissViewControllerAnimated(false, completion: nil)
     }
+    
+//    func setupNavBar() {
+//        let navBar: UINavigationBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: 320, height: 44))
+//        self.view.addSubview(navBar);
+//        let navItem = UINavigationItem(title: "SomeTitle");
+////        let doneItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: nil, action: "selector");
+////        navItem.rightBarButtonItem = doneItem;
+//        navBar.setItems([navItem], animated: false);
+//    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

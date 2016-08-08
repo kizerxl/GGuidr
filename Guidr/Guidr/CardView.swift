@@ -86,6 +86,7 @@ class CardView: UIView {
         
     }
     
+    
     func setup() {
         
         translatesAutoresizingMaskIntoConstraints = false
@@ -168,6 +169,9 @@ class CardView: UIView {
             previousLabel = label
         
         }
+        
+        //add more info button here or so?
+        
        
         layoutIfNeeded()
         

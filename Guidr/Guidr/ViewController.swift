@@ -35,7 +35,9 @@ class ViewController: UIViewController, CalendarDelegate, SplashDelegate {
     // and initialize the Google Apps Script Execution API service
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        setupNavBar()
+        
         eventStore = EKEventStore()
         
         dataStore = CardDataStore.sharedInstance
@@ -272,14 +274,30 @@ class ViewController: UIViewController, CalendarDelegate, SplashDelegate {
         splash.dismissViewControllerAnimated(false, completion: nil)
     }
     
-//    func setupNavBar() {
+    func setupNavBar() {
 //        let navBar: UINavigationBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: 320, height: 44))
 //        self.view.addSubview(navBar);
 //        let navItem = UINavigationItem(title: "SomeTitle");
 ////        let doneItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: nil, action: "selector");
 ////        navItem.rightBarButtonItem = doneItem;
 //        navBar.setItems([navItem], animated: false);
-//    }
+        // 1
+        var nav = self.navigationController?.navigationBar
+        // 2
+//        nav?.barStyle = UIBarStyle.Default
+//        nav?.backgroundColor = UIColor(red: 134/255, green: 36/255, blue: 27/255, alpha: 1)
+//        nav?.tintColor = UIColor(red: 134/255, green: 36/255, blue: 27/255, alpha: 1)
+        nav?.setBackgroundImage(UIImage(named: "bgHeader"), forBarMetrics: UIBarMetrics.Default)
+//        UIColor(red: 1, green: 165/255, blue: 0, alpha: 1)
+        // 3
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        imageView.contentMode = .ScaleAspectFit
+        // 4
+        let image = UIImage(named: "garyHeader1")
+        imageView.image = image
+//        // 5
+        navigationItem.titleView = imageView
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

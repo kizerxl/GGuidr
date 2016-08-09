@@ -275,43 +275,38 @@ class ViewController: UIViewController, CalendarDelegate, SplashDelegate {
     }
     
     func setupNavBar() {
+        
         //title image
-        var nav = self.navigationController?.navigationBar
+        let nav = self.navigationController?.navigationBar
         nav?.setBackgroundImage(UIImage(named: "bgHeader"), forBarMetrics: UIBarMetrics.Default)
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
         imageView.contentMode = .ScaleAspectFit
         let image = UIImage(named: "garyHeader1")
         imageView.image = image
-        
-        //left bar button image
-//        let leftImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-//        leftImageView.contentMode = .ScaleAspectFit
-//        let leftButtonImg = UIImage(named: "settingsImg")
-//        leftImageView.image = leftButtonImg
-
-        
-        
-        
+    
         //set title
         navigationItem.titleView = imageView
         
         //add left button
-//        let leftButton = UIButton(type: .Custom)
-//        leftButton.frame = CGRectMake(0, 0, (nav?.frame.size.height)!, 30)
-//        leftButton.setImage( UIImage(named: "settingsImg"), forState: UIControlState.Normal)
-//        leftButton.imageView?.image
-//        leftButton.addTarget(self, action: #selector(ViewController.settingsTapped), forControlEvents: UIControlEvents.TouchUpInside)
-//        let leftBarButton = UIBarButtonItem(customView: leftButton)
+        let leftButton: UIButton = UIButton(type: UIButtonType.Custom)
+        leftButton.setImage(UIImage(named: "settingsImg"), forState: .Normal)
+        leftButton.frame = CGRectMake(0, 0, 40, 30)
+        leftButton.imageView!.contentMode = .ScaleAspectFit;
+        leftButton.contentHorizontalAlignment = .Left
+        let leftBarButton = UIBarButtonItem(customView: leftButton)
+        self.navigationItem.leftBarButtonItem  = leftBarButton
         
-//        navigationItem.leftBarButtonItems = [leftBarButton]
-//        navigationItem.rightBarButtonItems = [leftBarButton]
-//        let testUIBarButtonItem = UIBarButtonItem(image: UIImage(named: "test.png"), style: .plain, target: self, action: nil)
-        let leftButton = UIBarButtonItem(image: UIImage(named: "newCheck"), style: UIBarButtonItemStyle.Done, target: self, action: #selector(ViewController.settingsTapped))
-//        let leftButton = UIBarButtonItem(title: "left button", style: UIBarButtonItemStyle.Done, target: self, action: #selector(ViewController.settingsTapped))
-
+        //add right button 
+        let rightButton: UIButton = UIButton(type: UIButtonType.Custom)
+        rightButton.setImage(UIImage(named: "calendarImg"), forState: .Normal)
+        rightButton.frame = CGRectMake(0, 0, 40, 30)
+        rightButton.imageView!.contentMode = .ScaleAspectFit;
+        rightButton.contentHorizontalAlignment = .Right
+        let rightBarButton = UIBarButtonItem(customView: rightButton)
         
-        self.navigationItem.leftBarButtonItem  = leftButton
-        self.navigationItem.rightBarButtonItem = leftButton
+        //assign left and right buttons 
+        self.navigationItem.leftBarButtonItem  = leftBarButton
+        self.navigationItem.rightBarButtonItem = rightBarButton
         
 
 

@@ -42,14 +42,11 @@ class ViewController: UIViewController, CalendarDelegate, SplashDelegate {
         
         dataStore = CardDataStore.sharedInstance
         
-//        view.backgroundColor = UIColor.purpleColor()
-        print("In view did load!!!!!!\n\n\n")
         if let auth = GTMOAuth2ViewControllerTouch.authForGoogleFromKeychainForName(
             kKeychainItemName,
             clientID: kClientID,
             clientSecret: nil) {
             service.authorizer = auth
-            print("checking for auth!!!!!!\n\n\n")
 
         }
         
@@ -64,7 +61,6 @@ class ViewController: UIViewController, CalendarDelegate, SplashDelegate {
             loadSplash = false
             splashScreen = SplashScreen()
             splashScreen.splashDelegate = self
-            print("Loading screen setup")
             presentViewController(splashScreen, animated: false, completion: nil)
         }
         
@@ -73,15 +69,12 @@ class ViewController: UIViewController, CalendarDelegate, SplashDelegate {
         
         if let authorizer = service.authorizer,
             canAuth = authorizer.canAuthorize where canAuth {
-            print("just got inside viewdidapppear!!!!!!!")
 
             //call our data store here and have it return the card content
              dataStore.getEventsContent(usingService: service)
-            print("after using the getEventsContent method!!!!")
             NSNotificationCenter.defaultCenter().addObserver(self,selector: #selector(ViewController.setupViewWithDraggableView(_:)), name: eventsLoadedNotification, object: nil)
             
-            print("just setup the draggable view!")
-            print("here is the result of the script!!!: \(dataStore.getEventsContentFromStore())")
+//            print("here is the result of the script!!!: \(dataStore.getEventsContentFromStore())")
 
             
         } else {
@@ -152,29 +145,32 @@ class ViewController: UIViewController, CalendarDelegate, SplashDelegate {
     
     @objc func setupViewWithDraggableView(note: NSNotification) {
         
+        // If events array is empty, set it up from the data store
         if eventsContentArray.count == 0 {
-            print("size of the eventsContentArray is FIRST \(eventsContentArray.count)")
             
-            print("started setting up draggable vieww!!!!")
             eventsContentArray = dataStore.getEventsContentFromStore()
             
-            print("size of the eventsContentArray is \(eventsContentArray.count)")
-            
-            draggableBackground = DraggableViewBackground(frame: self.view.frame)
-            draggableBackground = DraggableViewBackground()
+            // Create draggable background (containing the card and the X and check buttons)
+            draggableBackground = DraggableViewBackground() // <-- the initializer sets the height and width anchors to be the size of screen.
+    
             view.addSubview(draggableBackground)
+            // Position constraints
             draggableBackground.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
             draggableBackground.centerYAnchor.constraintEqualToAnchor(view.centerYAnchor).active = true
+            
+            let navBar = self.navigationController?.navigationBar
+            
+//            draggableBackground.topAnchor.constraintEqualToAnchor(navBar?.bottomAnchor , constant: 20).active = true
+            draggableBackground.bottomAnchor.constraintEqualToAnchor(view.bottomAnchor).active = true
             draggableBackground.translatesAutoresizingMaskIntoConstraints = false
             view.layoutIfNeeded()
             
-            
+            // Create a card for each event and add the cards to draggable view
             draggableBackground.addCardsContent(eventsContentArray)
             draggableBackground.calDelegate = self
-            view.addSubview(draggableBackground)
-            print("ended setting up draggable vieww!!!!")
+            
+            // When setup is done, make the splash screen go away
             splashScreen.splashDelegate.endSplashScreen(splashScreen)
-            print("end splash screen \n\n\n!!!!!!!!")
         }
     
     }
@@ -186,7 +182,6 @@ class ViewController: UIViewController, CalendarDelegate, SplashDelegate {
         let calendars = eventStore.calendarsForEntityType(.Event)
         for calendar: EKCalendar in calendars {
             if calendar.title == appName {
-                print("calendar is already made!!!!!")
                 self.calendar = calendar
                 return
             }
@@ -212,7 +207,6 @@ class ViewController: UIViewController, CalendarDelegate, SplashDelegate {
             self.presentViewController(alert, animated: true, completion: nil)
         }
         
-        print("MADE the calendar and now we are going to use it!!!!!!")
         
     }
     
@@ -222,9 +216,6 @@ class ViewController: UIViewController, CalendarDelegate, SplashDelegate {
             
             if accessGranted == true {
                 dispatch_async(dispatch_get_main_queue(), {
-                    
-                    print("Access granted!!!!!")
-                    
                     
                 })
             } else {
@@ -241,7 +232,7 @@ class ViewController: UIViewController, CalendarDelegate, SplashDelegate {
     
     func addEventToCalendar(card:CardView){
         
-        //we add the event to the calendar 
+        // Add the event to the user's iPhone calendar
         
         let newEvent = EKEvent(eventStore: eventStore)
         newEvent.calendar = calendar
@@ -251,18 +242,12 @@ class ViewController: UIViewController, CalendarDelegate, SplashDelegate {
         newEvent.notes = card.eventDescription
         newEvent.location = card.location
         
-        
-        print("The start event date is \(newEvent.startDate)")
-        print("The end event date is \(newEvent.endDate)")
-
-        
         do {
             try eventStore.saveEvent(newEvent, span: .ThisEvent)
-            print("This was added to the calendar!!!!")
             
         } catch {
             //TODO: handle this somehow if the event does not save.....
-            print("WOMP womp womp not added to calendar!!!")
+            print("\n\nProblem: event couldn't be added to the calendar\n\n")
 
         }
         
@@ -270,7 +255,6 @@ class ViewController: UIViewController, CalendarDelegate, SplashDelegate {
     }
     
     func endSplashScreen(splash: UIViewController) {
-        print("We dismissed the SPLASH\n\n\n\n")
         splash.dismissViewControllerAnimated(false, completion: nil)
     }
     
@@ -307,14 +291,7 @@ class ViewController: UIViewController, CalendarDelegate, SplashDelegate {
         //assign left and right buttons 
         self.navigationItem.leftBarButtonItem  = leftBarButton
         self.navigationItem.rightBarButtonItem = rightBarButton
-        
 
-
-//        self.navigationController!.navigationItem.leftBarButtonItem = leftBarButton
-//        self.navigationController!.navigationItem.leftBarButtonItem?.width = 30.0
-        print("Width of bar button item is: \(self.navigationController?.navigationItem.leftBarButtonItem?.width). Frame of nav bar: \(self.navigationController?.navigationBar.frame)")
-        
-        
     }
 
     override func didReceiveMemoryWarning() {

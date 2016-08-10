@@ -14,12 +14,22 @@ protocol DraggableViewDelegate {
 }
 
 class CardView: UIView {
+    @IBOutlet weak var eventTitle: UILabel!
+    @IBOutlet weak var eventAddress: UILabel!
+    @IBOutlet weak var eventDesc: UILabel!
+    @IBOutlet weak var eventPrice: UILabel!
+    @IBOutlet weak var eventDate: UILabel!
     
     var title: String
     var date: NSDate
     var location: String
     var eventDescription: String
     var originalPoint: CGPoint
+    
+    @IBAction func moreInfoTapped(sender: AnyObject) {
+        //open up the webview here 
+        
+    }
     
     //for tinder
     let ACTION_MARGIN: Float = 120      //%%% distance from center where the action applies. Higher = swipe further in order for the action to be called
@@ -82,8 +92,8 @@ class CardView: UIView {
         self.eventDescription = eventDescription
 
         
-        setup()
-        
+//        setup()
+        addCardView()
     }
     
     
@@ -247,11 +257,9 @@ class CardView: UIView {
         }
         
         if direction == "left" {
-            print("------card swipped left being called!!!!!!!------")
             delegate.cardSwipedLeft(self)
         }
         else {
-            print("------card swipped right being called!!!!!!!------")
             delegate.cardSwipedRight(self)
         }
     }
@@ -294,6 +302,29 @@ class CardView: UIView {
             self.removeFromSuperview()
         }
         delegate.cardSwipedLeft(self)
+    }
+    
+    func addCardView() {
+        let bundle = NSBundle(forClass: self.dynamicType)
+        let nib = UINib(nibName: "CardView2", bundle: bundle)
+        let view = nib.instantiateWithOwner(self, options: nil)[0] as! UIView
+        
+        addSubview(view)
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+//        view.centerXAnchor.constraintEqualToAnchor(self.centerXAnchor).active = true
+//        view.centerYAnchor.constraintEqualToAnchor(self.centerYAnchor).active = true
+//        view.heightAnchor.constraintEqualToAnchor(self.heightAnchor, multiplier: 1).active = true
+//        view.widthAnchor.constraintEqualToAnchor(self.widthAnchor, multiplier: 1).active = true
+        
+        //uncomment me
+        let screenHeight = UIScreen.mainScreen().bounds.height
+        let screenWidth = UIScreen.mainScreen().bounds.width
+        self.heightAnchor.constraintEqualToConstant(screenHeight * 0.50).active = true
+        self.widthAnchor.constraintEqualToConstant(screenWidth * 0.90).active = true
+        
+        //put constraints on the newly added view
+        
     }
 
 }

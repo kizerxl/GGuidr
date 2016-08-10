@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B5802331D5BA8F100DCAEB6 /* CardView2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B5802321D5BA8F100DCAEB6 /* CardView2.xib */; };
+		1B8996D51D5A39750021F5ED /* CardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B8996D41D5A39750021F5ED /* CardView.xib */; };
 		1B99A0231D54230500045402 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B99A0221D54230400045402 /* SplashScreen.swift */; };
 		1B99A0271D54561600045402 /* CALayer+Pulsar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B99A0261D54561600045402 /* CALayer+Pulsar.swift */; };
 		1BE9F4471D0A580000E0D7A0 /* DraggableViewBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE9F4461D0A580000E0D7A0 /* DraggableViewBackground.swift */; };
@@ -26,6 +28,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1B5802321D5BA8F100DCAEB6 /* CardView2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardView2.xib; sourceTree = "<group>"; };
+		1B8996D41D5A39750021F5ED /* CardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardView.xib; sourceTree = "<group>"; };
 		1B99A0221D54230400045402 /* SplashScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 		1B99A0241D54555900045402 /* Pulsar.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pulsar.framework; path = "../../../../Library/Developer/Xcode/DerivedData/Guidr-diwwzdyjliyegvfevvxzqetxmjva/Build/Products/Debug-iphonesimulator/Pulsar/Pulsar.framework"; sourceTree = "<group>"; };
 		1B99A0261D54561600045402 /* CALayer+Pulsar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CALayer+Pulsar.swift"; sourceTree = "<group>"; };
@@ -110,6 +114,8 @@
 				EB6C01D81CF62F8000A64A0D /* GGuidr-Bridging-Header.h */,
 				EB036CC51CF6167E000CCB5E /* AppDelegate.swift */,
 				EB036CC71CF6167E000CCB5E /* ViewController.swift */,
+				1B8996D41D5A39750021F5ED /* CardView.xib */,
+				1B5802321D5BA8F100DCAEB6 /* CardView2.xib */,
 				1B99A0221D54230400045402 /* SplashScreen.swift */,
 				1F1398A01CFF675A0053408A /* CardView.swift */,
 				1BE9F4461D0A580000E0D7A0 /* DraggableViewBackground.swift */,
@@ -189,7 +195,9 @@
 			files = (
 				EB036CD01CF6167E000CCB5E /* LaunchScreen.storyboard in Resources */,
 				EB036CCD1CF6167E000CCB5E /* Assets.xcassets in Resources */,
+				1B8996D51D5A39750021F5ED /* CardView.xib in Resources */,
 				EB036CCB1CF6167E000CCB5E /* Main.storyboard in Resources */,
+				1B5802331D5BA8F100DCAEB6 /* CardView2.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

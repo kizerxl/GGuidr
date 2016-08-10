@@ -41,7 +41,6 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        print("start loading this bitch up")
 
         super.layoutSubviews()
         self.setupView()
@@ -49,17 +48,15 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         allCards = []
         loadedCards = []
         cardContentArray = []
-        print("MIDWAY loading this bitch up")
         cardsLoadedIndex = 0
 //        self.loadCards()
-        print("end loading this bitch up")
 
     }
     
     convenience init(){
  
         self.init(frame: CGRect.zero)
-        
+//        
         let screenHeight = UIScreen.mainScreen().bounds.height
         let screenWidth = UIScreen.mainScreen().bounds.width
         self.heightAnchor.constraintEqualToConstant(screenHeight).active = true
@@ -124,38 +121,30 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
                                          eventDescription: currentCard.count > 3 ? currentCard[3] : "(no description)")
         
         
-        
         draggableView.delegate = self
         return draggableView
     }
     
     func loadCards() -> Void {
-        print("loading cards......")
-        print("size of cardContentArray is \(cardContentArray.count)")
         
         if cardContentArray.count > 0 {
-            print("starting the official loading of the cards mein")
 
             let numLoadedCardsCap = cardContentArray.count > MAX_BUFFER_SIZE ? MAX_BUFFER_SIZE : cardContentArray.count
             for i in 0 ..< cardContentArray.count {
                 let newCard: CardView = self.createDraggableViewWithDataAtIndex(i)
                 allCards.append(newCard)
-                print("All cards count: \(allCards.count)")
                 if i < numLoadedCardsCap {
                     loadedCards.append(newCard)
-                    print("Loaded cards count: \(loadedCards.count)")
 
                 }
             }
             
             for i in 0 ..< loadedCards.count {
-                print("We are in the ACTUAL loading of the cards!!!!!!")
                 
                 let card1 = loadedCards[i]
 
                 // Put first card above the view; each subsequent card goes below the preceding one
                 if i > 0 {
-                    print("added a card above the view!")
                     self.insertSubview(card1, belowSubview: loadedCards[i - 1])
                     let card2 = loadedCards[i - 1]
                     card2.translatesAutoresizingMaskIntoConstraints = false
@@ -165,26 +154,27 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
                     self.addSubview(card1)
                 }
                 
+                
+                // constrain the CardView
                 card1.translatesAutoresizingMaskIntoConstraints = false
-                card1.centerXAnchor.constraintEqualToAnchor(self.superview!.centerXAnchor).active = true
-                card1.centerYAnchor.constraintEqualToAnchor(self.superview!.centerYAnchor).active = true
+                card1.centerXAnchor.constraintEqualToAnchor(self.centerXAnchor).active = true
+                card1.centerYAnchor.constraintEqualToAnchor(self.centerYAnchor).active = true
+//                card1.bottomAnchor.constraintEqualToAnchor(xButton.topAnchor, constant: -20).active = true
+//                card1.topAnchor.constraintEqualToAnchor(self.topAnchor, constant: 20).active = true
+                
                 layoutIfNeeded()
-                print("card added. Frame: \(card1.frame)")
                 
             }
-            print("Cards loaded: \(cardsLoadedIndex)")
             cardsLoadedIndex! += 1
         }
     }
     
     func cardSwiped(card: CardView) -> Void {
 
-        print("just swiped!!!")
 
         loadedCards.removeAtIndex(0)
         
         if cardsLoadedIndex < allCards.count {
-            print("haven't run out of cards yet")
             loadedCards.append(allCards[cardsLoadedIndex])
             cardsLoadedIndex = cardsLoadedIndex + 1
             let card1 = loadedCards[MAX_BUFFER_SIZE - 1]
@@ -195,8 +185,6 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
             card1.centerYAnchor.constraintEqualToAnchor(self.superview!.centerYAnchor).active = true
             layoutIfNeeded()
 
-        } else {
-            print("ran out of cards")
         }
     
     }
@@ -238,9 +226,7 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
     }
     
     internal func addCardsContent(cardsArray: [[String]]) {
-        print("Getting into the draggable background array add!")
         self.cardContentArray = cardsArray
-        print("This is what the cards array looks like: \(self.cardContentArray)")
         self.loadCards()
     }
     

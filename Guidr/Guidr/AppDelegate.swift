@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //setting the initial screen bounds of the view
         self.viewController = ViewController()
         //creating object of ViewController class
-        var navigationController = UINavigationController(rootViewController: viewController!)
+        let navigationController = UINavigationController(rootViewController: viewController!)
         //creating an instance of UINavigationController & setting the rootViewController
         window?.rootViewController = navigationController
         //setting the initial VieController as UINavigationController

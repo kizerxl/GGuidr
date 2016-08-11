@@ -310,7 +310,7 @@ class CardView: UIView {
     
     func addCardView() {
         let bundle = NSBundle(forClass: self.dynamicType)
-        let nib = UINib(nibName: "CardView2", bundle: bundle)
+        let nib = UINib(nibName: "CardView", bundle: bundle)
         let view = nib.instantiateWithOwner(self, options: nil)[0] as! UIView
         
         addSubview(view)

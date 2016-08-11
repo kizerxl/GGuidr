@@ -49,7 +49,7 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         loadedCards = []
         cardContentArray = []
         cardsLoadedIndex = 0
-//        self.loadCards()
+        self.loadCards()
 
     }
     
@@ -57,10 +57,10 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
  
         self.init(frame: CGRect.zero)
 //        
-        let screenHeight = UIScreen.mainScreen().bounds.height
-        let screenWidth = UIScreen.mainScreen().bounds.width
-        self.heightAnchor.constraintEqualToConstant(screenHeight).active = true
-        self.widthAnchor.constraintEqualToConstant(screenWidth).active = true
+//        let screenHeight = UIScreen.mainScreen().bounds.height
+//        let screenWidth = UIScreen.mainScreen().bounds.width
+//        self.heightAnchor.constraintEqualToConstant(screenHeight).active = true
+//        self.widthAnchor.constraintEqualToConstant(screenWidth).active = true
 
     }
         
@@ -69,7 +69,7 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
     
     func setupView() -> Void {
 //        self.backgroundColor = UIColor.whiteColor()
-        self.backgroundColor = UIColor.whiteColor()
+//        self.backgroundColor = UIColor.whiteColor()
 
 //
 //        xButton = UIButton(frame: CGRectMake((self.frame.size.width - CARD_WIDTH)/2 + 35, self.frame.size.height/2 + CARD_HEIGHT/2 + 10, 100, 75))
@@ -147,18 +147,17 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
                 if i > 0 {
                     self.insertSubview(card1, belowSubview: loadedCards[i - 1])
                     let card2 = loadedCards[i - 1]
-                    card2.translatesAutoresizingMaskIntoConstraints = false
-                    card2.centerXAnchor.constraintEqualToAnchor(self.superview!.centerXAnchor).active = true
-                    card2.centerYAnchor.constraintEqualToAnchor(self.superview!.centerYAnchor).active = true
+                    addCorrectConstraints(card2)
                 } else {
                     self.addSubview(card1)
+                    addCorrectConstraints(card1)
                 }
                 
                 
                 // constrain the CardView
-                card1.translatesAutoresizingMaskIntoConstraints = false
-                card1.centerXAnchor.constraintEqualToAnchor(self.centerXAnchor).active = true
-                card1.centerYAnchor.constraintEqualToAnchor(self.centerYAnchor).active = true
+//                card1.translatesAutoresizingMaskIntoConstraints = false
+//                card1.centerXAnchor.constraintEqualToAnchor(self.centerXAnchor).active = true
+//                card1.centerYAnchor.constraintEqualToAnchor(self.centerYAnchor).active = true
 //                card1.bottomAnchor.constraintEqualToAnchor(xButton.topAnchor, constant: -20).active = true
 //                card1.topAnchor.constraintEqualToAnchor(self.topAnchor, constant: 20).active = true
                 
@@ -180,9 +179,9 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
             let card1 = loadedCards[MAX_BUFFER_SIZE - 1]
             self.insertSubview(card1, aboveSubview: self)
             self.insertSubview(card1, belowSubview: loadedCards[MAX_BUFFER_SIZE - 2])
-            card1.translatesAutoresizingMaskIntoConstraints = false
-            card1.centerXAnchor.constraintEqualToAnchor(self.superview!.centerXAnchor).active = true
-            card1.centerYAnchor.constraintEqualToAnchor(self.superview!.centerYAnchor).active = true
+//            card1.translatesAutoresizingMaskIntoConstraints = false
+//            card1.centerXAnchor.constraintEqualToAnchor(self.superview!.centerXAnchor).active = true
+//            card1.centerYAnchor.constraintEqualToAnchor(self.superview!.centerYAnchor).active = true
             layoutIfNeeded()
 
         }
@@ -269,6 +268,17 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         
         
         return newDate
+    }
+    
+    //helper method for setting constraints on the passed in card view
+    func addCorrectConstraints(card: CardView) {
+        card.translatesAutoresizingMaskIntoConstraints = false
+        card.centerXAnchor.constraintEqualToAnchor(self.centerXAnchor).active = true
+        card.centerYAnchor.constraintEqualToAnchor(self.centerYAnchor, constant: -card.bounds.height/2).active = true
+//        card.leftAnchor.constraintEqualToAnchor(self.superview!.leftAnchor, constant: 10).active = true
+//        card.topAnchor.constraintEqualToAnchor(self.superview!.topAnchor, constant: 20).active = true
+        card.widthAnchor.constraintEqualToAnchor(self.widthAnchor, constant: -100).active = true
+        card.heightAnchor.constraintEqualToAnchor(self.superview!.heightAnchor, multiplier: 0.5).active = true
     }
     
 

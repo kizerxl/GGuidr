@@ -258,9 +258,11 @@ class CardView: UIView {
         
         if direction == "left" {
             delegate.cardSwipedLeft(self)
+            print("card swipped left")
         }
         else {
             delegate.cardSwipedRight(self)
+            print("card swipped right")
         }
     }
 
@@ -280,6 +282,7 @@ class CardView: UIView {
             
         }) { (value: Bool) in
             self.removeFromSuperview()
+            print("card is now gone from the view after swipping right!")
         }
         delegate.cardSwipedRight(self)
     }
@@ -300,6 +303,7 @@ class CardView: UIView {
             
         }) { (value: Bool) in
             self.removeFromSuperview()
+            print("card is now gone from the view after swipping left!")
         }
         delegate.cardSwipedLeft(self)
     }
@@ -311,19 +315,20 @@ class CardView: UIView {
         
         addSubview(view)
         
+        //put constraints on the newly added view
         view.translatesAutoresizingMaskIntoConstraints = false
-//        view.centerXAnchor.constraintEqualToAnchor(self.centerXAnchor).active = true
-//        view.centerYAnchor.constraintEqualToAnchor(self.centerYAnchor).active = true
-//        view.heightAnchor.constraintEqualToAnchor(self.heightAnchor, multiplier: 1).active = true
-//        view.widthAnchor.constraintEqualToAnchor(self.widthAnchor, multiplier: 1).active = true
+        view.leftAnchor.constraintEqualToAnchor(self.leftAnchor).active = true
+        view.rightAnchor.constraintEqualToAnchor(self.rightAnchor).active = true
+        view.topAnchor.constraintEqualToAnchor(self.topAnchor).active = true
+        view.bottomAnchor.constraintEqualToAnchor(self.bottomAnchor).active = true
+        
+        print("The card view dimensions are first : \(view.bounds.height) and \(view.bounds.width)")
         
         //uncomment me
-        let screenHeight = UIScreen.mainScreen().bounds.height
-        let screenWidth = UIScreen.mainScreen().bounds.width
-        self.heightAnchor.constraintEqualToConstant(screenHeight * 0.50).active = true
-        self.widthAnchor.constraintEqualToConstant(screenWidth * 0.90).active = true
-        
-        //put constraints on the newly added view
+//        let screenHeight = UIScreen.mainScreen().bounds.height
+//        let screenWidth = UIScreen.mainScreen().bounds.width
+//        self.heightAnchor.constraintEqualToConstant(screenHeight * 0.50).active = true
+//        self.widthAnchor.constraintEqualToConstant(screenWidth * 0.90).active = true
         
     }
 

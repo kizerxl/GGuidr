@@ -155,18 +155,22 @@ class ViewController: UIViewController, CalendarDelegate, SplashDelegate {
     
             view.addSubview(draggableBackground)
             // Position constraints
-            draggableBackground.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
-            draggableBackground.centerYAnchor.constraintEqualToAnchor(view.centerYAnchor).active = true
-            
             let navBar = self.navigationController?.navigationBar
             
-//            draggableBackground.topAnchor.constraintEqualToAnchor(navBar?.bottomAnchor , constant: 20).active = true
-            draggableBackground.bottomAnchor.constraintEqualToAnchor(view.bottomAnchor).active = true
             draggableBackground.translatesAutoresizingMaskIntoConstraints = false
-            view.layoutIfNeeded()
+            draggableBackground.topAnchor.constraintEqualToAnchor(navBar?.bottomAnchor).active = true
+            draggableBackground.bottomAnchor.constraintEqualToAnchor(view.bottomAnchor).active = true
+            draggableBackground.leftAnchor.constraintEqualToAnchor(view.leftAnchor).active = true
+            draggableBackground.rightAnchor.constraintEqualToAnchor(view.rightAnchor).active = true
+            
+            draggableBackground.backgroundColor = UIColor.redColor() //change the color !!!!
+            
+//            view.layoutIfNeeded() < -- don't think this is needed
+            
+            print("The draggable bg dimensions are : \(draggableBackground.bounds.width) and \(draggableBackground.bounds.height)")
             
             // Create a card for each event and add the cards to draggable view
-            draggableBackground.addCardsContent(eventsContentArray)
+            draggableBackground.addCardsContent(eventsContentArray) 
             draggableBackground.calDelegate = self
             
             // When setup is done, make the splash screen go away

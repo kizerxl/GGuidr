@@ -58,7 +58,6 @@ class ViewController: UIViewController, CalendarDelegate, SplashDelegate {
         
         // start gary splash here.......
         if loadSplash {
-            loadSplash = false
             splashScreen = SplashScreen()
             splashScreen.splashDelegate = self
             presentViewController(splashScreen, animated: false, completion: nil)
@@ -69,7 +68,9 @@ class ViewController: UIViewController, CalendarDelegate, SplashDelegate {
         
         if let authorizer = service.authorizer,
             canAuth = authorizer.canAuthorize where canAuth {
-
+            
+            loadSplash = false //in case the splash screen is still around 
+            
             //call our data store here and have it return the card content
              dataStore.getEventsContent(usingService: service)
             NSNotificationCenter.defaultCenter().addObserver(self,selector: #selector(ViewController.setupViewWithDraggableView(_:)), name: eventsLoadedNotification, object: nil)
@@ -78,6 +79,7 @@ class ViewController: UIViewController, CalendarDelegate, SplashDelegate {
 
             
         } else {
+            splashScreen.splashDelegate.endSplashScreen(splashScreen)
             presentViewController(
                 createAuthController(),
                 animated: true,
@@ -165,9 +167,7 @@ class ViewController: UIViewController, CalendarDelegate, SplashDelegate {
             
             draggableBackground.backgroundColor = UIColor.redColor() //change the color !!!!
             
-//            view.layoutIfNeeded() < -- don't think this is needed
-            
-            print("The draggable bg dimensions are : \(draggableBackground.bounds.width) and \(draggableBackground.bounds.height)")
+            view.layoutIfNeeded() 
             
             // Create a card for each event and add the cards to draggable view
             draggableBackground.addCardsContent(eventsContentArray) 

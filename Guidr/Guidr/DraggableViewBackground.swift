@@ -61,15 +61,6 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         
     
     func setupView() -> Void {
-//        self.backgroundColor = UIColor.whiteColor()
-//        self.backgroundColor = UIColor.whiteColor()
-
-//
-//        xButton = UIButton(frame: CGRectMake((self.frame.size.width - CARD_WIDTH)/2 + 35, self.frame.size.height/2 + CARD_HEIGHT/2 + 10, 100, 75))
-//        xButton.setImage(UIImage(named: "xMark"), forState: UIControlState.Normal)
-//        xButton.addTarget(self, action: "swipeLeft", forControlEvents: UIControlEvents.TouchUpInside)
-//        
-//        checkButton = UIButton(frame: CGRectMake(self.frame.size.width/2 + CARD_WIDTH/2 - 85, self.frame.size.height/2 + CARD_HEIGHT/2 + 10, 90, 75))
         
         xButton = UIButton()
         checkButton = UIButton()

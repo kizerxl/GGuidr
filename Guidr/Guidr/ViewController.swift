@@ -58,6 +58,7 @@ class ViewController: UIViewController, CalendarDelegate, SplashDelegate {
         
         // start gary splash here.......
         if loadSplash {
+            loadSplash = false
             splashScreen = SplashScreen()
             splashScreen.splashDelegate = self
             presentViewController(splashScreen, animated: false, completion: nil)
@@ -68,8 +69,6 @@ class ViewController: UIViewController, CalendarDelegate, SplashDelegate {
         
         if let authorizer = service.authorizer,
             canAuth = authorizer.canAuthorize where canAuth {
-            
-            loadSplash = false //in case the splash screen is still around 
             
             //call our data store here and have it return the card content
              dataStore.getEventsContent(usingService: service)
@@ -165,7 +164,7 @@ class ViewController: UIViewController, CalendarDelegate, SplashDelegate {
             draggableBackground.leftAnchor.constraintEqualToAnchor(view.leftAnchor).active = true
             draggableBackground.rightAnchor.constraintEqualToAnchor(view.rightAnchor).active = true
             
-            draggableBackground.backgroundColor = UIColor.redColor() //change the color !!!!
+            draggableBackground.backgroundColor = UIColor(red: 134/255, green: 36.0/255, blue: 27.0/255, alpha: 1)
             
             view.layoutIfNeeded() 
             

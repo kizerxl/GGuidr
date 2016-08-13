@@ -19,12 +19,15 @@ class CardView: UIView {
     @IBOutlet weak var eventDesc: UILabel!
     @IBOutlet weak var eventPrice: UILabel!
     @IBOutlet weak var eventDate: UILabel!
+    @IBOutlet weak var eventTime: UILabel!
     
     var title: String
     var date: NSDate
     var location: String
     var eventDescription: String
     var originalPoint: CGPoint
+    var customCardView: UIView!
+    var urlString: String!
     
     @IBAction func moreInfoTapped(sender: AnyObject) {
         //open up the webview here 
@@ -94,6 +97,38 @@ class CardView: UIView {
         
 //        setup() < --- for running the old test card
         addCardView()
+    }
+    
+    // This uses an event object as an array
+    convenience init(event: [String]) {
+        self.init(frame: CGRectZero)
+        
+        addCardView()
+        
+        /*
+         So the eventCount can be either 6 or 7 
+         if it's 6 that means that there is no description and the urlString is at idx 3
+         else if it's 7 there is a description and the urlString is at idx 4
+        */
+        
+        var eventCopy = event
+        let eventCount = eventCopy.count
+        var eventDetails = [eventDate, eventTitle, eventAddress, eventDesc, eventPrice, eventTime]
+
+        // There is no description
+        if eventCount == 6 {
+            urlString = eventCopy.removeAtIndex(3)
+            eventDetails[3].text = "No Description"
+            eventDetails.removeAtIndex(3)
+        } else {
+            urlString = eventCopy.removeAtIndex(4)
+        }
+        print("The url string is \(urlString)")
+        
+        for i in 0..<eventDetails.count {
+            eventDetails[i].text = eventCopy[i]
+        }
+ 
     }
     
     
@@ -307,16 +342,16 @@ class CardView: UIView {
     func addCardView() {
         let bundle = NSBundle(forClass: self.dynamicType)
         let nib = UINib(nibName: "CardView", bundle: bundle)
-        let view = nib.instantiateWithOwner(self, options: nil)[0] as! UIView
+        customCardView = nib.instantiateWithOwner(self, options: nil)[0] as! UIView
         
-        addSubview(view)
+        addSubview(customCardView)
         
         //put constraints on the newly added view
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.leftAnchor.constraintEqualToAnchor(self.leftAnchor).active = true
-        view.rightAnchor.constraintEqualToAnchor(self.rightAnchor).active = true
-        view.topAnchor.constraintEqualToAnchor(self.topAnchor).active = true
-        view.bottomAnchor.constraintEqualToAnchor(self.bottomAnchor).active = true
+        customCardView.translatesAutoresizingMaskIntoConstraints = false
+        customCardView.leftAnchor.constraintEqualToAnchor(self.leftAnchor).active = true
+        customCardView.rightAnchor.constraintEqualToAnchor(self.rightAnchor).active = true
+        customCardView.topAnchor.constraintEqualToAnchor(self.topAnchor).active = true
+        customCardView.bottomAnchor.constraintEqualToAnchor(self.bottomAnchor).active = true
         
     }
 

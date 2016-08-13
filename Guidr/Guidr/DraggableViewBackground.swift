@@ -99,10 +99,11 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         
         let currentCard = cardContentArray[index]
         
-        let draggableView = CardView(title: currentCard.count > 1 ? currentCard[1] : "(no title)",
-                                         date: formatDate(currentCard[0]),
-                                         location: currentCard.count > 2 ? currentCard[2] : "(no location given)",
-                                         eventDescription: currentCard.count > 3 ? currentCard[3] : "(no description)")
+//        let draggableView = CardView(title: currentCard.count > 1 ? currentCard[1] : "(no title)",
+//                                         date: formatDate(currentCard[0]),
+//                                         location: currentCard.count > 2 ? currentCard[2] : "(no location given)",
+//                                         eventDescription: currentCard.count > 3 ? currentCard[3] : "(no description)")
+        let draggableView = CardView(event: currentCard)
         
         
         draggableView.delegate = self

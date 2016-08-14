@@ -281,6 +281,7 @@ class CardView: UIView {
                 self.center = self.originPoint
                 self.transform = CGAffineTransformMakeRotation(0)
                 self.overlayView.alpha = 0
+                self.layoutIfNeeded()
             })
         }
     }

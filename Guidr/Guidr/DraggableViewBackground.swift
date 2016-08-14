@@ -28,6 +28,7 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
     var checkButton: UIButton!
     var xButton: UIButton!
     var calDelegate: CalendarDelegate!
+    var buttonView: ButtonView!
     
     
     var calendarOfCurrentYear: NSCalendar!
@@ -56,43 +57,44 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
     convenience init(){
         self.init(frame: CGRect.zero)
     }
-        
-        
-        
-    
+
     func setupView() -> Void {
         
-        xButton = UIButton()
-        checkButton = UIButton()
+//        xButton = UIButton()
+//        checkButton = UIButton()
+//
+//        checkButton.setImage(UIImage(named: "newCheck"), forState: UIControlState.Normal)
+//        checkButton.addTarget(self, action: #selector(DraggableViewBackground.swipeRight), forControlEvents: UIControlEvents.TouchUpInside)
+//        
+//        xButton.setImage(UIImage(named: "newX"), forState: UIControlState.Normal)
+//        xButton.addTarget(self, action: #selector(DraggableViewBackground.swipeLeft), forControlEvents: UIControlEvents.TouchUpInside)
+//        
+//        self.addSubview(xButton)
+//        self.addSubview(checkButton)
+//        
+//        // check button constraints
+//        checkButton.translatesAutoresizingMaskIntoConstraints = false
+////        checkButton.centerXAnchor.constraintEqualToAnchor(self.centerXAnchor, constant: checkButton.bounds.width).active = true
+//        checkButton.bottomAnchor.constraintEqualToAnchor(self.bottomAnchor, constant: -100).active = true
+//        checkButton.widthAnchor.constraintEqualToConstant(100).active = true
+//        checkButton.heightAnchor.constraintEqualToConstant(86).active = true
+//        checkButton.rightAnchor.constraintEqualToAnchor(self.rightAnchor, constant: -100).active = true
+//
+//        // x button constraints
+//        xButton.translatesAutoresizingMaskIntoConstraints = false
+////        xButton.centerXAnchor.constraintEqualToAnchor(self.centerXAnchor, constant: -self.checkButton.bounds.width).active = true
+//        xButton.bottomAnchor.constraintEqualToAnchor(self.bottomAnchor, constant: -100).active = true
+//        xButton.widthAnchor.constraintEqualToConstant(100).active = true
+//        xButton.heightAnchor.constraintEqualToConstant(86).active = true
+//        xButton.leftAnchor.constraintEqualToAnchor(self.leftAnchor, constant: 100).active = true
 
-        checkButton.setImage(UIImage(named: "newCheck"), forState: UIControlState.Normal)
-        checkButton.addTarget(self, action: #selector(DraggableViewBackground.swipeRight), forControlEvents: UIControlEvents.TouchUpInside)
-        
-        xButton.setImage(UIImage(named: "newX"), forState: UIControlState.Normal)
-        xButton.addTarget(self, action: #selector(DraggableViewBackground.swipeLeft), forControlEvents: UIControlEvents.TouchUpInside)
-        
-        self.addSubview(xButton)
-        self.addSubview(checkButton)
-        
-        // check button constraints
-        checkButton.translatesAutoresizingMaskIntoConstraints = false
-//        checkButton.centerXAnchor.constraintEqualToAnchor(self.centerXAnchor, constant: checkButton.bounds.width).active = true
-        checkButton.bottomAnchor.constraintEqualToAnchor(self.bottomAnchor, constant: -100).active = true
-        checkButton.widthAnchor.constraintEqualToConstant(100).active = true
-        checkButton.heightAnchor.constraintEqualToConstant(86).active = true
-        checkButton.rightAnchor.constraintEqualToAnchor(self.rightAnchor, constant: -100).active = true
 
-        // x button constraints
-        xButton.translatesAutoresizingMaskIntoConstraints = false
-//        xButton.centerXAnchor.constraintEqualToAnchor(self.centerXAnchor, constant: -self.checkButton.bounds.width).active = true
-        xButton.bottomAnchor.constraintEqualToAnchor(self.bottomAnchor, constant: -100).active = true
-        xButton.widthAnchor.constraintEqualToConstant(100).active = true
-        xButton.heightAnchor.constraintEqualToConstant(86).active = true
-        xButton.leftAnchor.constraintEqualToAnchor(self.leftAnchor, constant: 100).active = true
-
-
-        layoutIfNeeded()
-
+//        layoutIfNeeded()
+        buttonView = ButtonView()
+        addSubview(buttonView)
+        addButtonViewConstraints()
+        buttonView.checkButton.addTarget(self, action: #selector(DraggableViewBackground.swipeRight), forControlEvents: UIControlEvents.TouchUpInside)
+        buttonView.xButton.addTarget(self, action: #selector(DraggableViewBackground.swipeLeft), forControlEvents: UIControlEvents.TouchUpInside)
     }
     
     func createDraggableViewWithDataAtIndex(index: NSInteger) -> CardView {
@@ -184,6 +186,7 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
             dragView.overlayView.alpha = 1
         })
         dragView.rightClickAction()
+        print("Swipped right!!!!!!")
     }
     
     func swipeLeft() -> Void {
@@ -251,8 +254,17 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         card.leftAnchor.constraintEqualToAnchor(self.leftAnchor, constant: 10).active = true
         card.rightAnchor.constraintEqualToAnchor(self.rightAnchor, constant: -10).active = true
         card.topAnchor.constraintEqualToAnchor(self.topAnchor, constant: 5).active = true
-        card.heightAnchor.constraintEqualToAnchor(self.heightAnchor, constant: -100).active = true
+        card.heightAnchor.constraintEqualToAnchor(self.heightAnchor, constant: -150).active = true
     }
     
-
+    //helper method for setting constraints on the buttonSet (aka ButtonView)
+    func addButtonViewConstraints() {
+        buttonView.translatesAutoresizingMaskIntoConstraints = false
+        buttonView.leftAnchor.constraintEqualToAnchor(self.leftAnchor).active = true
+        buttonView.rightAnchor.constraintEqualToAnchor(self.rightAnchor).active = true
+        buttonView.bottomAnchor.constraintEqualToAnchor(self.bottomAnchor).active = true
+        buttonView.heightAnchor.constraintEqualToConstant(100).active = true
+//        buttonView.topAnchor.constraintEqualToAnchor(self.topAnchor).active = true
+    }
+    
 }

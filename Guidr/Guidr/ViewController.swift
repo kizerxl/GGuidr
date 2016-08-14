@@ -71,11 +71,11 @@ class ViewController: UIViewController, CalendarDelegate, SplashDelegate {
             canAuth = authorizer.canAuthorize where canAuth {
             
             //call our data store here and have it return the card content
-             dataStore.getEventsContent(usingService: service)
-            NSNotificationCenter.defaultCenter().addObserver(self,selector: #selector(ViewController.setupViewWithDraggableView(_:)), name: eventsLoadedNotification, object: nil)
+             dataStore.getEventsContent(usingService: service)  
             
-//            print("here is the result of the script!!!: \(dataStore.getEventsContentFromStore())")
-
+            NSNotificationCenter.defaultCenter().addObserver(self,selector: #selector(ViewController.setupViewWithDraggableView(_:)), name: eventsLoadedNotification, object: nil)
+            print("here is the result of the script!!!: \(dataStore.getEventsContentFromStore())")
+            splashScreen.splashDelegate.endSplashScreen(splashScreen) //added this for testing, please delete 
             
         } else {
             splashScreen.splashDelegate.endSplashScreen(splashScreen)
@@ -239,11 +239,11 @@ class ViewController: UIViewController, CalendarDelegate, SplashDelegate {
         
         let newEvent = EKEvent(eventStore: eventStore)
         newEvent.calendar = calendar
-        newEvent.title = card.title
+        newEvent.title = card.eventTitle.text!
         newEvent.startDate = card.date
         newEvent.endDate = card.date.dateByAddingTimeInterval(2 * 60 * 60)
-        newEvent.notes = card.eventDescription
-        newEvent.location = card.location
+        newEvent.notes = card.eventDesc.text!
+        newEvent.location = card.eventAddress.text!
         
         do {
             try eventStore.saveEvent(newEvent, span: .ThisEvent)

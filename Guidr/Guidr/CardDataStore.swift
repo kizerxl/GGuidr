@@ -18,6 +18,7 @@ class CardDataStore: NSObject {
     var store:[[String]] = []{
         didSet{
                 NSNotificationCenter.defaultCenter().postNotificationName(eventsLoadedNotification, object: nil)
+            print("notification sent!!!!!!")
         }
     }
     
@@ -31,21 +32,28 @@ class CardDataStore: NSObject {
     
     internal func getEventsContent(usingService service: GTLService) {
         
-        let baseUrl = "https://script.googleapis.com/v1/scripts/\(secretKScriptId):run"
-        let url = GTLUtilities.URLWithString(baseUrl, queryParameters: nil)
+        //added this for testing 
+        // Please remove or make testing false 
+        let testing = true
         
-        NSNotificationCenter.defaultCenter().postNotificationName(eventsLoadedNotification, object: self)
-        
-        // Create an execution request object.
-        let request = GTLObject()
-        request.setJSONValue("scapeGary", forKey: "function")
-        
-        // Make the API request.
-         service.fetchObjectByInsertingObject(request,
-                                              forURL: url,
-                                              delegate: self,
-                                              didFinishSelector: #selector(displayResultWithTicket(_:finishedWithObject:error:)))
-        
+        if testing{
+            loadTestData()
+        } else {
+            let baseUrl = "https://script.googleapis.com/v1/scripts/\(secretKScriptId):run"
+            let url = GTLUtilities.URLWithString(baseUrl, queryParameters: nil)
+            
+            NSNotificationCenter.defaultCenter().postNotificationName(eventsLoadedNotification, object: self)
+            
+            // Create an execution request object.
+            let request = GTLObject()
+            request.setJSONValue("scapeGary", forKey: "function")
+            
+            // Make the API request.
+            service.fetchObjectByInsertingObject(request,
+                                                 forURL: url,
+                                                 delegate: self,
+                                                 didFinishSelector: #selector(displayResultWithTicket(_:finishedWithObject:error:)))
+        }
     
     }
     
@@ -104,6 +112,27 @@ class CardDataStore: NSObject {
     
     internal func getEventsContentFromStore() -> [[String]] {
         return self.store
+    }
+    
+    //this is to load test data in case the site is down 
+    //as of 8/13/16 this was the case 
+//    GAry JSON sturcture - length is 6 or 7
+//    0 - Date
+//    1 - Name of event
+//    2 - Location/Address
+//    3 - event description
+//    4 - url of event
+//    5 - price of event
+//    6 - time of event 
+
+    
+    func loadTestData() {
+        let event1 = ["8/15/16", "Java Mondays", "Somewhere over the rainbow", "Some really cool event about Java", "http://wwww.google.com", "FREE", "5:00pm"]
+        let event2 = ["8/20/16", "Javascript Day", "Somewhere over the rainbow Pt2", "JS all JS all the time!", "http://wwww.google.com", "$30000", "10:00pm"]
+        let event3 = ["8/24/16", "Hidden Dragon Covention", "Place unknown", "Ninja coder event.", "http://wwww.google.com", "Pricy", "3:00pm"]
+        let event4 = ["8/27/16", "New Event Man", "Cool Place duh!", "So, let's uh make up something here..", "http://wwww.google.com", "Ballin", "1:00pm"]
+        store = [event1, event2, event3, event4]
+        
     }
     
 }

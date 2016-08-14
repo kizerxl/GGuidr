@@ -123,7 +123,6 @@ class CardView: UIView {
         } else {
             urlString = eventCopy.removeAtIndex(4)
         }
-        print("The url string is \(urlString)")
         
         for i in 0..<eventDetails.count {
             eventDetails[i].text = eventCopy[i]

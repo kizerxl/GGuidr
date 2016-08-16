@@ -13,7 +13,7 @@ protocol DraggableViewDelegate {
     func cardSwipedRight(card: CardView) -> Void
 }
 
-class CardView: UIView {
+class CardView: UIView, UIWebViewDelegate {
     @IBOutlet weak var eventTitle: UILabel!
     @IBOutlet weak var eventAddress: UILabel!
     @IBOutlet weak var eventDesc: UILabel!
@@ -31,7 +31,29 @@ class CardView: UIView {
     
     @IBAction func moreInfoTapped(sender: AnyObject) {
         //open up the webview here 
+        let customWV = CustomWebView()
+        customWV.alpha = 0
+        addSubview(customWV)
         
+        UIView.animateWithDuration(
+            0.4,
+            delay: 0,
+            options: .BeginFromCurrentState,
+            animations: { () -> Void in
+//                customWV.transform = CGAffineTransformMakeScale(1, 1)
+                customWV.translatesAutoresizingMaskIntoConstraints = false
+                customWV.topAnchor.constraintEqualToAnchor(self.topAnchor).active = true
+                customWV.bottomAnchor.constraintEqualToAnchor(self.bottomAnchor).active = true
+                customWV.rightAnchor.constraintEqualToAnchor(self.rightAnchor).active = true
+                customWV.leftAnchor.constraintEqualToAnchor(self.leftAnchor).active = true
+                customWV.webView.loadRequest(NSURLRequest(URL: NSURL(string: self.urlString)!))
+                customWV.alpha = 1
+        }) { (completed:Bool) -> Void in
+//            self.view.transform = CGAffineTransformMakeScale(, 0.5)
+            // or, to reset:
+            // self.view.transform = CGAffineTransformIdentity
+            print("Animation is done son!")
+        }
     }
     
     //for tinder
@@ -114,7 +136,7 @@ class CardView: UIView {
         var eventCopy = event
         let eventCount = eventCopy.count
         var eventDetails = [eventDate, eventTitle, eventAddress, eventDesc, eventPrice, eventTime]
-
+        
         // There is no description
         if eventCount == 6 {
             urlString = eventCopy.removeAtIndex(3)
@@ -127,7 +149,12 @@ class CardView: UIView {
         for i in 0..<eventDetails.count {
             eventDetails[i].text = eventCopy[i]
         }
- 
+        
+        // get date
+//        let dateFormatter = NSDateFormatter()
+//        dateFormatter.dateFormat = "EEEE, MMM d" /* find out and place date format from http://userguide.icu-project.org/formatparse/datetime */
+//        var date = dateFormatter.dateFromString(dateString)
+        
     }
     
     
@@ -354,5 +381,50 @@ class CardView: UIView {
         customCardView.bottomAnchor.constraintEqualToAnchor(self.bottomAnchor).active = true
         
     }
+    
+    func goToURL() {
+    }
 
+//    
+//    func formatDate(dateString: String) -> NSDate {
+//        
+//        let dateFormatter = NSDateFormatter()
+//        dateFormatter.dateFormat = "EEEE, MMM d" /* find out and place date format from http://userguide.icu-project.org/formatparse/datetime */
+//        var date = dateFormatter.dateFromString(dateString)
+//        
+//        //correct date with correct year
+//        date = correctYearForDate(date!)
+//        
+//        return date!
+//    }
+//    
+//    func correctYearForDate(eventDate: NSDate) -> NSDate {
+//        var correctYear = currentYear
+//        var newDate: NSDate!
+//        
+//        let components = calendarOfCurrentYear.components([.Month, .Day, .Year], fromDate: eventDate)
+//        let eventMonth = components.month
+//        
+//        if eventMonth < currentMonth {
+//            correctYear! += 1 //this is one year up
+//        }
+//        
+//        components.setValue(correctYear, forComponent: .Year)
+//        newDate = calendarOfCurrentYear.dateFromComponents(components)
+//        
+//        
+//        return newDate
+//    }
+//
+//    func setupDateChecking() {
+//        currentDate = NSDate()
+//        calendarOfCurrentYear = NSCalendar.currentCalendar()
+//        
+//        let components = calendarOfCurrentYear.components([.Month, .Year], fromDate: currentDate)
+//        
+//        currentMonth = components.month
+//        currentYear = components.year
+//
+    
+    
 }

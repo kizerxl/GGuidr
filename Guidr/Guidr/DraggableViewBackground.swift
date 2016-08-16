@@ -99,6 +99,12 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
     
     func createDraggableViewWithDataAtIndex(index: NSInteger) -> CardView {
         
+        // NEW APPROACH
+        // 1) WE initialize an Event object.
+                // (Write initializer that sets all the properties, and code here calling it)
+        // 2) We initialize a cardview passing in the event object:     CardView(event: event1)
+        // 3) In CardView's init, it uses the properties of the Event object to set up its views/labels
+        
         let currentCard = cardContentArray[index]
         
 //        let draggableView = CardView(title: currentCard.count > 1 ? currentCard[1] : "(no title)",
@@ -266,5 +272,4 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         buttonView.heightAnchor.constraintEqualToConstant(100).active = true
 //        buttonView.topAnchor.constraintEqualToAnchor(self.topAnchor).active = true
     }
-    
 }

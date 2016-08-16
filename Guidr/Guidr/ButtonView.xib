@@ -32,8 +32,9 @@
                                     <rect key="frame" x="149" y="0.0" width="146" height="96"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <size key="titleShadowOffset" width="2.2250738585072014e-308" height="0.0"/>
                                     <state key="normal" image="checkButtonSign"/>
-                                    <state key="highlighted" image="highlightedXButtonSign"/>
+                                    <state key="highlighted" image="checkButtonSign"/>
                                 </button>
                             </subviews>
                         </stackView>
@@ -60,7 +61,6 @@
     </objects>
     <resources>
         <image name="checkButtonSign" width="27" height="27"/>
-        <image name="highlightedXButtonSign" width="27" height="27"/>
         <image name="xButtonSign" width="27" height="27"/>
     </resources>
 </document>

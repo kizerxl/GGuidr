@@ -34,11 +34,11 @@ class CardDataStore: NSObject {
         
         //added this for testing 
         // Please remove or make testing false 
-        let testing = true
+//        let testing = true
         
-        if testing{
-            loadTestData()
-        } else {
+//        if testing{
+//            loadTestData()
+//        } else {
             let baseUrl = "https://script.googleapis.com/v1/scripts/\(secretKScriptId):run"
             let url = GTLUtilities.URLWithString(baseUrl, queryParameters: nil)
             
@@ -53,7 +53,7 @@ class CardDataStore: NSObject {
                                                  forURL: url,
                                                  delegate: self,
                                                  didFinishSelector: #selector(displayResultWithTicket(_:finishedWithObject:error:)))
-        }
+//        }
     
     }
     

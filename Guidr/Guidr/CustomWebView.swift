@@ -55,6 +55,7 @@ class CustomWebView: UIView {
         removeButton.rightAnchor.constraintEqualToAnchor(self.rightAnchor, constant: -10).active = true
         removeButton.topAnchor.constraintEqualToAnchor(self.topAnchor, constant: 10).active = true
         removeButton.setImage((UIImage (named: "newX")) , forState: .Normal)
+        removeButton.alpha = 0.7
         removeButton.addTarget(self.superview, action: #selector(CustomWebView.removeCustomWebView), forControlEvents: UIControlEvents.TouchUpInside)
     }
     

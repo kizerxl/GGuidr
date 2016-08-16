@@ -34,22 +34,21 @@ class CardView: UIView, UIWebViewDelegate {
         let customWV = CustomWebView()
         customWV.alpha = 0
         addSubview(customWV)
-        
+        customWV.transform = CGAffineTransformMakeScale(0.1, 0.1)
         UIView.animateWithDuration(
             0.4,
             delay: 0,
             options: .BeginFromCurrentState,
             animations: { () -> Void in
-//                customWV.transform = CGAffineTransformMakeScale(1, 1)
                 customWV.translatesAutoresizingMaskIntoConstraints = false
                 customWV.topAnchor.constraintEqualToAnchor(self.topAnchor).active = true
                 customWV.bottomAnchor.constraintEqualToAnchor(self.bottomAnchor).active = true
                 customWV.rightAnchor.constraintEqualToAnchor(self.rightAnchor).active = true
                 customWV.leftAnchor.constraintEqualToAnchor(self.leftAnchor).active = true
                 customWV.webView.loadRequest(NSURLRequest(URL: NSURL(string: self.urlString)!))
+                customWV.transform = CGAffineTransformMakeScale(1, 1)
                 customWV.alpha = 1
         }) { (completed:Bool) -> Void in
-//            self.view.transform = CGAffineTransformMakeScale(, 0.5)
             // or, to reset:
             // self.view.transform = CGAffineTransformIdentity
             print("Animation is done son!")

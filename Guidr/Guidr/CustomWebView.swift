@@ -52,7 +52,7 @@ class CustomWebView: UIView {
         removeButton.translatesAutoresizingMaskIntoConstraints = false
         removeButton.heightAnchor.constraintEqualToConstant(43).active = true
         removeButton.widthAnchor.constraintEqualToConstant(50).active = true
-        removeButton.rightAnchor.constraintEqualToAnchor(self.rightAnchor, constant: 30).active = true
+        removeButton.rightAnchor.constraintEqualToAnchor(self.rightAnchor, constant: -10).active = true
         removeButton.topAnchor.constraintEqualToAnchor(self.topAnchor, constant: 10).active = true
         removeButton.setImage((UIImage (named: "newX")) , forState: .Normal)
         removeButton.addTarget(self.superview, action: #selector(CustomWebView.removeCustomWebView), forControlEvents: UIControlEvents.TouchUpInside)

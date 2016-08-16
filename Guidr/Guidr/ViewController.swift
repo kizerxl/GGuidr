@@ -282,6 +282,7 @@ class ViewController: UIViewController, CalendarDelegate, SplashDelegate {
         leftButton.contentHorizontalAlignment = .Left
         let leftBarButton = UIBarButtonItem(customView: leftButton)
         self.navigationItem.leftBarButtonItem  = leftBarButton
+        leftButton.addTarget(self, action: #selector(settingsTapped), forControlEvents: UIControlEvents.TouchUpInside)
         
         //add right button 
         let rightButton: UIButton = UIButton(type: UIButtonType.Custom)
@@ -303,7 +304,9 @@ class ViewController: UIViewController, CalendarDelegate, SplashDelegate {
     }
     
     func settingsTapped() {
-        print("settings tapped")
+        print("settings tapped!!!!!")
+//        presentViewController(SettingsVC(), animated: true, completion: nil)
+//        self.navigationController!.pushViewController(SettingsVC(), animated: true)
     }
     
 }

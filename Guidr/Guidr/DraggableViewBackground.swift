@@ -270,6 +270,5 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         buttonView.rightAnchor.constraintEqualToAnchor(self.rightAnchor).active = true
         buttonView.bottomAnchor.constraintEqualToAnchor(self.bottomAnchor).active = true
         buttonView.heightAnchor.constraintEqualToConstant(100).active = true
-//        buttonView.topAnchor.constraintEqualToAnchor(self.topAnchor).active = true
     }
 }

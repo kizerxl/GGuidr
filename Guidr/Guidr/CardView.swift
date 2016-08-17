@@ -84,9 +84,9 @@ class CardView: UIView, UIWebViewDelegate {
         self.backgroundColor = UIColor.init(red: 189/255, green: 195/255, blue: 199/255, alpha: 1)
         self.panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(CardView.beingDragged(_:)))
         self.addGestureRecognizer(panGestureRecognizer)
-        overlayView = OverlayView(frame: CGRectMake(self.frame.size.width/2-100, 0, 100, 100))
-        overlayView.alpha = 0
-        self.addSubview(overlayView)
+//        overlayView = OverlayView(frame: CGRectMake(self.frame.size.width/2-100, 0, 100, 100))
+//        overlayView.alpha = 0
+//        self.addSubview(overlayView)
 
         
     }
@@ -125,6 +125,16 @@ class CardView: UIView, UIWebViewDelegate {
         self.init(frame: CGRectZero)
         
         addCardView()
+        overlayView = OverlayView(frame: CGRectZero)
+        overlayView.alpha = 0
+        self.addSubview(overlayView)
+        
+        //add constriants to the overlay 
+        overlayView.translatesAutoresizingMaskIntoConstraints = false
+        overlayView.leftAnchor.constraintEqualToAnchor(self.leftAnchor).active = true
+        overlayView.rightAnchor.constraintEqualToAnchor(self.rightAnchor).active = true
+        overlayView.topAnchor.constraintEqualToAnchor(self.topAnchor).active = true
+        overlayView.bottomAnchor.constraintEqualToAnchor(self.bottomAnchor).active = true
         
         /*
          So the eventCount can be either 6 or 7 
@@ -246,7 +256,7 @@ class CardView: UIView, UIWebViewDelegate {
         layoutIfNeeded()
         
         
-        overlayView = OverlayView(frame: CGRectMake(self.frame.size.width/2-100, 0, 100, 100))
+        overlayView = OverlayView(frame: CGRectMake(self.frame.size.width/2-200, 0, 100, 100))
         overlayView.alpha = 0
         self.addSubview(overlayView)
         
@@ -380,9 +390,7 @@ class CardView: UIView, UIWebViewDelegate {
         customCardView.bottomAnchor.constraintEqualToAnchor(self.bottomAnchor).active = true
         
     }
-    
-    func goToURL() {
-    }
+
 
 //    
 //    func formatDate(dateString: String) -> NSDate {

@@ -75,7 +75,7 @@ class ViewController: UIViewController, CalendarDelegate, SplashDelegate {
             
             NSNotificationCenter.defaultCenter().addObserver(self,selector: #selector(ViewController.setupViewWithDraggableView(_:)), name: eventsLoadedNotification, object: nil)
 //            print("here is the result of the script!!!: \(dataStore.getEventsContentFromStore())")
-//            splashScreen.splashDelegate.endSplashScreen(splashScreen) //added this for testing, please delete
+            splashScreen.splashDelegate.endSplashScreen(splashScreen) //added this for testing, please delete
             
         } else {
             splashScreen.splashDelegate.endSplashScreen(splashScreen)

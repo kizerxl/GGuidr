@@ -28,7 +28,7 @@ class OverlayView: UIView{
         super.init(frame: frame)
         
         self.backgroundColor = UIColor.redColor()
-        imageView = UIImageView(image: UIImage(named: "smileYES"))
+        imageView = UIImageView(image: UIImage(named: "smileNO"))
         imageView.contentMode = .ScaleAspectFit
         setCoords("left")
         imageView.frame = CGRectMake(xValue, yValue, 300, 300)

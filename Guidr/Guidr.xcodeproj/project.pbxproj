@@ -11,7 +11,6 @@
 		1B5802331D5BA8F100DCAEB6 /* CardView2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B5802321D5BA8F100DCAEB6 /* CardView2.xib */; };
 		1B8996D51D5A39750021F5ED /* CardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B8996D41D5A39750021F5ED /* CardView.xib */; };
 		1B8D9BB81D629CCC00CE83B1 /* CustomWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8D9BB71D629CCC00CE83B1 /* CustomWebView.swift */; };
-		1B8D9BBA1D62BEF600CE83B1 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8D9BB91D62BEF600CE83B1 /* SettingsVC.swift */; };
 		1B90B8551D6006C200E6438D /* ButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B90B8541D6006C200E6438D /* ButtonView.xib */; };
 		1B90B8571D60206200E6438D /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B90B8561D60206200E6438D /* ButtonView.swift */; };
 		1B99A0231D54230500045402 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B99A0221D54230400045402 /* SplashScreen.swift */; };
@@ -19,6 +18,7 @@
 		1BE9F4471D0A580000E0D7A0 /* DraggableViewBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE9F4461D0A580000E0D7A0 /* DraggableViewBackground.swift */; };
 		1BE9F4491D0A5A7400E0D7A0 /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE9F4481D0A5A7400E0D7A0 /* OverlayView.swift */; };
 		1BE9F44B1D0A8E9900E0D7A0 /* CardDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE9F44A1D0A8E9900E0D7A0 /* CardDataStore.swift */; };
+		1BF5595A1D65299800D0460F /* SettingsTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF559591D65299800D0460F /* SettingsTableVC.swift */; };
 		1F1398A11CFF675A0053408A /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1398A01CFF675A0053408A /* CardView.swift */; };
 		9183A293ED11878DCE270FA9 /* Pods_Guidr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA426CFA56D7C939ABA18634 /* Pods_Guidr.framework */; };
 		EB036CC61CF6167E000CCB5E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB036CC51CF6167E000CCB5E /* AppDelegate.swift */; };
@@ -37,7 +37,6 @@
 		1B5802321D5BA8F100DCAEB6 /* CardView2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardView2.xib; sourceTree = "<group>"; };
 		1B8996D41D5A39750021F5ED /* CardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardView.xib; sourceTree = "<group>"; };
 		1B8D9BB71D629CCC00CE83B1 /* CustomWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomWebView.swift; sourceTree = "<group>"; };
-		1B8D9BB91D62BEF600CE83B1 /* SettingsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		1B90B8541D6006C200E6438D /* ButtonView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonView.xib; sourceTree = "<group>"; };
 		1B90B8561D60206200E6438D /* ButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
 		1B99A0221D54230400045402 /* SplashScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
@@ -46,6 +45,7 @@
 		1BE9F4461D0A580000E0D7A0 /* DraggableViewBackground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraggableViewBackground.swift; sourceTree = "<group>"; };
 		1BE9F4481D0A5A7400E0D7A0 /* OverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
 		1BE9F44A1D0A8E9900E0D7A0 /* CardDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDataStore.swift; sourceTree = "<group>"; };
+		1BF559591D65299800D0460F /* SettingsTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableVC.swift; sourceTree = "<group>"; };
 		1F1398A01CFF675A0053408A /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		BA426CFA56D7C939ABA18634 /* Pods_Guidr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Guidr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAD5F053B0EACE8670793C0E /* Pods-Guidr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Guidr.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Guidr/Pods-Guidr.debug.xcconfig"; sourceTree = "<group>"; };
@@ -79,6 +79,50 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1BF5595B1D6529BC00D0460F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1B90B8561D60206200E6438D /* ButtonView.swift */,
+				1F1398A01CFF675A0053408A /* CardView.swift */,
+				1B8D9BB71D629CCC00CE83B1 /* CustomWebView.swift */,
+				1BE9F4461D0A580000E0D7A0 /* DraggableViewBackground.swift */,
+				1BE9F4481D0A5A7400E0D7A0 /* OverlayView.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		1BF5595C1D6529C800D0460F /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				EB036CC71CF6167E000CCB5E /* ViewController.swift */,
+				1B99A0221D54230400045402 /* SplashScreen.swift */,
+				1BF559591D65299800D0460F /* SettingsTableVC.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		1BF5595D1D6529D300D0460F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1B523AE81D624B86003159F9 /* Event.swift */,
+				1BE9F44A1D0A8E9900E0D7A0 /* CardDataStore.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		1BF5595E1D652A4A00D0460F /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				1B90B8541D6006C200E6438D /* ButtonView.xib */,
+				1B5802321D5BA8F100DCAEB6 /* CardView2.xib */,
+				1B8996D41D5A39750021F5ED /* CardView.xib */,
+				EB6C01D81CF62F8000A64A0D /* GGuidr-Bridging-Header.h */,
+				EB3227A81CF8E4B8005FF081 /* Secrets.swift */,
+				1B99A0261D54561600045402 /* CALayer+Pulsar.swift */,
+			);
+			name = "Support Files";
+			sourceTree = "<group>";
+		};
 		2787C769EC5688CF04D1E26E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -121,27 +165,15 @@
 		EB036CC41CF6167E000CCB5E /* Guidr */ = {
 			isa = PBXGroup;
 			children = (
-				EB6C01D81CF62F8000A64A0D /* GGuidr-Bridging-Header.h */,
+				1BF5595E1D652A4A00D0460F /* Support Files */,
+				1BF5595D1D6529D300D0460F /* Models */,
+				1BF5595C1D6529C800D0460F /* Controllers */,
+				1BF5595B1D6529BC00D0460F /* Views */,
 				EB036CC51CF6167E000CCB5E /* AppDelegate.swift */,
-				EB036CC71CF6167E000CCB5E /* ViewController.swift */,
-				1B90B8561D60206200E6438D /* ButtonView.swift */,
-				1B8996D41D5A39750021F5ED /* CardView.xib */,
-				1B90B8541D6006C200E6438D /* ButtonView.xib */,
-				1B5802321D5BA8F100DCAEB6 /* CardView2.xib */,
-				1B99A0221D54230400045402 /* SplashScreen.swift */,
-				1F1398A01CFF675A0053408A /* CardView.swift */,
-				1B8D9BB71D629CCC00CE83B1 /* CustomWebView.swift */,
-				1B523AE81D624B86003159F9 /* Event.swift */,
-				1BE9F4461D0A580000E0D7A0 /* DraggableViewBackground.swift */,
-				1BE9F44A1D0A8E9900E0D7A0 /* CardDataStore.swift */,
-				1BE9F4481D0A5A7400E0D7A0 /* OverlayView.swift */,
-				EB3227A81CF8E4B8005FF081 /* Secrets.swift */,
-				1B99A0261D54561600045402 /* CALayer+Pulsar.swift */,
 				EB036CC91CF6167E000CCB5E /* Main.storyboard */,
 				EB036CCC1CF6167E000CCB5E /* Assets.xcassets */,
 				EB036CCE1CF6167E000CCB5E /* LaunchScreen.storyboard */,
 				EB036CD11CF6167E000CCB5E /* Info.plist */,
-				1B8D9BB91D62BEF600CE83B1 /* SettingsVC.swift */,
 			);
 			path = Guidr;
 			sourceTree = "<group>";
@@ -272,7 +304,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1B8D9BBA1D62BEF600CE83B1 /* SettingsVC.swift in Sources */,
 				1B99A0231D54230500045402 /* SplashScreen.swift in Sources */,
 				1B523AE91D624B86003159F9 /* Event.swift in Sources */,
 				EB036CC81CF6167E000CCB5E /* ViewController.swift in Sources */,
@@ -284,6 +315,7 @@
 				EB036CC61CF6167E000CCB5E /* AppDelegate.swift in Sources */,
 				1B8D9BB81D629CCC00CE83B1 /* CustomWebView.swift in Sources */,
 				1BE9F4471D0A580000E0D7A0 /* DraggableViewBackground.swift in Sources */,
+				1BF5595A1D65299800D0460F /* SettingsTableVC.swift in Sources */,
 				1BE9F44B1D0A8E9900E0D7A0 /* CardDataStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

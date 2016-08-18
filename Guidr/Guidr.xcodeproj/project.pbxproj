@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B435AD21D66631000F3AEE5 /* SettingsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B435AD11D66631000F3AEE5 /* SettingsCell.xib */; };
+		1B435AD41D6663D300F3AEE5 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B435AD31D6663D300F3AEE5 /* SettingsTableViewCell.swift */; };
 		1B523AE91D624B86003159F9 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B523AE81D624B86003159F9 /* Event.swift */; };
 		1B5802331D5BA8F100DCAEB6 /* CardView2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B5802321D5BA8F100DCAEB6 /* CardView2.xib */; };
 		1B8996D51D5A39750021F5ED /* CardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B8996D41D5A39750021F5ED /* CardView.xib */; };
@@ -33,6 +35,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1B435AD11D66631000F3AEE5 /* SettingsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsCell.xib; sourceTree = "<group>"; };
+		1B435AD31D6663D300F3AEE5 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		1B523AE81D624B86003159F9 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		1B5802321D5BA8F100DCAEB6 /* CardView2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardView2.xib; sourceTree = "<group>"; };
 		1B8996D41D5A39750021F5ED /* CardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardView.xib; sourceTree = "<group>"; };
@@ -106,6 +110,7 @@
 			children = (
 				1B523AE81D624B86003159F9 /* Event.swift */,
 				1BE9F44A1D0A8E9900E0D7A0 /* CardDataStore.swift */,
+				1B435AD31D6663D300F3AEE5 /* SettingsTableViewCell.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -116,6 +121,7 @@
 				1B90B8541D6006C200E6438D /* ButtonView.xib */,
 				1B5802321D5BA8F100DCAEB6 /* CardView2.xib */,
 				1B8996D41D5A39750021F5ED /* CardView.xib */,
+				1B435AD11D66631000F3AEE5 /* SettingsCell.xib */,
 				EB6C01D81CF62F8000A64A0D /* GGuidr-Bridging-Header.h */,
 				EB3227A81CF8E4B8005FF081 /* Secrets.swift */,
 				1B99A0261D54561600045402 /* CALayer+Pulsar.swift */,
@@ -241,6 +247,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB036CD01CF6167E000CCB5E /* LaunchScreen.storyboard in Resources */,
+				1B435AD21D66631000F3AEE5 /* SettingsCell.xib in Resources */,
 				EB036CCD1CF6167E000CCB5E /* Assets.xcassets in Resources */,
 				1B90B8551D6006C200E6438D /* ButtonView.xib in Resources */,
 				1B8996D51D5A39750021F5ED /* CardView.xib in Resources */,
@@ -311,6 +318,7 @@
 				1B99A0271D54561600045402 /* CALayer+Pulsar.swift in Sources */,
 				EB3227A91CF8E4B8005FF081 /* Secrets.swift in Sources */,
 				1F1398A11CFF675A0053408A /* CardView.swift in Sources */,
+				1B435AD41D6663D300F3AEE5 /* SettingsTableViewCell.swift in Sources */,
 				1BE9F4491D0A5A7400E0D7A0 /* OverlayView.swift in Sources */,
 				EB036CC61CF6167E000CCB5E /* AppDelegate.swift in Sources */,
 				1B8D9BB81D629CCC00CE83B1 /* CustomWebView.swift in Sources */,

@@ -156,10 +156,8 @@ class ViewController: UIViewController, CalendarDelegate, SplashDelegate {
     
             view.addSubview(draggableBackground)
             // Position constraints
-            let navBar = self.navigationController?.navigationBar
-            
             draggableBackground.translatesAutoresizingMaskIntoConstraints = false
-            draggableBackground.topAnchor.constraintEqualToAnchor(navBar?.bottomAnchor).active = true
+            draggableBackground.topAnchor.constraintEqualToAnchor(view.topAnchor).active = true
             draggableBackground.bottomAnchor.constraintEqualToAnchor(view.bottomAnchor).active = true
             draggableBackground.leftAnchor.constraintEqualToAnchor(view.leftAnchor).active = true
             draggableBackground.rightAnchor.constraintEqualToAnchor(view.rightAnchor).active = true
@@ -305,8 +303,9 @@ class ViewController: UIViewController, CalendarDelegate, SplashDelegate {
     
     func settingsTapped() {
         print("settings tapped!!!!!")
-//        presentViewController(SettingsVC(), animated: true, completion: nil)
-//        self.navigationController!.pushViewController(SettingsVC(), animated: true)
+//        presentViewController(SettingsTableVC(), animated: true, completion: nil)
+        self.navigationController!.pushViewController(SettingsTableVC(), animated: true)
+//        self.navigationController?.showViewController(SettingsTableVC(), sender: self)
     }
     
 }

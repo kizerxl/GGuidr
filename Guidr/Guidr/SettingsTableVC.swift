@@ -17,9 +17,11 @@ class SettingsTableVC: UITableViewController {
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+//         self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        self.view.backgroundColor = UIColor.redColor()
+        title = "Settings"
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -37,15 +39,17 @@ class SettingsTableVC: UITableViewController {
         return 0
     }
 
-    /*
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-
-        // Configure the cell...
-
-        return cell
+    override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+        dismissViewControllerAnimated(true, completion: nil)
     }
-    */
+//
+//    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+//        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
+//
+//        // Configure the cell...
+//
+//        return cell
+//    }
 
     /*
     // Override to support conditional editing of the table view.

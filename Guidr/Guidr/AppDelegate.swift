@@ -27,8 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //creating an instance of UINavigationController & setting the rootViewController
         window?.rootViewController = navigationController
         //setting the initial VieController as UINavigationController
-        
         window?.makeKeyAndVisible()
+    
         return true
     }
 

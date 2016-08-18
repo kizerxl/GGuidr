@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ButtonView" customModule="Guidr" customModuleProvider="target">
+            <connections>
+                <outlet property="checkButton" destination="GjO-F7-cW0" id="RZO-Kx-xRd"/>
+                <outlet property="xButton" destination="XyJ-yr-h01" id="pXZ-H8-1I7"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="299" height="100"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kgv-6t-LfR">
+                    <rect key="frame" x="0.0" y="0.0" width="299" height="100"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="MEi-yY-V5F">
+                            <rect key="frame" x="2" y="2" width="295" height="96"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XyJ-yr-h01">
+                                    <rect key="frame" x="0.0" y="0.0" width="147" height="96"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <state key="normal" image="xButtonSign"/>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GjO-F7-cW0">
+                                    <rect key="frame" x="149" y="0.0" width="146" height="96"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <size key="titleShadowOffset" width="2.2250738585072014e-308" height="0.0"/>
+                                    <state key="normal" image="checkButtonSign"/>
+                                    <state key="highlighted" image="checkButtonSign"/>
+                                </button>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="MEi-yY-V5F" secondAttribute="bottom" constant="2" id="8KV-2u-BrP"/>
+                        <constraint firstItem="MEi-yY-V5F" firstAttribute="top" secondItem="kgv-6t-LfR" secondAttribute="top" constant="2" id="RJ3-l5-CkR"/>
+                        <constraint firstItem="MEi-yY-V5F" firstAttribute="leading" secondItem="kgv-6t-LfR" secondAttribute="leading" constant="2" id="Rdq-gQ-jfx"/>
+                        <constraint firstAttribute="trailing" secondItem="MEi-yY-V5F" secondAttribute="trailing" constant="2" id="pAZ-Am-mPS"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="kgv-6t-LfR" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Bbz-uM-Crn"/>
+                <constraint firstAttribute="trailing" secondItem="kgv-6t-LfR" secondAttribute="trailing" id="FXu-JV-qqx"/>
+                <constraint firstAttribute="bottom" secondItem="kgv-6t-LfR" secondAttribute="bottom" id="N3Z-v3-IND"/>
+                <constraint firstItem="kgv-6t-LfR" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="RiU-ho-Wn5"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="244.5" y="225"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="checkButtonSign" width="27" height="27"/>
+        <image name="xButtonSign" width="27" height="27"/>
+    </resources>
+</document>

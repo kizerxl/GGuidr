@@ -13,13 +13,47 @@ protocol DraggableViewDelegate {
     func cardSwipedRight(card: CardView) -> Void
 }
 
-class CardView: UIView {
+class CardView: UIView, UIWebViewDelegate {
+    @IBOutlet weak var eventTitle: UILabel!
+    @IBOutlet weak var eventAddress: UILabel!
+    @IBOutlet weak var eventDesc: UILabel!
+    @IBOutlet weak var eventPrice: UILabel!
+    @IBOutlet weak var eventDate: UILabel!
+    @IBOutlet weak var eventTime: UILabel!
     
     var title: String
     var date: NSDate
     var location: String
     var eventDescription: String
     var originalPoint: CGPoint
+    var customCardView: UIView!
+    var urlString: String!
+    
+    @IBAction func moreInfoTapped(sender: AnyObject) {
+        //open up the webview here 
+        let customWV = CustomWebView()
+        customWV.alpha = 0
+        addSubview(customWV)
+        customWV.transform = CGAffineTransformMakeScale(0.1, 0.1)
+        UIView.animateWithDuration(
+            0.4,
+            delay: 0,
+            options: .BeginFromCurrentState,
+            animations: { () -> Void in
+                customWV.translatesAutoresizingMaskIntoConstraints = false
+                customWV.topAnchor.constraintEqualToAnchor(self.topAnchor).active = true
+                customWV.bottomAnchor.constraintEqualToAnchor(self.bottomAnchor).active = true
+                customWV.rightAnchor.constraintEqualToAnchor(self.rightAnchor).active = true
+                customWV.leftAnchor.constraintEqualToAnchor(self.leftAnchor).active = true
+                customWV.webView.loadRequest(NSURLRequest(URL: NSURL(string: self.urlString)!))
+                customWV.transform = CGAffineTransformMakeScale(1, 1)
+                customWV.alpha = 1
+        }) { (completed:Bool) -> Void in
+            // or, to reset:
+            // self.view.transform = CGAffineTransformIdentity
+            print("Animation is done son!")
+        }
+    }
     
     //for tinder
     let ACTION_MARGIN: Float = 120      //%%% distance from center where the action applies. Higher = swipe further in order for the action to be called
@@ -50,9 +84,9 @@ class CardView: UIView {
         self.backgroundColor = UIColor.init(red: 189/255, green: 195/255, blue: 199/255, alpha: 1)
         self.panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(CardView.beingDragged(_:)))
         self.addGestureRecognizer(panGestureRecognizer)
-        overlayView = OverlayView(frame: CGRectMake(self.frame.size.width/2-100, 0, 100, 100))
-        overlayView.alpha = 0
-        self.addSubview(overlayView)
+//        overlayView = OverlayView(frame: CGRectMake(self.frame.size.width/2-100, 0, 100, 100))
+//        overlayView.alpha = 0
+//        self.addSubview(overlayView)
 
         
     }
@@ -82,7 +116,53 @@ class CardView: UIView {
         self.eventDescription = eventDescription
 
         
-        setup()
+//        setup() < --- for running the old test card
+        addCardView()
+    }
+    
+    // This uses an event object as an array
+    convenience init(event: [String]) {
+        self.init(frame: CGRectZero)
+        
+        addCardView()
+        overlayView = OverlayView(frame: CGRectZero)
+        overlayView.alpha = 0
+        self.addSubview(overlayView)
+        
+        //add constriants to the overlay 
+        overlayView.translatesAutoresizingMaskIntoConstraints = false
+        overlayView.leftAnchor.constraintEqualToAnchor(self.leftAnchor).active = true
+        overlayView.rightAnchor.constraintEqualToAnchor(self.rightAnchor).active = true
+        overlayView.topAnchor.constraintEqualToAnchor(self.topAnchor).active = true
+        overlayView.bottomAnchor.constraintEqualToAnchor(self.bottomAnchor).active = true
+        
+        /*
+         So the eventCount can be either 6 or 7 
+         if it's 6 that means that there is no description and the urlString is at idx 3
+         else if it's 7 there is a description and the urlString is at idx 4
+        */
+        
+        var eventCopy = event
+        let eventCount = eventCopy.count
+        var eventDetails = [eventDate, eventTitle, eventAddress, eventDesc, eventPrice, eventTime]
+        
+        // There is no description
+        if eventCount == 6 {
+            urlString = eventCopy.removeAtIndex(3)
+            eventDetails[3].text = "No Description"
+            eventDetails.removeAtIndex(3)
+        } else {
+            urlString = eventCopy.removeAtIndex(4)
+        }
+        
+        for i in 0..<eventDetails.count {
+            eventDetails[i].text = eventCopy[i]
+        }
+        
+        // get date
+//        let dateFormatter = NSDateFormatter()
+//        dateFormatter.dateFormat = "EEEE, MMM d" /* find out and place date format from http://userguide.icu-project.org/formatparse/datetime */
+//        var date = dateFormatter.dateFromString(dateString)
         
     }
     
@@ -176,7 +256,7 @@ class CardView: UIView {
         layoutIfNeeded()
         
         
-        overlayView = OverlayView(frame: CGRectMake(self.frame.size.width/2-100, 0, 100, 100))
+        overlayView = OverlayView(frame: CGRectMake(self.frame.size.width/2-200, 0, 100, 100))
         overlayView.alpha = 0
         self.addSubview(overlayView)
         
@@ -237,6 +317,7 @@ class CardView: UIView {
                 self.center = self.originPoint
                 self.transform = CGAffineTransformMakeRotation(0)
                 self.overlayView.alpha = 0
+                self.layoutIfNeeded()
             })
         }
     }
@@ -247,11 +328,9 @@ class CardView: UIView {
         }
         
         if direction == "left" {
-            print("------card swipped left being called!!!!!!!------")
             delegate.cardSwipedLeft(self)
         }
         else {
-            print("------card swipped right being called!!!!!!!------")
             delegate.cardSwipedRight(self)
         }
     }
@@ -295,5 +374,64 @@ class CardView: UIView {
         }
         delegate.cardSwipedLeft(self)
     }
+    
+    func addCardView() {
+        let bundle = NSBundle(forClass: self.dynamicType)
+        let nib = UINib(nibName: "CardView", bundle: bundle)
+        customCardView = nib.instantiateWithOwner(self, options: nil)[0] as! UIView
+        
+        addSubview(customCardView)
+        
+        //put constraints on the newly added view
+        customCardView.translatesAutoresizingMaskIntoConstraints = false
+        customCardView.leftAnchor.constraintEqualToAnchor(self.leftAnchor).active = true
+        customCardView.rightAnchor.constraintEqualToAnchor(self.rightAnchor).active = true
+        customCardView.topAnchor.constraintEqualToAnchor(self.topAnchor).active = true
+        customCardView.bottomAnchor.constraintEqualToAnchor(self.bottomAnchor).active = true
+        
+    }
 
+
+//    
+//    func formatDate(dateString: String) -> NSDate {
+//        
+//        let dateFormatter = NSDateFormatter()
+//        dateFormatter.dateFormat = "EEEE, MMM d" /* find out and place date format from http://userguide.icu-project.org/formatparse/datetime */
+//        var date = dateFormatter.dateFromString(dateString)
+//        
+//        //correct date with correct year
+//        date = correctYearForDate(date!)
+//        
+//        return date!
+//    }
+//    
+//    func correctYearForDate(eventDate: NSDate) -> NSDate {
+//        var correctYear = currentYear
+//        var newDate: NSDate!
+//        
+//        let components = calendarOfCurrentYear.components([.Month, .Day, .Year], fromDate: eventDate)
+//        let eventMonth = components.month
+//        
+//        if eventMonth < currentMonth {
+//            correctYear! += 1 //this is one year up
+//        }
+//        
+//        components.setValue(correctYear, forComponent: .Year)
+//        newDate = calendarOfCurrentYear.dateFromComponents(components)
+//        
+//        
+//        return newDate
+//    }
+//
+//    func setupDateChecking() {
+//        currentDate = NSDate()
+//        calendarOfCurrentYear = NSCalendar.currentCalendar()
+//        
+//        let components = calendarOfCurrentYear.components([.Month, .Year], fromDate: currentDate)
+//        
+//        currentMonth = components.month
+//        currentYear = components.year
+//
+    
+    
 }

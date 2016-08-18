@@ -28,6 +28,7 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
     var checkButton: UIButton!
     var xButton: UIButton!
     var calDelegate: CalendarDelegate!
+    var buttonView: ButtonView!
     
     
     var calendarOfCurrentYear: NSCalendar!
@@ -41,7 +42,6 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        print("start loading this bitch up")
 
         super.layoutSubviews()
         self.setupView()
@@ -49,80 +49,69 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         allCards = []
         loadedCards = []
         cardContentArray = []
-        print("MIDWAY loading this bitch up")
         cardsLoadedIndex = 0
-//        self.loadCards()
-        print("end loading this bitch up")
+        self.loadCards()
 
     }
     
     convenience init(){
- 
         self.init(frame: CGRect.zero)
-        
-        let screenHeight = UIScreen.mainScreen().bounds.height
-        let screenWidth = UIScreen.mainScreen().bounds.width
-        self.heightAnchor.constraintEqualToConstant(screenHeight).active = true
-        self.widthAnchor.constraintEqualToConstant(screenWidth).active = true
-
     }
-        
-        
-        
-    
+
     func setupView() -> Void {
-//        self.backgroundColor = UIColor.whiteColor()
-        self.backgroundColor = UIColor.whiteColor()
-
+        
+//        xButton = UIButton()
+//        checkButton = UIButton()
 //
-//        xButton = UIButton(frame: CGRectMake((self.frame.size.width - CARD_WIDTH)/2 + 35, self.frame.size.height/2 + CARD_HEIGHT/2 + 10, 100, 75))
-//        xButton.setImage(UIImage(named: "xMark"), forState: UIControlState.Normal)
-//        xButton.addTarget(self, action: "swipeLeft", forControlEvents: UIControlEvents.TouchUpInside)
+//        checkButton.setImage(UIImage(named: "newCheck"), forState: UIControlState.Normal)
+//        checkButton.addTarget(self, action: #selector(DraggableViewBackground.swipeRight), forControlEvents: UIControlEvents.TouchUpInside)
 //        
-//        checkButton = UIButton(frame: CGRectMake(self.frame.size.width/2 + CARD_WIDTH/2 - 85, self.frame.size.height/2 + CARD_HEIGHT/2 + 10, 90, 75))
-        
-        xButton = UIButton()
-        checkButton = UIButton()
-
-        checkButton.setImage(UIImage(named: "newCheck"), forState: UIControlState.Normal)
-        checkButton.addTarget(self, action: #selector(DraggableViewBackground.swipeRight), forControlEvents: UIControlEvents.TouchUpInside)
-        
-        xButton.setImage(UIImage(named: "newX"), forState: UIControlState.Normal)
-        xButton.addTarget(self, action: #selector(DraggableViewBackground.swipeLeft), forControlEvents: UIControlEvents.TouchUpInside)
-        
-        self.addSubview(xButton)
-        self.addSubview(checkButton)
-        
-        // check button constraints
-        checkButton.translatesAutoresizingMaskIntoConstraints = false
-//        checkButton.centerXAnchor.constraintEqualToAnchor(self.centerXAnchor, constant: checkButton.bounds.width).active = true
-        checkButton.bottomAnchor.constraintEqualToAnchor(self.bottomAnchor, constant: -100).active = true
-        checkButton.widthAnchor.constraintEqualToConstant(100).active = true
-        checkButton.heightAnchor.constraintEqualToConstant(86).active = true
-        checkButton.rightAnchor.constraintEqualToAnchor(self.rightAnchor, constant: -100).active = true
-
-        // x button constraints
-        xButton.translatesAutoresizingMaskIntoConstraints = false
-//        xButton.centerXAnchor.constraintEqualToAnchor(self.centerXAnchor, constant: -self.checkButton.bounds.width).active = true
-        xButton.bottomAnchor.constraintEqualToAnchor(self.bottomAnchor, constant: -100).active = true
-        xButton.widthAnchor.constraintEqualToConstant(100).active = true
-        xButton.heightAnchor.constraintEqualToConstant(86).active = true
-        xButton.leftAnchor.constraintEqualToAnchor(self.leftAnchor, constant: 100).active = true
+//        xButton.setImage(UIImage(named: "newX"), forState: UIControlState.Normal)
+//        xButton.addTarget(self, action: #selector(DraggableViewBackground.swipeLeft), forControlEvents: UIControlEvents.TouchUpInside)
+//        
+//        self.addSubview(xButton)
+//        self.addSubview(checkButton)
+//        
+//        // check button constraints
+//        checkButton.translatesAutoresizingMaskIntoConstraints = false
+////        checkButton.centerXAnchor.constraintEqualToAnchor(self.centerXAnchor, constant: checkButton.bounds.width).active = true
+//        checkButton.bottomAnchor.constraintEqualToAnchor(self.bottomAnchor, constant: -100).active = true
+//        checkButton.widthAnchor.constraintEqualToConstant(100).active = true
+//        checkButton.heightAnchor.constraintEqualToConstant(86).active = true
+//        checkButton.rightAnchor.constraintEqualToAnchor(self.rightAnchor, constant: -100).active = true
+//
+//        // x button constraints
+//        xButton.translatesAutoresizingMaskIntoConstraints = false
+////        xButton.centerXAnchor.constraintEqualToAnchor(self.centerXAnchor, constant: -self.checkButton.bounds.width).active = true
+//        xButton.bottomAnchor.constraintEqualToAnchor(self.bottomAnchor, constant: -100).active = true
+//        xButton.widthAnchor.constraintEqualToConstant(100).active = true
+//        xButton.heightAnchor.constraintEqualToConstant(86).active = true
+//        xButton.leftAnchor.constraintEqualToAnchor(self.leftAnchor, constant: 100).active = true
 
 
-        layoutIfNeeded()
-
+//        layoutIfNeeded()
+        buttonView = ButtonView()
+        addSubview(buttonView)
+        addButtonViewConstraints()
+        buttonView.checkButton.addTarget(self, action: #selector(DraggableViewBackground.swipeRight), forControlEvents: UIControlEvents.TouchUpInside)
+        buttonView.xButton.addTarget(self, action: #selector(DraggableViewBackground.swipeLeft), forControlEvents: UIControlEvents.TouchUpInside)
     }
     
     func createDraggableViewWithDataAtIndex(index: NSInteger) -> CardView {
         
+        // NEW APPROACH
+        // 1) WE initialize an Event object.
+                // (Write initializer that sets all the properties, and code here calling it)
+        // 2) We initialize a cardview passing in the event object:     CardView(event: event1)
+        // 3) In CardView's init, it uses the properties of the Event object to set up its views/labels
+        
         let currentCard = cardContentArray[index]
         
-        let draggableView = CardView(title: currentCard.count > 1 ? currentCard[1] : "(no title)",
-                                         date: formatDate(currentCard[0]),
-                                         location: currentCard.count > 2 ? currentCard[2] : "(no location given)",
-                                         eventDescription: currentCard.count > 3 ? currentCard[3] : "(no description)")
-        
+//        let draggableView = CardView(title: currentCard.count > 1 ? currentCard[1] : "(no title)",
+//                                         date: formatDate(currentCard[0]),
+//                                         location: currentCard.count > 2 ? currentCard[2] : "(no location given)",
+//                                         eventDescription: currentCard.count > 3 ? currentCard[3] : "(no description)")
+        let draggableView = CardView(event: currentCard)
         
         
         draggableView.delegate = self
@@ -130,73 +119,54 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
     }
     
     func loadCards() -> Void {
-        print("loading cards......")
-        print("size of cardContentArray is \(cardContentArray.count)")
         
         if cardContentArray.count > 0 {
-            print("starting the official loading of the cards mein")
 
             let numLoadedCardsCap = cardContentArray.count > MAX_BUFFER_SIZE ? MAX_BUFFER_SIZE : cardContentArray.count
             for i in 0 ..< cardContentArray.count {
                 let newCard: CardView = self.createDraggableViewWithDataAtIndex(i)
                 allCards.append(newCard)
-                print("All cards count: \(allCards.count)")
                 if i < numLoadedCardsCap {
                     loadedCards.append(newCard)
-                    print("Loaded cards count: \(loadedCards.count)")
 
                 }
             }
             
             for i in 0 ..< loadedCards.count {
-                print("We are in the ACTUAL loading of the cards!!!!!!")
                 
                 let card1 = loadedCards[i]
 
                 // Put first card above the view; each subsequent card goes below the preceding one
                 if i > 0 {
-                    print("added a card above the view!")
                     self.insertSubview(card1, belowSubview: loadedCards[i - 1])
-                    let card2 = loadedCards[i - 1]
-                    card2.translatesAutoresizingMaskIntoConstraints = false
-                    card2.centerXAnchor.constraintEqualToAnchor(self.superview!.centerXAnchor).active = true
-                    card2.centerYAnchor.constraintEqualToAnchor(self.superview!.centerYAnchor).active = true
                 } else {
                     self.addSubview(card1)
                 }
                 
-                card1.translatesAutoresizingMaskIntoConstraints = false
-                card1.centerXAnchor.constraintEqualToAnchor(self.superview!.centerXAnchor).active = true
-                card1.centerYAnchor.constraintEqualToAnchor(self.superview!.centerYAnchor).active = true
+                addCorrectConstraints(card1)
+                
                 layoutIfNeeded()
-                print("card added. Frame: \(card1.frame)")
                 
             }
-            print("Cards loaded: \(cardsLoadedIndex)")
             cardsLoadedIndex! += 1
         }
     }
     
     func cardSwiped(card: CardView) -> Void {
 
-        print("just swiped!!!")
 
         loadedCards.removeAtIndex(0)
         
         if cardsLoadedIndex < allCards.count {
-            print("haven't run out of cards yet")
             loadedCards.append(allCards[cardsLoadedIndex])
             cardsLoadedIndex = cardsLoadedIndex + 1
             let card1 = loadedCards[MAX_BUFFER_SIZE - 1]
             self.insertSubview(card1, aboveSubview: self)
             self.insertSubview(card1, belowSubview: loadedCards[MAX_BUFFER_SIZE - 2])
-            card1.translatesAutoresizingMaskIntoConstraints = false
-            card1.centerXAnchor.constraintEqualToAnchor(self.superview!.centerXAnchor).active = true
-            card1.centerYAnchor.constraintEqualToAnchor(self.superview!.centerYAnchor).active = true
+            addCorrectConstraints(card1)
+            
             layoutIfNeeded()
 
-        } else {
-            print("ran out of cards")
         }
     
     }
@@ -222,6 +192,7 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
             dragView.overlayView.alpha = 1
         })
         dragView.rightClickAction()
+        print("Swipped right!!!!!!")
     }
     
     func swipeLeft() -> Void {
@@ -238,9 +209,7 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
     }
     
     internal func addCardsContent(cardsArray: [[String]]) {
-        print("Getting into the draggable background array add!")
         self.cardContentArray = cardsArray
-        print("This is what the cards array looks like: \(self.cardContentArray)")
         self.loadCards()
     }
     
@@ -285,5 +254,21 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         return newDate
     }
     
-
+    //helper method for setting constraints on the passed in card view
+    func addCorrectConstraints(card: CardView) {
+        card.translatesAutoresizingMaskIntoConstraints = false
+        card.leftAnchor.constraintEqualToAnchor(self.leftAnchor, constant: 10).active = true
+        card.rightAnchor.constraintEqualToAnchor(self.rightAnchor, constant: -10).active = true
+        card.topAnchor.constraintEqualToAnchor(self.topAnchor, constant: 5).active = true
+        card.heightAnchor.constraintEqualToAnchor(self.heightAnchor, constant: -150).active = true
+    }
+    
+    //helper method for setting constraints on the buttonSet (aka ButtonView)
+    func addButtonViewConstraints() {
+        buttonView.translatesAutoresizingMaskIntoConstraints = false
+        buttonView.leftAnchor.constraintEqualToAnchor(self.leftAnchor).active = true
+        buttonView.rightAnchor.constraintEqualToAnchor(self.rightAnchor).active = true
+        buttonView.bottomAnchor.constraintEqualToAnchor(self.bottomAnchor).active = true
+        buttonView.heightAnchor.constraintEqualToConstant(100).active = true
+    }
 }

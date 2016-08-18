@@ -20,6 +20,8 @@ class SettingsTableVC: UITableViewController {
 //         self.navigationItem.rightBarButtonItem = self.editButtonItem()
         self.view.backgroundColor = UIColor.redColor()
         title = "Settings"
+        self.navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
     }
     
     override func didReceiveMemoryWarning() {

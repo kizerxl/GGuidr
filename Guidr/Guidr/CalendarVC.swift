@@ -13,14 +13,40 @@ class CalendarVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
         print("Inside the calendar VC")
-        self.view.backgroundColor = UIColor.blueColor()
+        let items = ["Going", "Not Going", "Conflicts"]
+
+        view.backgroundColor = UIColor(red: 134/255, green: 36/255, blue: 27/255, alpha: 1)
+        title = "Calendar"
+        
+        let customSC = UISegmentedControl(items: items)
+        customSC.selectedSegmentIndex = 0
+        
+        let frame = UIScreen.mainScreen().bounds
+        customSC.frame = CGRectMake(frame.minX + 10, frame.minY + 50,
+                                    frame.width - 20, frame.height*0.1)
+        customSC.addTarget(self, action: #selector(CalendarVC.testing(_:)), forControlEvents: .ValueChanged)
+        
+        view.addSubview(customSC)
+
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func testing(sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            view.backgroundColor = UIColor.blueColor()
+        case 1:
+            view.backgroundColor = UIColor.redColor()
+        case 2:
+            view.backgroundColor = UIColor.yellowColor()
+        default: break
+        
+        }
     }
     
 

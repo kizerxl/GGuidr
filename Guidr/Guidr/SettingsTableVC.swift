@@ -9,29 +9,15 @@
 import UIKit
 
 class SettingsTableVC: UITableViewController {
-    
-//    About
-//    - line with Name of App (bold) + version number on the right hand side
-//    - acknowledgements link -> A generic acknowledgements page
-//    - credits -> a view containing a list of all people who get credit for the app and involvement
-//    - Replay tutorial -> allows you to replay the same tutorial page on startup
-//    
-//    Feedback
-//    - "Thoughts? Comments? Issues? Let us know" -> this will open up to a link where you can send email
-    
     let headers = ["About","Feedback"]
     let sectonOneRowTitles = ["Guidr - Version 1", "Acknowledgements", "Credits", "Replay Tutorial"]
     let sectonTwoRowTitles = ["Drop us a line!"]
     
-
-
     override func viewDidLoad() {
         super.viewDidLoad()
         //235 212 203
         self.view.backgroundColor = UIColor(red: 235/255, green: 212/255, blue: 203/255, alpha: 1)
         title = "Settings"
-        self.navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
-        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.tableView.registerNib(UINib(nibName: "SettingsCell", bundle: nil), forCellReuseIdentifier: "settingsCell")
     
     }
@@ -69,6 +55,7 @@ class SettingsTableVC: UITableViewController {
         return section == 0 ? 4 : 1
     }
 
+    //will put this in once other screens are done (ie tutorial, etc)
 //    override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
 //
 //    }

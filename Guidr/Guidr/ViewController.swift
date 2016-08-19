@@ -279,7 +279,6 @@ class ViewController: UIViewController, CalendarDelegate, SplashDelegate {
         leftButton.imageView!.contentMode = .ScaleAspectFit;
         leftButton.contentHorizontalAlignment = .Left
         let leftBarButton = UIBarButtonItem(customView: leftButton)
-        self.navigationItem.leftBarButtonItem  = leftBarButton
         leftButton.addTarget(self, action: #selector(settingsTapped), forControlEvents: UIControlEvents.TouchUpInside)
         
         //add right button 
@@ -289,10 +288,15 @@ class ViewController: UIViewController, CalendarDelegate, SplashDelegate {
         rightButton.imageView!.contentMode = .ScaleAspectFit;
         rightButton.contentHorizontalAlignment = .Right
         let rightBarButton = UIBarButtonItem(customView: rightButton)
+        rightButton.addTarget(self, action: #selector(calendarTapped), forControlEvents: UIControlEvents.TouchUpInside)
         
         //assign left and right buttons 
         self.navigationItem.leftBarButtonItem  = leftBarButton
         self.navigationItem.rightBarButtonItem = rightBarButton
+        
+        //set the text properties of the text on the bar throughout 
+        self.navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
 
     }
 
@@ -303,9 +307,13 @@ class ViewController: UIViewController, CalendarDelegate, SplashDelegate {
     
     func settingsTapped() {
         print("settings tapped!!!!!")
-//        presentViewController(SettingsTableVC(), animated: true, completion: nil)
         self.navigationController!.pushViewController(SettingsTableVC(), animated: true)
-//        self.navigationController?.showViewController(SettingsTableVC(), sender: self)
+    }
+    
+    func calendarTapped() {
+        print("calendar tapped!!!!!")
+        self.navigationController!.pushViewController(CalendarVC(), animated: true)
+
     }
     
 }

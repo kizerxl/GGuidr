@@ -1,11 +1,11 @@
-////
-////  Event.swift
-////  Guidr
-////
-////  Created by Flatiron School on 8/15/16.
-////  Copyright © 2016 roundSteel. All rights reserved.
-////
 //
+//  Event.swift
+//  Guidr
+//
+//  Created by Flatiron School on 8/15/16.
+//  Copyright © 2016 roundSteel. All rights reserved.
+//
+
 //import UIKit
 //
 //class Event: NSObject {
@@ -18,16 +18,16 @@
 //    var date: NSDate
 //    var time: String
 //    
-////    override init() {
-////        
-////    }
-////    
-////    required init() {
-////        
-////    }
-////    
-////    convenience init(title: String, URL: String, ) {
-////        
-////    }
+//    override init() {
+//        
+//    }
+//    
+//    required override init() {
+//        
+//    }
+//    
+//    convenience init(title: String, URL: String, ) {
+//        
+//    }
 //    
 //}

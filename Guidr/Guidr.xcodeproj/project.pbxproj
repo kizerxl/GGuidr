@@ -11,6 +11,7 @@
 		1B435AD41D6663D300F3AEE5 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B435AD31D6663D300F3AEE5 /* SettingsTableViewCell.swift */; };
 		1B523AE91D624B86003159F9 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B523AE81D624B86003159F9 /* Event.swift */; };
 		1B5802331D5BA8F100DCAEB6 /* CardView2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B5802321D5BA8F100DCAEB6 /* CardView2.xib */; };
+		1B5842C21D66973200A07B89 /* CalendarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5842C11D66973200A07B89 /* CalendarVC.swift */; };
 		1B8996D51D5A39750021F5ED /* CardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B8996D41D5A39750021F5ED /* CardView.xib */; };
 		1B8D9BB81D629CCC00CE83B1 /* CustomWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8D9BB71D629CCC00CE83B1 /* CustomWebView.swift */; };
 		1B90B8551D6006C200E6438D /* ButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B90B8541D6006C200E6438D /* ButtonView.xib */; };
@@ -39,6 +40,7 @@
 		1B435AD31D6663D300F3AEE5 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		1B523AE81D624B86003159F9 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		1B5802321D5BA8F100DCAEB6 /* CardView2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardView2.xib; sourceTree = "<group>"; };
+		1B5842C11D66973200A07B89 /* CalendarVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarVC.swift; sourceTree = "<group>"; };
 		1B8996D41D5A39750021F5ED /* CardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardView.xib; sourceTree = "<group>"; };
 		1B8D9BB71D629CCC00CE83B1 /* CustomWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomWebView.swift; sourceTree = "<group>"; };
 		1B90B8541D6006C200E6438D /* ButtonView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonView.xib; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 				EB036CC71CF6167E000CCB5E /* ViewController.swift */,
 				1B99A0221D54230400045402 /* SplashScreen.swift */,
 				1BF559591D65299800D0460F /* SettingsTableVC.swift */,
+				1B5842C11D66973200A07B89 /* CalendarVC.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -316,6 +319,7 @@
 				EB036CC81CF6167E000CCB5E /* ViewController.swift in Sources */,
 				1B90B8571D60206200E6438D /* ButtonView.swift in Sources */,
 				1B99A0271D54561600045402 /* CALayer+Pulsar.swift in Sources */,
+				1B5842C21D66973200A07B89 /* CalendarVC.swift in Sources */,
 				EB3227A91CF8E4B8005FF081 /* Secrets.swift in Sources */,
 				1F1398A11CFF675A0053408A /* CardView.swift in Sources */,
 				1B435AD41D6663D300F3AEE5 /* SettingsTableViewCell.swift in Sources */,

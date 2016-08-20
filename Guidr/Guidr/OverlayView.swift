@@ -13,6 +13,12 @@ enum GGOverlayViewMode {
     case GGOverlayViewModeLeft
     case GGOverlayViewModeRight
 }
+
+enum OverlayCoordinate {
+    case Left
+    case Right
+}
+
 // let's tweak the colors, size
 class OverlayView: UIView{
     var _mode: GGOverlayViewMode! = GGOverlayViewMode.GGOverlayViewModeLeft
@@ -30,7 +36,7 @@ class OverlayView: UIView{
         self.backgroundColor = UIColor.redColor()
         imageView = UIImageView(image: UIImage(named: "smileNO"))
         imageView.contentMode = .ScaleAspectFit
-        setCoords("left")
+        setCoords(.Left)
         imageView.frame = CGRectMake(xValue, yValue, 300, 300)
         self.addSubview(imageView)
     }
@@ -42,13 +48,13 @@ class OverlayView: UIView{
         _mode = mode
         
         if _mode == GGOverlayViewMode.GGOverlayViewModeLeft {
-            setCoords("left")
+            setCoords(.Left)
             imageView.image = UIImage(named: "smileNO")
             self.backgroundColor = UIColor.redColor() //change overlay bg custom color here
             imageView.frame = CGRectMake(xValue, yValue, 300, 300)
             
         } else {
-            setCoords()
+            setCoords(.Right)
             imageView.image = UIImage(named: "smileYES")
             self.backgroundColor = UIColor.greenColor() //change overlay bg custom color here
             imageView.frame = CGRectMake(xValue, yValue, 300, 300)
@@ -59,17 +65,16 @@ class OverlayView: UIView{
         super.layoutSubviews()
     }
 
-    // I want to refactor this...
-    func setCoords(direction: String = "right") {
-        
-        if direction == "left" {
+    func setCoords(coordinate: OverlayCoordinate) {
+        switch coordinate {
+        case .Left:
             xValue = 0
             yValue = 0
-        }
-        else {
+        case .Right:
             xValue = 0 + imageView.frame.width/4
             yValue = 0
         }
+
     }
     
     

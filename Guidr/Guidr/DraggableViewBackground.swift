@@ -10,10 +10,6 @@ import Foundation
 import UIKit
 import EventKit
 
-//protocol CalendarDelegate {
-//    func addEventToCalendar(card:CardView)
-//}
-
 class DraggableViewBackground: UIView, DraggableViewDelegate {
     var cardContentArray: [[String]]!
     var allCards: [CardView]!
@@ -28,7 +24,6 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
     var messageButton: UIButton!
     var checkButton: UIButton!
     var xButton: UIButton!
-//    var calDelegate: CalendarDelegate!
     var buttonView: ButtonView!
     var calendarOfCurrentYear: NSCalendar!
     var currentDate: NSDate!
@@ -60,37 +55,6 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
     }
 
     func setupView() -> Void {
-        
-//        xButton = UIButton()
-//        checkButton = UIButton()
-//
-//        checkButton.setImage(UIImage(named: "newCheck"), forState: UIControlState.Normal)
-//        checkButton.addTarget(self, action: #selector(DraggableViewBackground.swipeRight), forControlEvents: UIControlEvents.TouchUpInside)
-//        
-//        xButton.setImage(UIImage(named: "newX"), forState: UIControlState.Normal)
-//        xButton.addTarget(self, action: #selector(DraggableViewBackground.swipeLeft), forControlEvents: UIControlEvents.TouchUpInside)
-//        
-//        self.addSubview(xButton)
-//        self.addSubview(checkButton)
-//        
-//        // check button constraints
-//        checkButton.translatesAutoresizingMaskIntoConstraints = false
-////        checkButton.centerXAnchor.constraintEqualToAnchor(self.centerXAnchor, constant: checkButton.bounds.width).active = true
-//        checkButton.bottomAnchor.constraintEqualToAnchor(self.bottomAnchor, constant: -100).active = true
-//        checkButton.widthAnchor.constraintEqualToConstant(100).active = true
-//        checkButton.heightAnchor.constraintEqualToConstant(86).active = true
-//        checkButton.rightAnchor.constraintEqualToAnchor(self.rightAnchor, constant: -100).active = true
-//
-//        // x button constraints
-//        xButton.translatesAutoresizingMaskIntoConstraints = false
-////        xButton.centerXAnchor.constraintEqualToAnchor(self.centerXAnchor, constant: -self.checkButton.bounds.width).active = true
-//        xButton.bottomAnchor.constraintEqualToAnchor(self.bottomAnchor, constant: -100).active = true
-//        xButton.widthAnchor.constraintEqualToConstant(100).active = true
-//        xButton.heightAnchor.constraintEqualToConstant(86).active = true
-//        xButton.leftAnchor.constraintEqualToAnchor(self.leftAnchor, constant: 100).active = true
-
-
-//        layoutIfNeeded()
         buttonView = ButtonView()
         addSubview(buttonView)
         addButtonViewConstraints()
@@ -188,10 +152,7 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         } catch {
             print("\n\nProblem: event couldn't be added to the calendar\n\n")
         }
-        
-        //OLd way of doing things....
-//        calDelegate.addEventToCalendar(card)
-
+    
     }
     
     func swipeRight() -> Void {

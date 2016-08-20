@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import WebKit
 
 class CustomWebView: UIView {
     
-    var webView: UIWebView!
+    weak var webView: WKWebView!
     var removeButton: UIButton!
 
     override init(frame: CGRect) {
@@ -34,7 +35,7 @@ class CustomWebView: UIView {
     }
     
     func initialize() {
-        webView = UIWebView(frame: CGRectZero)
+        webView = WKWebView(frame: CGRectZero)
     }
     
     func addWebViewConstraints() {

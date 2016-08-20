@@ -34,7 +34,7 @@ class CardDataStore: NSObject {
         
         //added this for testing 
         // Please remove or make testing false 
-        let testing = true
+        let testing = false
         
         if testing {
             loadTestData() // for testing
@@ -113,18 +113,6 @@ class CardDataStore: NSObject {
     internal func getEventsContentFromStore() -> [[String]] {
         return self.store
     }
-    
-    //this is to load test data in case the site is down 
-    //as of 8/13/16 this was the case 
-//    GAry JSON sturcture - length is 6 or 7
-//    0 - Date
-//    1 - Name of event
-//    2 - Location/Address
-//    3 - event description
-//    4 - url of event
-//    5 - price of event
-//    6 - time of event 
-
     
     func loadTestData() {
         let event1 = ["8/15/16", "Java Mondays", "Somewhere over the rainbow", "Some really cool event about Java", "http://wwww.google.com", "FREE", "5:00pm"]

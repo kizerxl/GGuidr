@@ -18,6 +18,7 @@
 		1B90B8571D60206200E6438D /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B90B8561D60206200E6438D /* ButtonView.swift */; };
 		1B99A0231D54230500045402 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B99A0221D54230400045402 /* SplashScreen.swift */; };
 		1B99A0271D54561600045402 /* CALayer+Pulsar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B99A0261D54561600045402 /* CALayer+Pulsar.swift */; };
+		1BE51EEF1D68D74300014021 /* CalendarEventDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE51EEE1D68D74300014021 /* CalendarEventDataStore.swift */; };
 		1BE9F4471D0A580000E0D7A0 /* DraggableViewBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE9F4461D0A580000E0D7A0 /* DraggableViewBackground.swift */; };
 		1BE9F4491D0A5A7400E0D7A0 /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE9F4481D0A5A7400E0D7A0 /* OverlayView.swift */; };
 		1BE9F44B1D0A8E9900E0D7A0 /* CardDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE9F44A1D0A8E9900E0D7A0 /* CardDataStore.swift */; };
@@ -48,6 +49,7 @@
 		1B99A0221D54230400045402 /* SplashScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 		1B99A0241D54555900045402 /* Pulsar.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pulsar.framework; path = "../../../../Library/Developer/Xcode/DerivedData/Guidr-diwwzdyjliyegvfevvxzqetxmjva/Build/Products/Debug-iphonesimulator/Pulsar/Pulsar.framework"; sourceTree = "<group>"; };
 		1B99A0261D54561600045402 /* CALayer+Pulsar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CALayer+Pulsar.swift"; sourceTree = "<group>"; };
+		1BE51EEE1D68D74300014021 /* CalendarEventDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarEventDataStore.swift; sourceTree = "<group>"; };
 		1BE9F4461D0A580000E0D7A0 /* DraggableViewBackground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraggableViewBackground.swift; sourceTree = "<group>"; };
 		1BE9F4481D0A5A7400E0D7A0 /* OverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
 		1BE9F44A1D0A8E9900E0D7A0 /* CardDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDataStore.swift; sourceTree = "<group>"; };
@@ -100,7 +102,6 @@
 		1BF5595C1D6529C800D0460F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				EB036CC71CF6167E000CCB5E /* ViewController.swift */,
 				1B99A0221D54230400045402 /* SplashScreen.swift */,
 				1BF559591D65299800D0460F /* SettingsTableVC.swift */,
 				1B5842C11D66973200A07B89 /* CalendarVC.swift */,
@@ -113,6 +114,8 @@
 			children = (
 				1B523AE81D624B86003159F9 /* Event.swift */,
 				1BE9F44A1D0A8E9900E0D7A0 /* CardDataStore.swift */,
+				1BE51EEE1D68D74300014021 /* CalendarEventDataStore.swift */,
+				EB036CC71CF6167E000CCB5E /* ViewController.swift */,
 				1B435AD31D6663D300F3AEE5 /* SettingsTableViewCell.swift */,
 			);
 			name = Models;
@@ -324,6 +327,7 @@
 				1F1398A11CFF675A0053408A /* CardView.swift in Sources */,
 				1B435AD41D6663D300F3AEE5 /* SettingsTableViewCell.swift in Sources */,
 				1BE9F4491D0A5A7400E0D7A0 /* OverlayView.swift in Sources */,
+				1BE51EEF1D68D74300014021 /* CalendarEventDataStore.swift in Sources */,
 				EB036CC61CF6167E000CCB5E /* AppDelegate.swift in Sources */,
 				1B8D9BB81D629CCC00CE83B1 /* CustomWebView.swift in Sources */,
 				1BE9F4471D0A580000E0D7A0 /* DraggableViewBackground.swift in Sources */,
@@ -442,6 +446,8 @@
 			baseConfigurationReference = DAD5F053B0EACE8670793C0E /* Pods-Guidr.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
@@ -450,6 +456,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.roundSteel.Guidr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Guidr/GGuidr-Bridging-Header.h";
 			};
 			name = Debug;
@@ -459,6 +466,8 @@
 			baseConfigurationReference = E115212CECDA0662BD99F273 /* Pods-Guidr.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
@@ -467,6 +476,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.roundSteel.Guidr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Guidr/GGuidr-Bridging-Header.h";
 			};
 			name = Release;

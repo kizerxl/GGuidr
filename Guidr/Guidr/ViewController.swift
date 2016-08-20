@@ -11,7 +11,7 @@ import GTMOAuth2
 import UIKit
 import EventKit
 
-class ViewController: UIViewController, CalendarDelegate, SplashDelegate {
+class ViewController: UIViewController, SplashDelegate {
     
     private let kKeychainItemName = nameInKeychain
     private let kClientID = secretKClientID
@@ -19,9 +19,9 @@ class ViewController: UIViewController, CalendarDelegate, SplashDelegate {
     private var dataStore: CardDataStore!
     private var draggableBackground: DraggableViewBackground!
     private var eventsContentArray: [[String]] = []
-    private var eventStore: EKEventStore!
-    private var calendar: EKCalendar!
-    private var appName = "Guidr"
+//    private var eventStore: EKEventStore!
+//    private var calendar: EKCalendar!
+//    private var appName = "Guidr"
     private var splashScreen: SplashScreen!
     private var loadSplash = true
     
@@ -38,9 +38,13 @@ class ViewController: UIViewController, CalendarDelegate, SplashDelegate {
         
         setupNavBar()
         
-        eventStore = EKEventStore()
+//        eventStore = EKEventStore()
         
         dataStore = CardDataStore.sharedInstance
+        
+        //TODO: request the CalendarStore here and ask for auth <-------- important 
+        CalendarEventDataStore.sharedInstance.checkCalendarAuthorizationStatus()
+        
         
         if let auth = GTMOAuth2ViewControllerTouch.authForGoogleFromKeychainForName(
             kKeychainItemName,
@@ -56,6 +60,9 @@ class ViewController: UIViewController, CalendarDelegate, SplashDelegate {
     // and perform API calls
     override func viewDidAppear(animated: Bool) {
         
+        //Check for calendar authorization first!
+        CalendarEventDataStore.sharedInstance.checkCalendarAuthorizationStatus()
+
         // start gary splash here.......
         if loadSplash {
             loadSplash = false
@@ -65,7 +72,7 @@ class ViewController: UIViewController, CalendarDelegate, SplashDelegate {
         }
         
         // Make sure we have calendar authorization
-        checkCalendarAuthorizationStatus()
+//        checkCalendarAuthorizationStatus()
         
         if let authorizer = service.authorizer,
             canAuth = authorizer.canAuthorize where canAuth {
@@ -75,7 +82,7 @@ class ViewController: UIViewController, CalendarDelegate, SplashDelegate {
             
             NSNotificationCenter.defaultCenter().addObserver(self,selector: #selector(ViewController.setupViewWithDraggableView(_:)), name: eventsLoadedNotification, object: nil)
 //            print("here is the result of the script!!!: \(dataStore.getEventsContentFromStore())")
-            splashScreen.splashDelegate.endSplashScreen(splashScreen) //added this for testing, please delete
+//            splashScreen.splashDelegate.endSplashScreen(splashScreen) //added this for testing, please delete
             
         } else {
             splashScreen.splashDelegate.endSplashScreen(splashScreen)
@@ -87,23 +94,23 @@ class ViewController: UIViewController, CalendarDelegate, SplashDelegate {
         }
     }
     
-    // (Copied from tutorial)
-    func checkCalendarAuthorizationStatus() {
-        let status = EKEventStore.authorizationStatusForEntityType(EKEntityType.Event)
-        
-        switch (status) {
-        case EKAuthorizationStatus.NotDetermined: // This happens on first-run
-            requestAccessToCalendar()
-        case EKAuthorizationStatus.Authorized:
-            calendarSetup() //setup the calendar
-            break // Things are in line with being able to show the calendars in the table view
-//            loadCalendars() //TODO: change this
-        case EKAuthorizationStatus.Restricted, EKAuthorizationStatus.Denied:
-            //TODO: handle this
-            break
-            
-        }
-    }
+//    // (Copied from tutorial)
+//    func checkCalendarAuthorizationStatus() {
+//        let status = EKEventStore.authorizationStatusForEntityType(EKEntityType.Event)
+//        
+//        switch (status) {
+//        case EKAuthorizationStatus.NotDetermined: // This happens on first-run
+//            requestAccessToCalendar()
+//        case EKAuthorizationStatus.Authorized:
+//            calendarSetup() //setup the calendar
+//            break // Things are in line with being able to show the calendars in the table view
+////            loadCalendars() //TODO: change this
+//        case EKAuthorizationStatus.Restricted, EKAuthorizationStatus.Denied:
+//            //TODO: handle this
+//            break
+//            
+//        }
+//    }
     
     // Creates the auth controller for authorizing access to Google Apps Script Execution API
     private func createAuthController() -> GTMOAuth2ViewControllerTouch {
@@ -168,7 +175,7 @@ class ViewController: UIViewController, CalendarDelegate, SplashDelegate {
             
             // Create a card for each event and add the cards to draggable view
             draggableBackground.addCardsContent(eventsContentArray) 
-            draggableBackground.calDelegate = self
+//            draggableBackground.calDelegate = self 
             
             // When setup is done, make the splash screen go away
             splashScreen.splashDelegate.endSplashScreen(splashScreen)
@@ -177,83 +184,83 @@ class ViewController: UIViewController, CalendarDelegate, SplashDelegate {
     }
 
     
-    func calendarSetup() {
-        
-        // If the app's calendar already exists on the phone, use it
-        let calendars = eventStore.calendarsForEntityType(.Event)
-        for calendar: EKCalendar in calendars {
-            if calendar.title == appName {
-                self.calendar = calendar
-                return
-            }
-        }
-        
-        // Otherwise, create one
-        calendar = EKCalendar(forEntityType: .Event, eventStore: eventStore)
-        calendar.title = appName
-        
-        calendar.source = eventStore.sources.filter{
-            (source: EKSource) -> Bool in
-            source.sourceType.rawValue == EKSourceType.Local.rawValue
-            }.first!
-        
-        do {
-            try self.eventStore.saveCalendar(calendar, commit: true)
-
-        } catch {
-            let alert = UIAlertController(title: "Couldn't create calendar", message: (error as NSError).localizedDescription, preferredStyle: .Alert)
-            let OKAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-            alert.addAction(OKAction)
-            
-            self.presentViewController(alert, animated: true, completion: nil)
-        }
-        
-        
-    }
+//    func calendarSetup() {
+//        
+//        // If the app's calendar already exists on the phone, use it
+//        let calendars = eventStore.calendarsForEntityType(.Event)
+//        for calendar: EKCalendar in calendars {
+//            if calendar.title == appName {
+//                self.calendar = calendar
+//                return
+//            }
+//        }
+//        
+//        // Otherwise, create one
+//        calendar = EKCalendar(forEntityType: .Event, eventStore: eventStore)
+//        calendar.title = appName
+//        
+//        calendar.source = eventStore.sources.filter{
+//            (source: EKSource) -> Bool in
+//            source.sourceType.rawValue == EKSourceType.Local.rawValue
+//            }.first!
+//        
+//        do {
+//            try self.eventStore.saveCalendar(calendar, commit: true)
+//
+//        } catch {
+//            let alert = UIAlertController(title: "Couldn't create calendar", message: (error as NSError).localizedDescription, preferredStyle: .Alert)
+//            let OKAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+//            alert.addAction(OKAction)
+//            
+//            self.presentViewController(alert, animated: true, completion: nil)
+//        }
+//        
+//        
+//    }
+//    
+//    func requestAccessToCalendar() {
+//        eventStore.requestAccessToEntityType(EKEntityType.Event, completion: {
+//            (accessGranted: Bool, error: NSError?) in
+//            
+//            if accessGranted == true {
+//                dispatch_async(dispatch_get_main_queue(), {
+//                    
+//                })
+//            } else {
+//                dispatch_async(dispatch_get_main_queue(), {
+//                    //some logic to have user open settings
+////                    let openSettingsUrl = NSURL(string: UIApplicationOpenSettingsURLString)
+////                    UIApplication.sharedApplication().openURL(openSettingsUrl!)
+//
+//                })
+//            }
+//        })
+//    }
     
-    func requestAccessToCalendar() {
-        eventStore.requestAccessToEntityType(EKEntityType.Event, completion: {
-            (accessGranted: Bool, error: NSError?) in
-            
-            if accessGranted == true {
-                dispatch_async(dispatch_get_main_queue(), {
-                    
-                })
-            } else {
-                dispatch_async(dispatch_get_main_queue(), {
-                    //some logic to have user open settings
-//                    let openSettingsUrl = NSURL(string: UIApplicationOpenSettingsURLString)
-//                    UIApplication.sharedApplication().openURL(openSettingsUrl!)
-
-                })
-            }
-        })
-    }
     
-    
-    func addEventToCalendar(card:CardView){
-        
-        // Add the event to the user's iPhone calendar
-        
-        let newEvent = EKEvent(eventStore: eventStore)
-        newEvent.calendar = calendar
-        newEvent.title = card.eventTitle.text!
-        newEvent.startDate = card.date
-        newEvent.endDate = card.date.dateByAddingTimeInterval(2 * 60 * 60)
-        newEvent.notes = card.eventDesc.text!
-        newEvent.location = card.eventAddress.text!
-        
-        do {
-            try eventStore.saveEvent(newEvent, span: .ThisEvent)
-            
-        } catch {
-            //TODO: handle this somehow if the event does not save.....
-            print("\n\nProblem: event couldn't be added to the calendar\n\n")
-
-        }
-        
-        
-    }
+//    func addEventToCalendar(card:CardView){
+//        
+//        // Add the event to the user's iPhone calendar
+//        
+//        let newEvent = EKEvent(eventStore: eventStore)
+//        newEvent.calendar = calendar
+//        newEvent.title = card.eventTitle.text!
+//        newEvent.startDate = card.date
+//        newEvent.endDate = card.date.dateByAddingTimeInterval(2 * 60 * 60)
+//        newEvent.notes = card.eventDesc.text!
+//        newEvent.location = card.eventAddress.text!
+//        
+//        do {
+//            try eventStore.saveEvent(newEvent, span: .ThisEvent)
+//            
+//        } catch {
+//            //TODO: handle this somehow if the event does not save.....
+//            print("\n\nProblem: event couldn't be added to the calendar\n\n")
+//
+//        }
+//        
+//        
+//    }
     
     func endSplashScreen(splash: UIViewController) {
         splash.dismissViewControllerAnimated(false, completion: nil)

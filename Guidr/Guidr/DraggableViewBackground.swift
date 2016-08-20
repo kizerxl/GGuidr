@@ -8,10 +8,11 @@
 
 import Foundation
 import UIKit
+import EventKit
 
-protocol CalendarDelegate {
-    func addEventToCalendar(card:CardView)
-}
+//protocol CalendarDelegate {
+//    func addEventToCalendar(card:CardView)
+//}
 
 class DraggableViewBackground: UIView, DraggableViewDelegate {
     var cardContentArray: [[String]]!
@@ -27,14 +28,13 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
     var messageButton: UIButton!
     var checkButton: UIButton!
     var xButton: UIButton!
-    var calDelegate: CalendarDelegate!
+//    var calDelegate: CalendarDelegate!
     var buttonView: ButtonView!
-    
-    
     var calendarOfCurrentYear: NSCalendar!
     var currentDate: NSDate!
     var currentMonth: Int!
     var currentYear: Int!
+    var calEventDataStore: CalendarEventDataStore!
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
@@ -50,6 +50,7 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         loadedCards = []
         cardContentArray = []
         cardsLoadedIndex = 0
+        calEventDataStore = CalendarEventDataStore.sharedInstance //get the shared Calendar Event store
         self.loadCards()
 
     }
@@ -112,9 +113,8 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
 //                                         location: currentCard.count > 2 ? currentCard[2] : "(no location given)",
 //                                         eventDescription: currentCard.count > 3 ? currentCard[3] : "(no description)")
         let draggableView = CardView(event: currentCard)
-        
-        
         draggableView.delegate = self
+        
         return draggableView
     }
     
@@ -153,8 +153,6 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
     }
     
     func cardSwiped(card: CardView) -> Void {
-
-
         loadedCards.removeAtIndex(0)
         
         if cardsLoadedIndex < allCards.count {
@@ -170,14 +168,29 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         }
     
     }
+    
     func cardSwipedLeft(card: CardView) -> Void {
         cardSwiped(card)
+        // Add the event to the notGoingEvent array of the shared store
+        let event = createCalendarEvent(card)
+        calEventDataStore.notGoingEvents.append(event)
     }
+    
     func cardSwipedRight(card: CardView) -> Void {
         cardSwiped(card)
         
+        //Add the event to the goingEvent array of the shared store
         // Add the event to the calendar
-        calDelegate.addEventToCalendar(card)
+        let event = createCalendarEvent(card)
+        do {
+            try calEventDataStore.eventStore.saveEvent(event, span: .ThisEvent)
+            
+        } catch {
+            print("\n\nProblem: event couldn't be added to the calendar\n\n")
+        }
+        
+        //OLd way of doing things....
+//        calDelegate.addEventToCalendar(card)
 
     }
     
@@ -214,8 +227,7 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
     }
     
     
-    func formatDate(dateString: String) -> NSDate {
-        
+    private func formatDate(dateString: String) -> NSDate {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "EEEE, MMM d" /* find out and place date format from http://userguide.icu-project.org/formatparse/datetime */
         var date = dateFormatter.dateFromString(dateString)
@@ -226,7 +238,7 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         return date!
     }
     
-    func setupDateChecking() {
+    private func setupDateChecking() {
         currentDate = NSDate()
         calendarOfCurrentYear = NSCalendar.currentCalendar()
         
@@ -236,7 +248,7 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         currentYear = components.year
     }
     
-    func correctYearForDate(eventDate: NSDate) -> NSDate {
+    private func correctYearForDate(eventDate: NSDate) -> NSDate {
         var correctYear = currentYear
         var newDate: NSDate!
         
@@ -271,4 +283,20 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         buttonView.bottomAnchor.constraintEqualToAnchor(self.bottomAnchor).active = true
         buttonView.heightAnchor.constraintEqualToConstant(100).active = true
     }
+    
+    //pass in a cardView and get back a EKEvent object
+    func createCalendarEvent(card: CardView) -> EKEvent {
+        let cardDate = formatDate(card.eventDate.text!)
+        
+        let newEvent = EKEvent(eventStore: calEventDataStore.eventStore)
+        newEvent.calendar = calEventDataStore.calendar
+        newEvent.title = card.eventTitle.text!
+        newEvent.startDate = cardDate
+        newEvent.endDate = cardDate.dateByAddingTimeInterval(2 * 60 * 60)
+        newEvent.notes = card.eventDesc.text!
+        newEvent.location = card.eventAddress.text!
+        
+        return newEvent
+    }
+
 }

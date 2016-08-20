@@ -8,27 +8,29 @@
 
 import UIKit
 
+enum CalendarMode {
+    case AddEvent
+    case AddDeleteEvent
+    case DeleteEvent
+}
+
 class CalendarVC: UIViewController {
+    
+    var customSC: UISegmentedControl!
+    var tableView: UITableView!
+    var conflictEvents = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        print("Inside the calendar VC")
-        let items = ["Going", "Not Going", "Conflicts"]
-
         view.backgroundColor = UIColor(red: 134/255, green: 36/255, blue: 27/255, alpha: 1)
         title = "Calendar"
         
-        let customSC = UISegmentedControl(items: items)
-        customSC.selectedSegmentIndex = 0
+        setupSC()
+        addSCContstraints()
+        setupTableView()
+        addTableViewConstraints()
         
-        let frame = UIScreen.mainScreen().bounds
-        customSC.frame = CGRectMake(frame.minX + 10, frame.minY + 50,
-                                    frame.width - 20, frame.height*0.1)
-        customSC.addTarget(self, action: #selector(CalendarVC.testing(_:)), forControlEvents: .ValueChanged)
-        
-        view.addSubview(customSC)
-
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,15 +51,43 @@ class CalendarVC: UIViewController {
         }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func setupSC() {
+        let items = ["Going", "Not Going", "Conflicts"]
+        customSC = UISegmentedControl(items: items)
+        customSC.selectedSegmentIndex = 0
+        customSC.frame = CGRectZero
+        customSC.tintColor = UIColor.whiteColor()
+        customSC.addTarget(self, action: #selector(CalendarVC.testing(_:)), forControlEvents: .ValueChanged)
+        
+        view.addSubview(customSC)
     }
-    */
+    
+    func setupTableView() {
+//        tableView = UITableView(frame: CGRectZero)
+////        tableView.delegate =
+//        view.addSubview(tableView)
+    }
+    
+    func addSCContstraints() {
+        customSC.translatesAutoresizingMaskIntoConstraints = false
+        customSC.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
+        customSC.topAnchor.constraintEqualToAnchor(view.topAnchor, constant: 5).active = true
+        customSC.heightAnchor.constraintEqualToConstant(50).active = true
+        customSC.widthAnchor.constraintEqualToConstant(view.frame.width - 50).active = true
+    }
+    
+    func addTableViewConstraints() {
+        //let's make magic happen
+    }
+
+    // MARK: - Table View methods 
+   
+    //set the tableview's mode for Going, Not Going, Conflict
+    func setMode(calendarMode: CalendarMode) {
+        
+    }
+    
+    
+
 
 }

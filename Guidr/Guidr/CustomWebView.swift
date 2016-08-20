@@ -11,7 +11,7 @@ import WebKit
 
 class CustomWebView: UIView {
     
-    weak var webView: WKWebView!
+    var webView: WKWebView!
     var removeButton: UIButton!
 
     override init(frame: CGRect) {

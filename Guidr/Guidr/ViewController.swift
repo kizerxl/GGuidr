@@ -53,7 +53,7 @@ class ViewController: UIViewController, SplashDelegate {
     override func viewDidAppear(animated: Bool) {
         
         //Check for calendar authorization first!
-        CalendarEventDataStore.sharedInstance.checkCalendarAuthorizationStatus()
+//        CalendarEventDataStore.sharedInstance.checkCalendarAuthorizationStatus()
 
         // start gary splash here.......
         if loadSplash {

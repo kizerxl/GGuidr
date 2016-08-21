@@ -51,11 +51,14 @@ class CalendarVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         case 0:
             calEventDataStore.fetchEventsFromCalendar()
             dataSource = calEventDataStore.isGoingEvents
+            mode = .Going
         case 1:
             dataSource = calEventDataStore.notGoingEvents
+            mode = .NotGoing
         case 2:
             calEventDataStore.checkForConflicts()
             dataSource = calEventDataStore.conflictEvents
+            mode = .Conflicts
         default: break
         }
         tableView.reloadData()
@@ -119,4 +122,50 @@ class CalendarVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 80.0
     }
+    
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        let goingAction = UITableViewRowAction(style: .Normal, title: "Going") { action, void in
+            
+            do {
+                try self.calEventDataStore.eventStore.saveEvent(self.dataSource[indexPath.row], span: .ThisEvent)
+                print("Event saved...")
+            } catch  {
+                print("Didn't work....")
+            }
+        }
+        
+        goingAction.backgroundColor = UIColor.greenColor()
+        
+        let notGoingAction = UITableViewRowAction(style: .Normal, title: "Not Going") { action, index in
+            
+            do {
+                try self.calEventDataStore.eventStore.removeEvent(self.dataSource[indexPath.row], span: .ThisEvent)
+                print("Event removed...")
+            } catch  {
+                print("Didn't work....")
+            }
+        }
+        
+        notGoingAction.backgroundColor = UIColor.orangeColor()
+        
+        return (mode == .Going || mode == .Conflicts) ? [notGoingAction] : [goingAction]
+
+    }
+    
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+
+        return true
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            print("Removed from TABLEVIEW!!!")
+        }
+    }
+    
+    func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+            return .Delete
+    }
+    
 }

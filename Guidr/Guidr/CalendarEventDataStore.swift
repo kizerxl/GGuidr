@@ -22,15 +22,21 @@ class CalendarEventDataStore {
     private init() {}
 
     func checkCalendarAuthorizationStatus() {
+        print("Start checking for calendar!!!!")
         let status = EKEventStore.authorizationStatusForEntityType(EKEntityType.Event)
-        
+        print("The status is \(status)")
+        print("The status is \(status.rawValue)")
+        print("The status is \(status.hashValue)")
         switch (status) {
         case EKAuthorizationStatus.NotDetermined: // This happens on first-run
+            print("Auth status not determined!!!")
             requestAccessToCalendar()
         case EKAuthorizationStatus.Authorized:
+            print("Let's setup the calendar")
             calendarSetup() //setup the calendar
             break
         case EKAuthorizationStatus.Restricted, EKAuthorizationStatus.Denied:
+            print("Auth denied")
             //TODO: handle this
             // let's send out a nsnotification to the respective controller that the user has 
             // to manually go into settings and enable the calendar
@@ -52,11 +58,12 @@ class CalendarEventDataStore {
         let calendars = eventStore.calendarsForEntityType(.Event)
         for calendar: EKCalendar in calendars {
             if calendar.title == appName {
+                print("calendar was found!!!!!")
                 self.calendar = calendar
                 return
             }
         }
-        
+        print("Making the calendar")
         // Otherwise, create one
         calendar = EKCalendar(forEntityType: .Event, eventStore: eventStore)
         calendar.title = appName
@@ -68,8 +75,10 @@ class CalendarEventDataStore {
         
         do {
             try self.eventStore.saveCalendar(calendar, commit: true)
+            print("saved the calendar")
             
         } catch {
+            print("Calendar could not be saved")
             //WE will use NSNotification to instruct user
             //by opening an Alert on the VC
         }
@@ -115,17 +124,19 @@ class CalendarEventDataStore {
     func checkForConflicts() {
         fetchEventsFromCalendar()
         conflictEvents = [] //reset the conflicts array
-        var startDate = isGoingEvents[0].startDate
-        var nextDate: NSDate!
-        var currentEvent: EKEvent!
-        for i in 1..<isGoingEvents.count {
-            currentEvent = isGoingEvents[i]
-            nextDate = currentEvent.startDate
-            if startDate.isEqualToDate(nextDate) || startDate.compare(nextDate) == .OrderedDescending {
-                conflictEvents.append(currentEvent)
+        if isGoingEvents.count > 1 {
+            var startDate = isGoingEvents[0].startDate
+            var nextDate: NSDate!
+            var currentEvent: EKEvent!
+            
+            for i in 1..<isGoingEvents.count {
+                currentEvent = isGoingEvents[i]
+                nextDate = currentEvent.startDate
+                if startDate.isEqualToDate(nextDate) || startDate.compare(nextDate) == .OrderedDescending {
+                    conflictEvents.append(currentEvent)
+                }
+                startDate = currentEvent.startDate
             }
-            startDate = currentEvent.startDate
         }
     }
-
 }

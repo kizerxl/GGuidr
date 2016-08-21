@@ -21,28 +21,26 @@ class CalendarVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var dataSource: [EKEvent]!
     var mode = CalendarMode.Going
     let calEventDataStore = CalendarEventDataStore.sharedInstance
-    var reuseIdentifier: String!
+    let defaultCalendar = NSCalendar.currentCalendar()
+    var reuseIdentifier = "calendarCell"
+    let dateFormatter: NSDateFormatter = NSDateFormatter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.backgroundColor = UIColor(red: 134/255, green: 36/255, blue: 27/255, alpha: 1)
         title = "Calendar"
+        calEventDataStore.fetchEventsFromCalendar()
         dataSource = calEventDataStore.isGoingEvents
         setupSC()
         addSCContstraints()
         setupTableView()
         addTableViewConstraints()
         
-        reuseIdentifier = "calendarCell"
         self.tableView.registerNib(UINib(nibName: "CalendarCell", bundle: nil), forCellReuseIdentifier: reuseIdentifier)
+        dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
     }
     
-//    override func viewDidAppear(animated: Bool) {
-//        super.viewDidAppear(false)
-//        tableView.reloadData()
-//    }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -51,14 +49,13 @@ class CalendarVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func setCalendarMode(sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
+            calEventDataStore.fetchEventsFromCalendar()
             dataSource = calEventDataStore.isGoingEvents
-            reuseIdentifier = "calendarCell"
         case 1:
             dataSource = calEventDataStore.notGoingEvents
-            reuseIdentifier = "calendarCell"
         case 2:
+            calEventDataStore.checkForConflicts()
             dataSource = calEventDataStore.conflictEvents
-            reuseIdentifier = "calendarCell" //change this in a bit
         default: break
         }
         tableView.reloadData()
@@ -78,6 +75,7 @@ class CalendarVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         tableView = UITableView(frame: CGRectZero)
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.backgroundColor = UIColor(red: 134/255, green: 36/255, blue: 27/255, alpha: 1)
         view.addSubview(tableView)
     }
     
@@ -101,26 +99,24 @@ class CalendarVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     // MARK: - Table View methods 
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        print("Section called......")
         return 1
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("THIS METHOD IS BEING CALLED!!!!!")
         return dataSource.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as! CalendarTableViewCell
-        print("WE are in cell number \(indexPath.row)")
         
         let currentEvent = dataSource[indexPath.row]
-        cell.eventLabel.text = currentEvent.eventIdentifier
+        cell.eventLabel.text = currentEvent.title
+        cell.dateLabel.text = dateFormatter.stringFromDate(currentEvent.occurrenceDate)
+
         return cell
     }
     
-    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        print("Cell size is called!!!!!!!!!!!")
-        return 75
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 80.0
     }
 }

@@ -11,9 +11,7 @@ import UIKit
 class CalendarTableViewCell: UITableViewCell {
 
     @IBOutlet weak var eventLabel: UILabel!
-    @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var priceLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

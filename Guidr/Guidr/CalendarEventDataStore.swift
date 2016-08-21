@@ -99,5 +99,33 @@ class CalendarEventDataStore {
             }
         })
     }
+    
+    func fetchEventsFromCalendar() {
+        isGoingEvents = [] //clear the array
+        let startDate = NSDate()
+        let endDate = NSDate(timeIntervalSinceNow: 60*60*24*30)
+        let predicate = eventStore.predicateForEventsWithStartDate(startDate, endDate: endDate, calendars: [calendar])
+        let events = eventStore.eventsMatchingPredicate(predicate) as [EKEvent]
+        
+        for event in events {
+            isGoingEvents.append(event)
+        }
+    }
+    
+    func checkForConflicts() {
+        fetchEventsFromCalendar()
+        conflictEvents = [] //reset the conflicts array
+        var startDate = isGoingEvents[0].startDate
+        var nextDate: NSDate!
+        var currentEvent: EKEvent!
+        for i in 1..<isGoingEvents.count {
+            currentEvent = isGoingEvents[i]
+            nextDate = currentEvent.startDate
+            if startDate.isEqualToDate(nextDate) || startDate.compare(nextDate) == .OrderedDescending {
+                conflictEvents.append(currentEvent)
+            }
+            startDate = currentEvent.startDate
+        }
+    }
 
 }

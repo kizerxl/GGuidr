@@ -8,81 +8,50 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="calendarCell" id="78h-ZQ-eJz" customClass="CalendarTableViewCell" customModule="Guidr" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="calendarCell" rowHeight="80" id="78h-ZQ-eJz" customClass="CalendarTableViewCell" customModule="Guidr" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="78h-ZQ-eJz" id="EpI-Sb-uoc">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="74"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="79"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rIH-46-X5g">
-                        <rect key="frame" x="20" y="37" width="81" height="29"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="81" id="9K5-Op-7n5"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="15"/>
-                        <color key="textColor" red="0.85490196080000003" green="0.62352941179999999" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sxM-mh-GZl">
-                        <rect key="frame" x="109" y="37" width="175" height="29"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="175" id="F5q-Qn-8nJ"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="15"/>
-                        <color key="textColor" red="0.85490196080000003" green="0.62352941179999999" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MJE-h8-A9z">
-                        <rect key="frame" x="292" y="37" width="75" height="29"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="75" id="5tE-Oo-VYE"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="15"/>
-                        <color key="textColor" red="0.85490196080000003" green="0.62352941179999999" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U6B-Ih-9Ge">
                         <rect key="frame" x="21" y="3" width="346" height="33"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="33" id="lg3-i9-xww"/>
+                            <constraint firstAttribute="width" constant="346" id="Ex2-Bi-dSG"/>
+                            <constraint firstAttribute="height" constant="33" id="Orw-8C-6Jb"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="16"/>
+                        <color key="textColor" red="0.85490196080000003" green="0.62352941179999999" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sxM-mh-GZl">
+                        <rect key="frame" x="21" y="44" width="194" height="21"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="194" id="uPf-d4-SoF"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="15"/>
                         <color key="textColor" red="0.85490196080000003" green="0.62352941179999999" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <color key="backgroundColor" red="0.74345894609999996" green="0.34059700320000003" blue="0.34774803970000001" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
-                    <constraint firstAttribute="trailingMargin" secondItem="MJE-h8-A9z" secondAttribute="trailing" id="1TU-Rw-S5A"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="rIH-46-X5g" secondAttribute="bottom" id="6Oc-vq-MeN"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="MJE-h8-A9z" secondAttribute="bottom" id="AEL-lF-Imm"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="sxM-mh-GZl" secondAttribute="bottom" id="MxL-UN-i8f"/>
-                    <constraint firstItem="sxM-mh-GZl" firstAttribute="leading" secondItem="rIH-46-X5g" secondAttribute="trailing" constant="8" id="UT2-Jh-gOC"/>
-                    <constraint firstItem="MJE-h8-A9z" firstAttribute="top" secondItem="U6B-Ih-9Ge" secondAttribute="bottom" constant="1" id="bzm-0E-ozE"/>
-                    <constraint firstItem="sxM-mh-GZl" firstAttribute="top" secondItem="U6B-Ih-9Ge" secondAttribute="bottom" constant="1" id="kMw-vN-ueN"/>
-                    <constraint firstItem="rIH-46-X5g" firstAttribute="top" secondItem="U6B-Ih-9Ge" secondAttribute="bottom" constant="1" id="qnj-KP-OZd"/>
-                    <constraint firstItem="rIH-46-X5g" firstAttribute="leading" secondItem="EpI-Sb-uoc" secondAttribute="leadingMargin" constant="12" id="rMe-oI-byu"/>
-                    <constraint firstItem="U6B-Ih-9Ge" firstAttribute="leading" secondItem="EpI-Sb-uoc" secondAttribute="leadingMargin" constant="13" id="t0G-en-pTH"/>
-                    <constraint firstItem="U6B-Ih-9Ge" firstAttribute="top" secondItem="EpI-Sb-uoc" secondAttribute="topMargin" constant="-5" id="x8m-1K-Z24"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="U6B-Ih-9Ge" secondAttribute="trailing" id="xNS-oD-3mT"/>
+                    <constraint firstItem="U6B-Ih-9Ge" firstAttribute="top" secondItem="EpI-Sb-uoc" secondAttribute="topMargin" constant="-5" id="Gtt-qX-Sod"/>
+                    <constraint firstItem="U6B-Ih-9Ge" firstAttribute="leading" secondItem="EpI-Sb-uoc" secondAttribute="leadingMargin" constant="13" id="RbO-bo-tPc"/>
+                    <constraint firstItem="sxM-mh-GZl" firstAttribute="leading" secondItem="EpI-Sb-uoc" secondAttribute="leadingMargin" constant="13" id="dB2-nY-ZIo"/>
+                    <constraint firstItem="sxM-mh-GZl" firstAttribute="top" secondItem="U6B-Ih-9Ge" secondAttribute="bottom" constant="8" id="o2d-H0-c3D"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="dateLabel" destination="sxM-mh-GZl" id="PvR-UC-ZWg"/>
                 <outlet property="eventLabel" destination="U6B-Ih-9Ge" id="Vw3-2A-SdU"/>
-                <outlet property="priceLabel" destination="MJE-h8-A9z" id="Dld-xs-NiH"/>
-                <outlet property="timeLabel" destination="rIH-46-X5g" id="FgI-wx-xjI"/>
             </connections>
-            <point key="canvasLocation" x="227.5" y="99.5"/>
+            <point key="canvasLocation" x="227.5" y="102"/>
         </tableViewCell>
     </objects>
 </document>

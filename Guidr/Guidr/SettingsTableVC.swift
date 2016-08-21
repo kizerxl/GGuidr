@@ -74,7 +74,6 @@ class SettingsTableVC: UITableViewController {
             
             case 1:
                 cell.settingsLabel.text = sectonTwoRowTitles[indexPath.row]
-            break
             
             default:
                 //do nothing...

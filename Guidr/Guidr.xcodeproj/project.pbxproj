@@ -16,6 +16,8 @@
 		1B8D9BB81D629CCC00CE83B1 /* CustomWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8D9BB71D629CCC00CE83B1 /* CustomWebView.swift */; };
 		1B90B8551D6006C200E6438D /* ButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B90B8541D6006C200E6438D /* ButtonView.xib */; };
 		1B90B8571D60206200E6438D /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B90B8561D60206200E6438D /* ButtonView.swift */; };
+		1B91B3E01D6949C1001B326A /* CalendarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B91B3DF1D6949C1001B326A /* CalendarCell.xib */; };
+		1B91B3E21D694A55001B326A /* CalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B91B3E11D694A55001B326A /* CalendarTableViewCell.swift */; };
 		1B99A0231D54230500045402 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B99A0221D54230400045402 /* SplashScreen.swift */; };
 		1B99A0271D54561600045402 /* CALayer+Pulsar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B99A0261D54561600045402 /* CALayer+Pulsar.swift */; };
 		1BE51EEF1D68D74300014021 /* CalendarEventDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE51EEE1D68D74300014021 /* CalendarEventDataStore.swift */; };
@@ -46,6 +48,8 @@
 		1B8D9BB71D629CCC00CE83B1 /* CustomWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomWebView.swift; sourceTree = "<group>"; };
 		1B90B8541D6006C200E6438D /* ButtonView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonView.xib; sourceTree = "<group>"; };
 		1B90B8561D60206200E6438D /* ButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
+		1B91B3DF1D6949C1001B326A /* CalendarCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarCell.xib; sourceTree = "<group>"; };
+		1B91B3E11D694A55001B326A /* CalendarTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarTableViewCell.swift; sourceTree = "<group>"; };
 		1B99A0221D54230400045402 /* SplashScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 		1B99A0241D54555900045402 /* Pulsar.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pulsar.framework; path = "../../../../Library/Developer/Xcode/DerivedData/Guidr-diwwzdyjliyegvfevvxzqetxmjva/Build/Products/Debug-iphonesimulator/Pulsar/Pulsar.framework"; sourceTree = "<group>"; };
 		1B99A0261D54561600045402 /* CALayer+Pulsar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CALayer+Pulsar.swift"; sourceTree = "<group>"; };
@@ -102,6 +106,7 @@
 		1BF5595C1D6529C800D0460F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				EB036CC71CF6167E000CCB5E /* ViewController.swift */,
 				1B99A0221D54230400045402 /* SplashScreen.swift */,
 				1BF559591D65299800D0460F /* SettingsTableVC.swift */,
 				1B5842C11D66973200A07B89 /* CalendarVC.swift */,
@@ -115,8 +120,8 @@
 				1B523AE81D624B86003159F9 /* Event.swift */,
 				1BE9F44A1D0A8E9900E0D7A0 /* CardDataStore.swift */,
 				1BE51EEE1D68D74300014021 /* CalendarEventDataStore.swift */,
-				EB036CC71CF6167E000CCB5E /* ViewController.swift */,
 				1B435AD31D6663D300F3AEE5 /* SettingsTableViewCell.swift */,
+				1B91B3E11D694A55001B326A /* CalendarTableViewCell.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -128,6 +133,7 @@
 				1B5802321D5BA8F100DCAEB6 /* CardView2.xib */,
 				1B8996D41D5A39750021F5ED /* CardView.xib */,
 				1B435AD11D66631000F3AEE5 /* SettingsCell.xib */,
+				1B91B3DF1D6949C1001B326A /* CalendarCell.xib */,
 				EB6C01D81CF62F8000A64A0D /* GGuidr-Bridging-Header.h */,
 				EB3227A81CF8E4B8005FF081 /* Secrets.swift */,
 				1B99A0261D54561600045402 /* CALayer+Pulsar.swift */,
@@ -255,6 +261,7 @@
 				EB036CD01CF6167E000CCB5E /* LaunchScreen.storyboard in Resources */,
 				1B435AD21D66631000F3AEE5 /* SettingsCell.xib in Resources */,
 				EB036CCD1CF6167E000CCB5E /* Assets.xcassets in Resources */,
+				1B91B3E01D6949C1001B326A /* CalendarCell.xib in Resources */,
 				1B90B8551D6006C200E6438D /* ButtonView.xib in Resources */,
 				1B8996D51D5A39750021F5ED /* CardView.xib in Resources */,
 				EB036CCB1CF6167E000CCB5E /* Main.storyboard in Resources */,
@@ -331,6 +338,7 @@
 				EB036CC61CF6167E000CCB5E /* AppDelegate.swift in Sources */,
 				1B8D9BB81D629CCC00CE83B1 /* CustomWebView.swift in Sources */,
 				1BE9F4471D0A580000E0D7A0 /* DraggableViewBackground.swift in Sources */,
+				1B91B3E21D694A55001B326A /* CalendarTableViewCell.swift in Sources */,
 				1BF5595A1D65299800D0460F /* SettingsTableVC.swift in Sources */,
 				1BE9F44B1D0A8E9900E0D7A0 /* CardDataStore.swift in Sources */,
 			);

@@ -132,6 +132,10 @@ class CalendarVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             } catch  {
                 print("Didn't work....")
             }
+            self.dataSource.removeAtIndex(indexPath.row)
+            self.calEventDataStore.notGoingEvents.removeAtIndex(indexPath.row)
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+
         }
         
         goingAction.backgroundColor = UIColor.greenColor()
@@ -144,6 +148,9 @@ class CalendarVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             } catch  {
                 print("Didn't work....")
             }
+            self.dataSource.removeAtIndex(indexPath.row)
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+
         }
         
         notGoingAction.backgroundColor = UIColor.orangeColor()
@@ -153,15 +160,7 @@ class CalendarVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-
         return true
-    }
-    
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-            print("Removed from TABLEVIEW!!!")
-        }
     }
     
     func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {

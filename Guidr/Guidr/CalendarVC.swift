@@ -128,9 +128,8 @@ class CalendarVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             
             do {
                 try self.calEventDataStore.eventStore.saveEvent(self.dataSource[indexPath.row], span: .ThisEvent)
-                print("Event saved...")
             } catch  {
-                print("Didn't work....")
+                print("Did not save Event....")
             }
             self.dataSource.removeAtIndex(indexPath.row)
             self.calEventDataStore.notGoingEvents.removeAtIndex(indexPath.row)
@@ -144,9 +143,8 @@ class CalendarVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             
             do {
                 try self.calEventDataStore.eventStore.removeEvent(self.dataSource[indexPath.row], span: .ThisEvent)
-                print("Event removed...")
             } catch  {
-                print("Didn't work....")
+                print("Did not remove Event....")
             }
             self.dataSource.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
@@ -164,7 +162,7 @@ class CalendarVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
-            return .Delete
+        return .Delete
     }
     
 }

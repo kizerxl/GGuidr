@@ -67,6 +67,9 @@ class CardDataStore: NSObject {
 //            showAlert("The API returned the error: ",
 //                      message: error.localizedDescription)
             print("Here is the error: \(error.localizedDescription)")
+            
+            // PUT SOME ERROR LOGIC IN HERE FOR ERRORS!!!!!!!!!!!!!!!!!!!!!!
+            
             return
         }
         

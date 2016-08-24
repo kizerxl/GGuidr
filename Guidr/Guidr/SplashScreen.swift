@@ -8,16 +8,11 @@
 
 import UIKit
 
-protocol SplashDelegate {
-    func endSplashScreen(splash: UIViewController)
-}
-
-
 class SplashScreen: UIViewController {
     
     var splashImage = UIImageView()
-    var splashDelegate: SplashDelegate!
-
+    var animate = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -52,14 +47,19 @@ class SplashScreen: UIViewController {
             self.splashImage.transform = CGAffineTransformMakeScale(1.3, 1.3)
             
         }) { _ in
-            self.splashImage.transform = CGAffineTransformIdentity
-            self.splashImage.layer.addPulse { builder in
-                builder.borderColors = [UIColor.whiteColor().CGColor]
-                builder.backgroundColors = []
+            if self.animate {
+                self.splashImage.transform = CGAffineTransformIdentity
+                self.splashImage.layer.addPulse { builder in
+                    builder.borderColors = [UIColor.whiteColor().CGColor]
+                    builder.backgroundColors = []
+                }
+                self.animateGary()
             }
-
-            self.animateGary()
         }
+    }
+    
+    deinit {
+        print("The screen just went bye bye")
     }
 
 }

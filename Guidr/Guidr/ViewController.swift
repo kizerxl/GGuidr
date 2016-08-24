@@ -11,7 +11,7 @@ import GTMOAuth2
 import UIKit
 import EventKit
 
-class ViewController: UIViewController, SplashDelegate {
+class ViewController: UIViewController {
     
     private let kKeychainItemName = nameInKeychain
     private let kClientID = secretKClientID
@@ -19,7 +19,6 @@ class ViewController: UIViewController, SplashDelegate {
     private var dataStore: CardDataStore!
     private var draggableBackground: DraggableViewBackground!
     private var eventsContentArray: [[String]] = []
-    private var splashScreen: SplashScreen!
     private var loadSplash = true
     
     // If modifying these scopes, delete your previously saved credentials by
@@ -33,10 +32,9 @@ class ViewController: UIViewController, SplashDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupNavBar()
+        view.backgroundColor = UIColor(red: 134/255, green: 36/255, blue: 27/255, alpha: 1)
         dataStore = CardDataStore.sharedInstance
         CalendarEventDataStore.sharedInstance.checkCalendarAuthorizationStatus()
-        
         
         if let auth = GTMOAuth2ViewControllerTouch.authForGoogleFromKeychainForName(
             kKeychainItemName,
@@ -45,7 +43,6 @@ class ViewController: UIViewController, SplashDelegate {
             service.authorizer = auth
 
         }
-        
     }
     
     // When the view appears, ensure that the Google Apps Script Execution API service is authorized
@@ -54,15 +51,13 @@ class ViewController: UIViewController, SplashDelegate {
         
         //Check for calendar authorization first!
 //        CalendarEventDataStore.sharedInstance.checkCalendarAuthorizationStatus()
-
+        
         // start gary splash here.......
         if loadSplash {
             loadSplash = false
-            splashScreen = SplashScreen()
-            splashScreen.splashDelegate = self
-            presentViewController(splashScreen, animated: false, completion: nil)
+            loadSplashScreen()
         }
-        
+    
         if let authorizer = service.authorizer,
             canAuth = authorizer.canAuthorize where canAuth {
             
@@ -70,11 +65,10 @@ class ViewController: UIViewController, SplashDelegate {
              dataStore.getEventsContent(usingService: service)  
             
             NSNotificationCenter.defaultCenter().addObserver(self,selector: #selector(ViewController.setupViewWithDraggableView(_:)), name: eventsLoadedNotification, object: nil)
-//            print("here is the result of the script!!!: \(dataStore.getEventsContentFromStore())")
-//            splashScreen.splashDelegate.endSplashScreen(splashScreen) //added this for testing, please delete
+//            endSplashScreen() // for testing <--- please delete 
             
         } else {
-            splashScreen.splashDelegate.endSplashScreen(splashScreen)
+            endSplashScreen()
             presentViewController(
                 createAuthController(),
                 animated: true,
@@ -108,7 +102,10 @@ class ViewController: UIViewController, SplashDelegate {
         }
         
         service.authorizer = authResult
-        dismissViewControllerAnimated(true, completion: nil)
+        
+        dismissViewControllerAnimated(true) {
+            self.loadSplashScreen()
+        }
     }
     
     // Helper for showing an alert
@@ -126,6 +123,8 @@ class ViewController: UIViewController, SplashDelegate {
         
         // If events array is empty, set it up from the data store
         if eventsContentArray.count == 0 {
+            
+            setupNavBar()
             
             eventsContentArray = dataStore.getEventsContentFromStore()
             
@@ -145,24 +144,17 @@ class ViewController: UIViewController, SplashDelegate {
             view.layoutIfNeeded() 
             
             // Create a card for each event and add the cards to draggable view
-            draggableBackground.addCardsContent(eventsContentArray) 
-//            draggableBackground.calDelegate = self 
+            draggableBackground.addCardsContent(eventsContentArray)
             
-            // When setup is done, make the splash screen go away
-            splashScreen.splashDelegate.endSplashScreen(splashScreen)
+            //make Splash screen go bye bye
+            endSplashScreen()
         }
     
-    }
-    
-    func endSplashScreen(splash: UIViewController) {
-        splash.dismissViewControllerAnimated(false, completion: nil)
     }
     
     func setupNavBar() {
         
         //title image
-        let nav = self.navigationController?.navigationBar
-        nav?.setBackgroundImage(UIImage(named: "bgHeader"), forBarMetrics: UIBarMetrics.Default)
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
         imageView.contentMode = .ScaleAspectFit
         let image = UIImage(named: "garyHeader1")
@@ -196,12 +188,24 @@ class ViewController: UIViewController, SplashDelegate {
         //set the text properties of the text on the bar throughout 
         self.navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func loadSplashScreen() {
+        navigationController?.pushViewController(SplashScreen(), animated: false)
+        navigationController?.navigationBarHidden = true
+    }
+    
+    func endSplashScreen() {
+        if navigationController?.topViewController is SplashScreen {
+            (navigationController?.topViewController as! SplashScreen).animate = false
+            navigationController?.popViewControllerAnimated(false)
+            navigationController?.navigationBarHidden = false
+        }
     }
     
     func settingsTapped() {

@@ -24,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.viewController = ViewController()
         //creating object of ViewController class
         let navigationController = UINavigationController(rootViewController: viewController!)
+        navigationController.navigationBar.setBackgroundImage(UIImage(named: "bgHeader"), forBarMetrics: UIBarMetrics.Default)
         //creating an instance of UINavigationController & setting the rootViewController
         window?.rootViewController = navigationController
         //setting the initial VieController as UINavigationController

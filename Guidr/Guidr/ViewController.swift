@@ -100,7 +100,7 @@ class ViewController: UIViewController {
             showAlert("Authentication Error", message: error.localizedDescription)
             return
         }
-        
+
         service.authorizer = authResult
         
         dismissViewControllerAnimated(true) {

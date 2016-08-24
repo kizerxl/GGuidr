@@ -29,8 +29,9 @@ class SplashScreen: UIViewController {
         splashImage.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
         splashImage.centerYAnchor.constraintEqualToAnchor(view.centerYAnchor).active = true
 
-        splashImage.heightAnchor.constraintEqualToConstant(234.0)
-        splashImage.widthAnchor.constraintEqualToConstant(200.0)
+        //fix the constraints and set aspect ratio correctly 
+//        splashImage.heightAnchor.constraintEqualToConstant(200.0).active = true
+//        splashImage.widthAnchor.constraintEqualToConstant(200.0).active = true
     }
     
     

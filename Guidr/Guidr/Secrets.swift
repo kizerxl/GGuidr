@@ -12,7 +12,9 @@ let nameInKeychain = "Test Gary"
 
 let secretKClientID = "885847385200-ktgfdmbk5m17lmkk3kh82j4kapscvvej.apps.googleusercontent.com"
 
-let secretKScriptId = "Mg0neH7oNT2VTHMxEt0XpbrLQuUZr8v_g"
+//let secretKScriptId = "Mg0neH7oNT2VTHMxEt0XpbrLQuUZr8v_g"
+let secretKScriptId = "1xBmOAJ6VsC92zTOkHpuHD7fC3BKzZyOAoI-lk49ciOBGZnE9wvPlb24a"
+
 
 
 

@@ -137,10 +137,7 @@ class CalendarVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
         }
         
-        goingAction.backgroundColor = UIColor.greenColor()
-        
         let notGoingAction = UITableViewRowAction(style: .Normal, title: "Not Going") { action, index in
-            
             do {
                 try self.calEventDataStore.eventStore.removeEvent(self.dataSource[indexPath.row], span: .ThisEvent)
             } catch  {
@@ -150,10 +147,28 @@ class CalendarVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
 
         }
+    
+        let deleteAction = UITableViewRowAction(style: .Destructive, title: "Delete") { action, void in
+            do {
+                try self.calEventDataStore.eventStore.removeEvent(self.dataSource[indexPath.row], span: .ThisEvent)
+            } catch  {
+                print("Did not remove Event....")
+            }
+            
+            if self.mode == .NotGoing{
+                self.calEventDataStore.notGoingEvents.removeAtIndex(indexPath.row)
+            }
+            self.dataSource.removeAtIndex(indexPath.row)
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            
+        }
         
+        
+        goingAction.backgroundColor = UIColor.greenColor()
         notGoingAction.backgroundColor = UIColor.orangeColor()
+        deleteAction.backgroundColor = UIColor.redColor()
         
-        return (mode == .Going || mode == .Conflicts) ? [notGoingAction] : [goingAction]
+        return (mode == .Going || mode == .Conflicts) ? [notGoingAction, deleteAction] : [goingAction, deleteAction]
 
     }
     

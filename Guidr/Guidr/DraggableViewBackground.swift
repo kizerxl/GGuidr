@@ -11,13 +11,10 @@ import UIKit
 import EventKit
 
 class DraggableViewBackground: UIView, DraggableViewDelegate {
+    let MAX_BUFFER_SIZE = 2
+    
     var cardContentArray: [[String]]!
     var allCards: [CardView]!
-    
-    let MAX_BUFFER_SIZE = 2
-    let CARD_HEIGHT: CGFloat = 386
-    let CARD_WIDTH: CGFloat = 290
-    
     var cardsLoadedIndex: Int!
     var loadedCards: [CardView]!
     var menuButton: UIButton!
@@ -184,6 +181,7 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
     
     internal func addCardsContent(cardsArray: [[String]]) {
         self.cardContentArray = cardsArray
+        sanitizeCardEvents() // remove old cards
         self.loadCards()
     }
     
@@ -258,6 +256,20 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         newEvent.location = card.eventAddress.text!
         
         return newEvent
+    }
+    
+    func sanitizeCardEvents() {
+        //we will filter cards from older days and prevent them from being added to our loaded cards list
+        var cleanCardContentArray:[[String]] = []
+        var laterDate: NSDate!
+
+        for cardContent in cardContentArray {
+            laterDate = formatDate(cardContent[0]).laterDate(currentDate)
+            if laterDate != currentDate {
+                cleanCardContentArray.append(cardContent)
+            }
+        }
+       cardContentArray = cleanCardContentArray
     }
 
 }

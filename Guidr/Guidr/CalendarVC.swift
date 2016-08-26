@@ -163,7 +163,6 @@ class CalendarVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             
         }
         
-        
         goingAction.backgroundColor = UIColor.greenColor()
         notGoingAction.backgroundColor = UIColor.orangeColor()
         deleteAction.backgroundColor = UIColor.redColor()

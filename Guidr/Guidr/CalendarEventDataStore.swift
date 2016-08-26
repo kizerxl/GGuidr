@@ -50,7 +50,8 @@ class CalendarEventDataStore {
             //                    UIApplication.sharedApplication().openURL(openSettingsUrl!)
             
             //Do a shared method since this functinality gets used twice
-            requestAccessToCalendar()
+            print("Access to calendar is restricted man!!!!!!!!! <-")
+            NSNotificationCenter.defaultCenter().postNotificationName(settingsNotification, object: self)
             break
             
         }

@@ -33,12 +33,13 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.sharedAlert(_:)), name: errorNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.sharedAlert(_:)), name: settingsNotification, object: nil)
+        
         view.backgroundColor = UIColor(red: 134/255, green: 36/255, blue: 27/255, alpha: 1)
         dataStore = CardDataStore.sharedInstance
         CalendarEventDataStore.sharedInstance.checkCalendarAuthorizationStatus()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.sharedAlert(_:)), name: errorNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.sharedAlert(_:)), name: settingsNotification, object: nil)
         
         if let auth = GTMOAuth2ViewControllerTouch.authForGoogleFromKeychainForName(
             kKeychainItemName,
@@ -111,7 +112,8 @@ class ViewController: UIViewController {
     
     func sharedAlert(notification: NSNotification) {
         //put the logic in here that will display the respective message for the right sceanrio
-        var alertController: UIAlertController!
+        print("NOTIFICATION CALLED!!!!!!!!!!!!!!! <--------\n\n\n\n")
+        let alertController: UIAlertController!
         var title = "insert something here for now..."
         var message = "random stuff goes here"
 
@@ -119,34 +121,33 @@ class ViewController: UIViewController {
             self.dataStore.getEventsContent(usingService: self.service)
         }
         
-        let settingsAction = UIAlertAction(title: "Settings", style: .Default) { (action) in
-            UIApplication.sharedApplication().openURL(NSURL(string:UIApplicationOpenSettingsURLString)!)
-        }
-        
         let exitAction = UIAlertAction(title: "Exit", style: .Destructive) { (action) in
             exit(0)
         }
         
-        switch notification {
+        switch notification.name {
             case errorNotification:
+                print("Getting ready to calling ERROR alert")
                 title = "Error"
                 message = "Seems like either your internet said goodbye\n or we are having some technical difficulties"
+                print("Creating an error alert!")
                 alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
                 alertController.addAction(tryAgainAction)
+                alertController.addAction(exitAction)
+                presentViewController(alertController, animated: false, completion: nil)
             
             case settingsNotification:
+                print("Getting ready to calling settings alert")
                 title = "Fix Settings"
                 message = "We need to fix your settings for calendar usage!\n Click Settings > Privacy > Calendars and have the slider set to the yes position.\n"
+                print("Creating a settings alert!!!")
                 alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-                alertController.addAction(settingsAction)
+                alertController.addAction(exitAction)
+                presentViewController(alertController, animated: false, completion: nil)
             
             default: break //do nada
         }
-
-        //add actions
-        alertController.addAction(exitAction)
         
-        self.presentViewController(alertController, animated: false, completion: nil)
     }
     
     @objc func setupViewWithDraggableView(note: NSNotification) {

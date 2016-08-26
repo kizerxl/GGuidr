@@ -112,13 +112,13 @@ class ViewController: UIViewController {
     
     func sharedAlert(notification: NSNotification) {
         //put the logic in here that will display the respective message for the right sceanrio
-        print("NOTIFICATION CALLED!!!!!!!!!!!!!!! <--------\n\n\n\n")
         let alertController: UIAlertController!
         var title = "insert something here for now..."
         var message = "random stuff goes here"
 
         let tryAgainAction = UIAlertAction(title: "Again?", style: .Default) { (action) in
             self.dataStore.getEventsContent(usingService: self.service)
+            self.loadSplashScreen() //relaunch Splash or replace with Spinner as alternative...
         }
         
         let exitAction = UIAlertAction(title: "Exit", style: .Destructive) { (action) in
@@ -127,7 +127,6 @@ class ViewController: UIViewController {
         
         switch notification.name {
             case errorNotification:
-                print("Getting ready to calling ERROR alert")
                 title = "Error"
                 message = "Seems like either your internet said goodbye\n or we are having some technical difficulties"
                 print("Creating an error alert!")
@@ -137,7 +136,6 @@ class ViewController: UIViewController {
                 presentViewController(alertController, animated: false, completion: nil)
             
             case settingsNotification:
-                print("Getting ready to calling settings alert")
                 title = "Fix Settings"
                 message = "We need to fix your settings for calendar usage!\n Click Settings > Privacy > Calendars and have the slider set to the yes position.\n"
                 print("Creating a settings alert!!!")

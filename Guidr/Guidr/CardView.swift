@@ -375,5 +375,4 @@ class CardView: UIView, UIWebViewDelegate {
         customCardView.bottomAnchor.constraintEqualToAnchor(self.bottomAnchor).active = true
         
     }
-
 }

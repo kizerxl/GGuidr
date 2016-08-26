@@ -10,8 +10,11 @@ import UIKit
 
 class SettingsTableVC: UITableViewController {
     let headers = ["About","Feedback"]
-    let sectonOneRowTitles = ["Guidr - Version 1", "Acknowledgements", "Credits", "Replay Tutorial"]
+    let sectonOneRowTitles = ["Guidr - Version 1", "Acknowledgements", "Credits", "Terms Of Use", "About Gary's Guide", "Replay Tutorial"]
     let sectonTwoRowTitles = ["Drop us a line!"]
+    
+    //Texts for SharedDisplayVC
+    let aboutText = "GarysGuide is a global resource and community of professionals that are interested in startups,\n entrepreneurship, social media and technology. It is one of the best resources for discovering technology and\n startup related events, classes, workshops and jobs in New York City, San Francisco / Silicon Valley, London,\n Boston, Los Angeles, Austin and other cities.\n\nWe reach a highly targeted mix of influencers and connectors\n including Startup Founders, CEOs, Entrepreneurs, Technology & Media Executives, Venture Capitalists, Angel\n Investors, Private Equity, Marketers, Product Managers, Analysts, Technologists, Designers, Developers, Government\n Officials, Universities, PR, Press, Media, Bloggers and more.\n\nWe have been written up in the NY Times, Forbes,\n TechCrunch, Mashable, LifeHacker, Gawker, Business Insider, NY Observer / BetaBeat, VentureBeat, Entrepreneur\n Magazine, The Examiner, AM NY, The Next Web, Paid Content and more.\n\nOur current and past sponsors have included\n Google, Microsoft, IBM, HP, Verizon, SAP, MasterCard, The Economist, Stanford University, Columbia University,\n Cornell University, CBS Interactive, Uber, Lyft, WeWork, General Assembly, GrubHub, Casper and many many more.\nHave a question? Report a bug? Feature suggestions? Interested in advertising / sponsorship opportunities? Email us at\n hello@garysguide.com\n"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,12 +55,14 @@ class SettingsTableVC: UITableViewController {
     // MARK: - Row logic
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? 4 : 1
+        return section == 0 ? 5 : 1
     }
 
     //will put this in once other screens are done (ie tutorial, etc)
 //    override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-//
+//    
+//        
+//    
 //    }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

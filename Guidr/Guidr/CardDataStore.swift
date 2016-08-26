@@ -11,6 +11,7 @@ import GoogleAPIClient
 import UIKit
 
 let eventsLoadedNotification = "eventsLoaded"
+let errorNotification = "error"
 
 class CardDataStore: NSObject {
     
@@ -64,11 +65,10 @@ class CardDataStore: NSObject {
         if let error = error {
             // The API encountered a problem before the script
             // started executing.
-//            showAlert("The API returned the error: ",
-//                      message: error.localizedDescription)
             print("Here is the error: \(error.localizedDescription)")
             
             // PUT SOME ERROR LOGIC IN HERE FOR ERRORS!!!!!!!!!!!!!!!!!!!!!!
+            NSNotificationCenter.defaultCenter().postNotificationName(errorNotification, object: self)
             
             return
         }
@@ -95,6 +95,9 @@ class CardDataStore: NSObject {
                     errMessage += "\t\(f): \(num)\n"
                 }
             }
+            
+            // may update this for a more explicit error notification...
+            NSNotificationCenter.defaultCenter().postNotificationName(errorNotification, object: self)
             
         } else {
             // The result provided by the API needs to be cast into the

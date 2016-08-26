@@ -155,7 +155,7 @@ class CalendarVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 print("Did not remove Event....")
             }
             
-            if self.mode == .NotGoing{
+            if self.mode == .NotGoing {
                 self.calEventDataStore.notGoingEvents.removeAtIndex(indexPath.row)
             }
             self.dataSource.removeAtIndex(indexPath.row)

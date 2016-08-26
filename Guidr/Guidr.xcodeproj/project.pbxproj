@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B26AB6F1D6F6534007036BF /* SharedSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B26AB6E1D6F6534007036BF /* SharedSettingsView.swift */; };
 		1B435AD21D66631000F3AEE5 /* SettingsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B435AD11D66631000F3AEE5 /* SettingsCell.xib */; };
 		1B435AD41D6663D300F3AEE5 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B435AD31D6663D300F3AEE5 /* SettingsTableViewCell.swift */; };
 		1B523AE91D624B86003159F9 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B523AE81D624B86003159F9 /* Event.swift */; };
@@ -39,6 +40,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1B26AB6E1D6F6534007036BF /* SharedSettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedSettingsView.swift; sourceTree = "<group>"; };
 		1B435AD11D66631000F3AEE5 /* SettingsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsCell.xib; sourceTree = "<group>"; };
 		1B435AD31D6663D300F3AEE5 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		1B523AE81D624B86003159F9 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 				1B8D9BB71D629CCC00CE83B1 /* CustomWebView.swift */,
 				1BE9F4461D0A580000E0D7A0 /* DraggableViewBackground.swift */,
 				1BE9F4481D0A5A7400E0D7A0 /* OverlayView.swift */,
+				1B26AB6E1D6F6534007036BF /* SharedSettingsView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -340,6 +343,7 @@
 				1BE9F4471D0A580000E0D7A0 /* DraggableViewBackground.swift in Sources */,
 				1B91B3E21D694A55001B326A /* CalendarTableViewCell.swift in Sources */,
 				1BF5595A1D65299800D0460F /* SettingsTableVC.swift in Sources */,
+				1B26AB6F1D6F6534007036BF /* SharedSettingsView.swift in Sources */,
 				1BE9F44B1D0A8E9900E0D7A0 /* CardDataStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

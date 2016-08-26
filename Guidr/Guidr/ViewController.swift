@@ -10,6 +10,7 @@ import GoogleAPIClient
 import GTMOAuth2
 import UIKit
 import EventKit
+import Darwin
 
 class ViewController: UIViewController {
     
@@ -36,21 +37,20 @@ class ViewController: UIViewController {
         dataStore = CardDataStore.sharedInstance
         CalendarEventDataStore.sharedInstance.checkCalendarAuthorizationStatus()
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.sharedAlert(_:)), name: errorNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.sharedAlert(_:)), name: settingsNotification, object: nil)
+        
         if let auth = GTMOAuth2ViewControllerTouch.authForGoogleFromKeychainForName(
             kKeychainItemName,
             clientID: kClientID,
             clientSecret: nil) {
             service.authorizer = auth
-
         }
     }
     
     // When the view appears, ensure that the Google Apps Script Execution API service is authorized
     // and perform API calls
     override func viewDidAppear(animated: Bool) {
-        
-        //Check for calendar authorization first!
-//        CalendarEventDataStore.sharedInstance.checkCalendarAuthorizationStatus()
         
         // start gary splash here.......
         if loadSplash {
@@ -95,9 +95,10 @@ class ViewController: UIViewController {
     func viewController(vc : UIViewController,
                         finishedWithAuth authResult : GTMOAuth2Authentication, error : NSError?) {
         
-        if let error = error {
+        if error != nil {
             service.authorizer = nil
-            showAlert("Authentication Error", message: error.localizedDescription)
+            NSNotificationCenter.defaultCenter().postNotificationName(errorNotification, object: self)
+            
             return
         }
 
@@ -108,15 +109,44 @@ class ViewController: UIViewController {
         }
     }
     
-    // Helper for showing an alert
-    func showAlert(title : String, message: String) {
-        let alert = UIAlertView(
-            title: title,
-            message: message,
-            delegate: nil,
-            cancelButtonTitle: "OK"
-        )
-        alert.show()
+    func sharedAlert(notification: NSNotification) {
+        //put the logic in here that will display the respective message for the right sceanrio
+        var alertController: UIAlertController!
+        var title = "insert something here for now..."
+        var message = "random stuff goes here"
+
+        let tryAgainAction = UIAlertAction(title: "Again?", style: .Default) { (action) in
+            self.dataStore.getEventsContent(usingService: self.service)
+        }
+        
+        let settingsAction = UIAlertAction(title: "Settings", style: .Default) { (action) in
+            UIApplication.sharedApplication().openURL(NSURL(string:UIApplicationOpenSettingsURLString)!)
+        }
+        
+        let exitAction = UIAlertAction(title: "Exit", style: .Destructive) { (action) in
+            exit(0)
+        }
+        
+        switch notification {
+            case errorNotification:
+                title = "Error"
+                message = "Seems like either your internet said goodbye\n or we are having some technical difficulties"
+                alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+                alertController.addAction(tryAgainAction)
+            
+            case settingsNotification:
+                title = "Fix Settings"
+                message = "We need to fix your settings for calendar usage!\n Click Settings > Privacy > Calendars and have the slider set to the yes position.\n"
+                alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+                alertController.addAction(settingsAction)
+            
+            default: break //do nada
+        }
+
+        //add actions
+        alertController.addAction(exitAction)
+        
+        self.presentViewController(alertController, animated: false, completion: nil)
     }
     
     @objc func setupViewWithDraggableView(note: NSNotification) {

@@ -9,12 +9,15 @@
 import Foundation
 import EventKit
 
+let settingsNotification = "openSettings"
+
 class CalendarEventDataStore {
     var isGoingEvents: [EKEvent] = []
     var notGoingEvents: [EKEvent] = []
     var conflictEvents: [EKEvent] = []
     var eventStore = EKEventStore()
     var calendar: EKCalendar!
+    
     private var appName = "Guidr"
     
     static let sharedInstance = CalendarEventDataStore()
@@ -47,6 +50,7 @@ class CalendarEventDataStore {
             //                    UIApplication.sharedApplication().openURL(openSettingsUrl!)
             
             //Do a shared method since this functinality gets used twice
+            requestAccessToCalendar()
             break
             
         }
@@ -81,6 +85,7 @@ class CalendarEventDataStore {
             print("Calendar could not be saved")
             //WE will use NSNotification to instruct user
             //by opening an Alert on the VC
+            NSNotificationCenter.defaultCenter().postNotificationName(settingsNotification, object: nil)
         }
         
         
@@ -103,7 +108,7 @@ class CalendarEventDataStore {
                     //some logic to have user open settings
                     //                    let openSettingsUrl = NSURL(string: UIApplicationOpenSettingsURLString)
                     //                    UIApplication.sharedApplication().openURL(openSettingsUrl!)
-                    
+                    NSNotificationCenter.defaultCenter().postNotificationName(settingsNotification, object: nil)
                 })
             }
         })

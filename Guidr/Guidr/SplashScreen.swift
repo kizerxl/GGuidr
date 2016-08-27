@@ -24,6 +24,7 @@ class SplashScreen: UIViewController {
     func setup() {
         view.backgroundColor = UIColor(red: 134/255, green: 36/255, blue: 27/255, alpha: 1)
         splashImage.image = UIImage(named: "garyNewStartImg1")
+        splashImage.contentMode = .ScaleAspectFit;
         splashImage.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(splashImage)
         

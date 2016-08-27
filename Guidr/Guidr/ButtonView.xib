@@ -31,7 +31,7 @@
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GjO-F7-cW0">
                                     <rect key="frame" x="149" y="0.0" width="146" height="96"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <color key="tintColor" red="0.5660003395493981" green="1" blue="0.42242290233699309" alpha="1" colorSpace="calibratedRGB"/>
                                     <size key="titleShadowOffset" width="2.2250738585072014e-308" height="0.0"/>
                                     <state key="normal" image="checkButtonSign"/>
                                     <state key="highlighted" image="checkButtonSign"/>

@@ -12,6 +12,7 @@ class SplashScreen: UIViewController {
     
     var splashImage = UIImageView()
     var animate = true
+    var circleView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +23,7 @@ class SplashScreen: UIViewController {
 
     func setup() {
         view.backgroundColor = UIColor(red: 134/255, green: 36/255, blue: 27/255, alpha: 1)
-        splashImage.image = UIImage(named: "garyStartImage")
+        splashImage.image = UIImage(named: "garyNewStartImg1")
         splashImage.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(splashImage)
         
@@ -30,8 +31,22 @@ class SplashScreen: UIViewController {
         splashImage.centerYAnchor.constraintEqualToAnchor(view.centerYAnchor).active = true
 
         //fix the constraints and set aspect ratio correctly 
-//        splashImage.heightAnchor.constraintEqualToConstant(200.0).active = true
-//        splashImage.widthAnchor.constraintEqualToConstant(200.0).active = true
+        splashImage.heightAnchor.constraintEqualToConstant(131.0).active = true
+        splashImage.widthAnchor.constraintEqualToConstant(161.0).active = true
+        
+        circleView = UIView(frame: CGRectZero)
+        view.insertSubview(circleView, belowSubview: splashImage)
+        
+        //put constraints on the circle view
+        circleView.translatesAutoresizingMaskIntoConstraints = false
+        circleView.centerXAnchor.constraintEqualToAnchor(splashImage.centerXAnchor).active = true
+        circleView.centerYAnchor.constraintEqualToAnchor(splashImage.centerYAnchor).active = true
+        circleView.heightAnchor.constraintEqualToConstant(200).active = true
+        circleView.widthAnchor.constraintEqualToConstant(200).active = true
+        
+        //round the view
+        circleView.layer.cornerRadius = 100
+        
     }
     
     
@@ -41,22 +56,22 @@ class SplashScreen: UIViewController {
     }
     
     func animateGary() {
-        splashImage.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = false
-        splashImage.centerYAnchor.constraintEqualToAnchor(view.centerYAnchor).active = false
+        self.circleView.layer.masksToBounds = false
         
-        UIView.animateWithDuration(1, delay: 0.1, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, options: .CurveEaseInOut, animations: {
-            self.splashImage.transform = CGAffineTransformMakeScale(1.3, 1.3)
-            
+        UIView.animateWithDuration(0.5, delay: 0.5, options: .CurveEaseIn, animations: {
+            self.circleView.layer.opacity = 1
+            self.circleView.layer.addPulse({ builder in
+                builder.borderColors = [UIColor.whiteColor().CGColor]
+                builder.repeatCount = 1
+            })
+            self.circleView.layer.opacity = 0
         }) { _ in
+            
             if self.animate {
-                self.splashImage.transform = CGAffineTransformIdentity
-                self.splashImage.layer.addPulse { builder in
-                    builder.borderColors = [UIColor.whiteColor().CGColor]
-                    builder.backgroundColors = []
-                }
                 self.animateGary()
             }
         }
+        
     }
     
     deinit {

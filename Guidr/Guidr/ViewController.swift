@@ -238,14 +238,11 @@ class ViewController: UIViewController {
     }
     
     func settingsTapped() {
-        print("settings tapped!!!!!")
         self.navigationController!.pushViewController(SettingsTableVC(), animated: true)
     }
     
     func calendarTapped() {
-        print("calendar tapped!!!!!")
         self.navigationController!.pushViewController(CalendarVC(), animated: true)
-
     }
     
 }

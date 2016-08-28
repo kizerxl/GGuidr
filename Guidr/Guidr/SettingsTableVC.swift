@@ -7,14 +7,12 @@
 //
 
 import UIKit
+import MessageUI
 
-class SettingsTableVC: UITableViewController {
+class SettingsTableVC: UITableViewController, MFMailComposeViewControllerDelegate {
     let headers = ["About","Feedback"]
-    let sectonOneRowTitles = ["Guidr - Version 1", "Acknowledgements", "Credits", "Terms Of Use", "About Gary's Guide", "Replay Tutorial"]
+    let sectonOneRowTitles = ["Guidr - Version 1", "Credits", "Terms Of Use", "About Gary's Guide", "Replay Tutorial"]
     let sectonTwoRowTitles = ["Drop us a line!"]
-    
-    //Texts for SharedDisplayVC
-    let aboutText = "GarysGuide is a global resource and community of professionals that are interested in startups,\n entrepreneurship, social media and technology. It is one of the best resources for discovering technology and\n startup related events, classes, workshops and jobs in New York City, San Francisco / Silicon Valley, London,\n Boston, Los Angeles, Austin and other cities.\n\nWe reach a highly targeted mix of influencers and connectors\n including Startup Founders, CEOs, Entrepreneurs, Technology & Media Executives, Venture Capitalists, Angel\n Investors, Private Equity, Marketers, Product Managers, Analysts, Technologists, Designers, Developers, Government\n Officials, Universities, PR, Press, Media, Bloggers and more.\n\nWe have been written up in the NY Times, Forbes,\n TechCrunch, Mashable, LifeHacker, Gawker, Business Insider, NY Observer / BetaBeat, VentureBeat, Entrepreneur\n Magazine, The Examiner, AM NY, The Next Web, Paid Content and more.\n\nOur current and past sponsors have included\n Google, Microsoft, IBM, HP, Verizon, SAP, MasterCard, The Economist, Stanford University, Columbia University,\n Cornell University, CBS Interactive, Uber, Lyft, WeWork, General Assembly, GrubHub, Casper and many many more.\nHave a question? Report a bug? Feature suggestions? Interested in advertising / sponsorship opportunities? Email us at\n hello@garysguide.com\n"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +20,11 @@ class SettingsTableVC: UITableViewController {
         self.view.backgroundColor = UIColor(red: 235/255, green: 212/255, blue: 203/255, alpha: 1)
         title = "Settings"
         self.tableView.registerNib(UINib(nibName: "SettingsCell", bundle: nil), forCellReuseIdentifier: "settingsCell")
+    }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(false)
+        self.tableView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -58,12 +60,36 @@ class SettingsTableVC: UITableViewController {
         return section == 0 ? 5 : 1
     }
 
-    //will put this in once other screens are done (ie tutorial, etc)
-//    override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-//    
-//        
-//    
-//    }
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        var desiredText = ""
+        var sharedDisplayTitle = ""
+        
+        if indexPath.section == 0 {
+            switch indexPath.row {
+                case 0: return // do nothing..
+                case 1:
+                    desiredText = creditsText
+                    sharedDisplayTitle = "Credits"
+                case 2:
+                    desiredText = termsOfUse
+                    sharedDisplayTitle = "Terms Of Use"
+                case 3:
+                    desiredText = aboutText
+                    sharedDisplayTitle = "About"
+                case 4: return // for now do nothing until tut screen is done
+                default: return
+            }
+        } else {
+            if indexPath.row == 0 {
+                sendEmail()
+            }
+        }
+        
+        let sharedDisplayVC = SharedDisplayVC()
+        sharedDisplayVC.title = sharedDisplayTitle
+        sharedDisplayVC.textView.text = desiredText
+        self.navigationController!.pushViewController(sharedDisplayVC, animated: true)
+    }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("settingsCell", forIndexPath: indexPath) as! SettingsTableViewCell
@@ -79,7 +105,6 @@ class SettingsTableVC: UITableViewController {
             
             case 1:
                 cell.settingsLabel.text = sectonTwoRowTitles[indexPath.row]
-            
             default:
                 //do nothing...
             break
@@ -87,6 +112,21 @@ class SettingsTableVC: UITableViewController {
 
         return cell
     }
-
-
+    
+    func sendEmail() {
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            mail.setToRecipients(["ello@garysguide.com"])
+            mail.setMessageBody("<p>Hey Gary!</p>", isHTML: true)
+            presentViewController(mail, animated: true, completion: nil)
+        } else {
+            print("email not working man...")
+        }
+    }
+    
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+        controller.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
 }

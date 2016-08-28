@@ -1,6 +1,9 @@
 # Gary's GUIDR 
 ## The unofficial Gary's Guide app 
 
+![StartScreen](https://github.com/kizerxl/GGuidr/blob/master/Guidr/Extra%20Files/GaryStartScreen.gif)
+
+![Demo](https://github.com/kizerxl/GGuidr/blob/master/Guidr/Extra%20Files/officialGaryDemo3.gif)
 
 * Beautiful UI 
 * Browse Gary's Guide via custom Web View directly from the app 

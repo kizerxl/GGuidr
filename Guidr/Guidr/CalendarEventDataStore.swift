@@ -40,17 +40,6 @@ class CalendarEventDataStore {
             break
         case EKAuthorizationStatus.Restricted, EKAuthorizationStatus.Denied:
             print("Auth denied")
-            //TODO: handle this
-            // let's send out a nsnotification to the respective controller that the user has 
-            // to manually go into settings and enable the calendar
-            //The user has to manually grant access
-            //What I could do here is to simply
-            //some logic to have user open settings
-            //                    let openSettingsUrl = NSURL(string: UIApplicationOpenSettingsURLString)
-            //                    UIApplication.sharedApplication().openURL(openSettingsUrl!)
-            
-            //Do a shared method since this functinality gets used twice
-            print("Access to calendar is restricted man!!!!!!!!! <-")
             NSNotificationCenter.defaultCenter().postNotificationName(settingsNotification, object: self)
             break
             
@@ -58,7 +47,6 @@ class CalendarEventDataStore {
     }
     
     func calendarSetup() {
-        
         // If the app's calendar already exists on the phone, use it
         let calendars = eventStore.calendarsForEntityType(.Event)
         for calendar: EKCalendar in calendars {
@@ -84,8 +72,6 @@ class CalendarEventDataStore {
             
         } catch {
             print("Calendar could not be saved")
-            //WE will use NSNotification to instruct user
-            //by opening an Alert on the VC
             NSNotificationCenter.defaultCenter().postNotificationName(settingsNotification, object: nil)
         }
         
@@ -102,13 +88,6 @@ class CalendarEventDataStore {
                 })
             } else {
                 dispatch_async(dispatch_get_main_queue(), {
-                    //WE will use NSNotification to instruct user 
-                    //by opening an Alert on the VC
-                    //The user has to manually grant access
-                    //What I could do here is to simply 
-                    //some logic to have user open settings
-                    //                    let openSettingsUrl = NSURL(string: UIApplicationOpenSettingsURLString)
-                    //                    UIApplication.sharedApplication().openURL(openSettingsUrl!)
                     NSNotificationCenter.defaultCenter().postNotificationName(settingsNotification, object: nil)
                 })
             }

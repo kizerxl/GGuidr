@@ -66,8 +66,6 @@ class CardDataStore: NSObject {
             // The API encountered a problem before the script
             // started executing.
             print("Here is the error: \(error.localizedDescription)")
-            
-            // PUT SOME ERROR LOGIC IN HERE FOR ERRORS!!!!!!!!!!!!!!!!!!!!!!
             NSNotificationCenter.defaultCenter().postNotificationName(errorNotification, object: self)
             
             return

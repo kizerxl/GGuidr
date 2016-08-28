@@ -257,6 +257,7 @@ class CardView: UIView, UIWebViewDelegate {
         
         switch gestureRecognizer.state {
         case UIGestureRecognizerState.Began:
+            lockNavBar() // lock the bar buttons to prevent weird drag animations...
             self.originPoint = self.center
         case UIGestureRecognizerState.Changed:
             let rotationStrength: Float = min(xFromCenter/ROTATION_STRENGTH, ROTATION_MAX)
@@ -270,6 +271,7 @@ class CardView: UIView, UIWebViewDelegate {
             self.transform = scaleTransform
             self.updateOverlay(CGFloat(xFromCenter))
         case UIGestureRecognizerState.Ended:
+            unlockNavBar()
             self.afterSwipeAction()
         case UIGestureRecognizerState.Possible:
             fallthrough
@@ -374,5 +376,17 @@ class CardView: UIView, UIWebViewDelegate {
         customCardView.topAnchor.constraintEqualToAnchor(self.topAnchor).active = true
         customCardView.bottomAnchor.constraintEqualToAnchor(self.bottomAnchor).active = true
         
+    }
+    
+    func lockNavBar() {
+        let appDel = UIApplication.sharedApplication().delegate as! AppDelegate
+        let navController = appDel.window?.rootViewController as! UINavigationController
+        navController.navigationBar.userInteractionEnabled = false
+    }
+    
+    func unlockNavBar() {
+        let appDel = UIApplication.sharedApplication().delegate as! AppDelegate
+        let navController = appDel.window?.rootViewController as! UINavigationController
+        navController.navigationBar.userInteractionEnabled = true
     }
 }

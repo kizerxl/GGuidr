@@ -31,3 +31,6 @@
 //    }
 //    
 //}
+
+// This will be used for future update once the backend is updated with a dictionay in place of our event array
+

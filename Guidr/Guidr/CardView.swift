@@ -133,11 +133,14 @@ class CardView: UIView, UIWebViewDelegate {
         */
         
         var eventCopy = event
+        
         let eventCount = eventCopy.count
         var eventDetails = [eventDate, eventTitle, eventAddress, eventDesc, eventPrice, eventTime]
         
         // There is no description
-        if eventCount == 6 {
+        if eventCount == 5 {
+            eventDetails.removeAtIndex(4)
+        } else if eventCount == 6 {
             urlString = eventCopy.removeAtIndex(3)
             eventDetails[3].text = "No Description"
             eventDetails.removeAtIndex(3)
@@ -147,6 +150,7 @@ class CardView: UIView, UIWebViewDelegate {
         
         for i in 0..<eventDetails.count {
             eventDetails[i].text = eventCopy[i]
+            print("We have reached index \(i)")
         }
         
     }
